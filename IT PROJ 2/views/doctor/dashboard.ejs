@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dashboard</title>
+<% include ../partials/header.ejs %>
+</head>
+  <body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+  <div class="wrapper">
+    <header class="main-header">
+      <a href="../doctor/dashboard" class="logo">
+        <span class="logo-mini"><b><%= username[0].account_type.charAt(0).toUpperCase()%></b></span>
+        <span class="logo-lg"><b><%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%></b></span>
+      </a>
+      <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../dist/img/avatar04.png" class="user-image" alt="User Image">
+                <span class="hidden-xs"><%= username[0].name %></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="user-header">
+                  <img src="../dist/img/avatar04.png" class="img-circle" alt="User Image">
+                  <p>
+                    <%=username[0].name%> - <%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%>
+                  </p>
+                </li>
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="../doctor/profileManagement" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href='../logout' class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <aside class="main-sidebar">
+      <section class="sidebar">
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="../dist/img/avatar04.png" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p><%= username[0].name %></p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
+        </div>
+
+        <ul class="sidebar-menu">
+          <li class="active"><a href="../doctor/dashboard" target="_self"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="../doctor/bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
+          <li><a href="../doctor/patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
+          <li><a href="../doctor/outpatientManagement"><i class="fa fa-wheelchair"></i> <span>Outpatient Management</span></a></li>
+          <li><a href="../doctor/appointmentManagement"><i class="fa fa-calendar"></i> <span>Appointment Management</span></a></li>
+          <li><a href="../doctor/prescriptionManagement"><i class="fa fa-sticky-note"></i> <span>Prescription Management</span></a></li>
+          <li><a href="../doctor/labRequestManagement"><i class="fa fa-stethoscope"></i> <span>Lab Request Management</span></a></li>
+          <li><a href="../doctor/profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+        </ul>
+      </section>
+    </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+      <section class="content-header">
+
+      </section>
+        <!-- Main content -->
+    <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+        <div class="row">
+
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+              <div class="inner">
+                <h3><%= counts[0].totalRegisteredPatients%></h3>
+                <p>Total Registered Patients</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person"></i>
+              </div>
+              <a href="../doctor/patientManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3><%= counts[0].currentlyAdmitted%></h3>
+                <p>Currently Admitted</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="../doctor/bedManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                <h3><%= counts[0].OPD%></h3>
+                <p>OPD</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a data-toggle="modal" data-target="#opdModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3><%= counts[0].WARD%></h3>
+                <p>Ward</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a data-toggle="modal" data-target="#wardModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box">
+            <center>
+              <div class="box-header">
+                <h3 class="box-title">Quick Access</h3>
+              </div>
+              <div class="box-body">
+                <a class="btn btn-app" data-toggle="modal" data-target="#myModal2">
+                <i class="fa fa-calendar" data-target="#myModal2"></i> Set Appointment
+                </a>
+            </div>
+            </center>
+          </div>
+        </div>
+
+        <div class="row">
+          <section class="col-lg-7 connectedSortable">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Patient Count</h3>
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="height:250px"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="box box-primary">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">To Do List</h3>
+            </div>
+
+            <div class="box-body">
+              <table id="example3" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                     <th></th>
+                  </tr>
+                </thead>
+                <%for(var i=0; i < todoList.length; i++){%>
+                  <%if(new Date() < new Date(todoList[i].date)) {%>
+                    <tr>
+                      <td> <span class="text"><%= todoList[i].description%></span></td>
+                      <td> <%if(todoList[i].status == 'general'){%>
+                              <small class="label label-info"><i class="fa fa-clock-o"></i><%= moment(new Date(todoList[i].date)).format('MMM-DD-YYYY HH:mm')%></small>
+                            <%} else{%>
+                              <small class="label label-danger"><i class="fa fa-clock-o"></i><%= moment(new Date(todoList[i].date)).format('MMM-DD-YYYY HH:mm')%></small>
+                            <%}%>
+                      </td>
+                      <td><form action="/doctor/dashboard?tId=<%= todoList[i].todo_id%>" method="POST">
+                            <button type="submit" name="sub" value="delToDo" class="btn btn-default">Delete</button>
+                          </form>
+                      </td>
+                    </tr>
+                  <%}%>
+                <%}%>
+              </table>
+            </div>
+
+            <div class="box-footer clearfix no-border">
+              <button type="button" name="button" onclick="showTodo()" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal4"><i class="fa fa-plus" data-target="#myModal4"></i> Add item</button>
+            </div>
+          </div>
+
+
+            <div class="box-header">
+            </div>
+            <div class="box-body no-padding">
+          </section>
+
+          <section class="col-lg-5 connectedSortable">
+            <div class="box-header">
+              <div class="pull-right box-tools">
+              </div>
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <h3 class="box-title">Patient Chart</h3>
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <div class="box-body">
+                  <div id="donut-chart1" style="height: 350px;"></div>
+                  <br>
+                  <ul class="chart-legend clearfix">
+                      <li><i class="fa fa-circle text-gray"></i> Cadet</li>
+                      <li><i class="fa fa-circle text-blue"></i> Authorized Civilian</li>
+                      <li><i class="fa fa-circle text-red"></i> Military Dependent</li>
+                      <li><i class="fa fa-circle text-yellow"></i> Civilian Employees</li>
+                      <li><i class="fa fa-circle text-aqua"></i> Military Officer</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            </div>
+
+          </section>
+        </div>
+
+        <!-- OPD Modal --->
+        <div class="modal fade" id="opdModal" role="dialog" aria-labelledby="myModalLabel3">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel3">OPD Information</h4>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Date and Time</th>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <%for (var i = 0; i < whoOPD.length; i++) { %>
+                      <tr>
+                        <td><%= moment(new Date(whoOPD[i].time)).format('MMM-DD-YYYY HH:mm')%></td>
+                        <td><%= whoOPD[i].name%></td>
+                      </tr>
+                    <%}%>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ward Modal --->
+        <div class="modal fade" id="wardModal" role="dialog" aria-labelledby="myModalLabel4">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel3">Ward Information</h4>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <table id="example2" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Date and Time</th>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <%for (var i = 0; i < whoWARD.length; i++) { %>
+                      <tr>
+                        <td><%= moment(new Date(whoWARD[i].time)).format('MMM-DD-YYYY HH:mm')%></td>
+                        <td><%= whoWARD[i].name%></td>
+                      </tr>
+                    <%}%>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------- Modal of Adding Appointment --------------------->
+        <div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">New Appointment</h4>
+              </div>
+              <div class="modal-body">
+                <form name="setAppointmentForm" class="horizontal" method="post" onsubmit="successAlert()">
+                  <div class="form-group">
+                  <label for="immuName" class="col-sm-2 control-label">Patient</label>
+                  <div class="col-xs-5">
+                    <select name="appointmentPatientID" class="select2 form-control" style="width: 100%;" name="">
+                      <%for(var i = 0; i < patientList.length; i++){%>
+                        <option value="<%= patientList[i].patient_id%>,<%= patientList[i].name%>"><%= patientList[i].name%></option>
+                      <%}%>
+                    </select>
+                  </div>
+                    <div class="col-xs-5">
+                      <input class="form-control" type="datetime-local" name="dateNtime" min="2000-10-06T00:00:00" max="9000-11-16T21:25:33" required>
+                    </div>
+
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="assessment" class="col-sm-2 control-label">Assessment</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" name="appointmentRemarks" rows="12" cols="80" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                      <button type="submit" name="sub" value="appointment" class="btn btn-primary"><i class="fa fa-check"></i> Confirm</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel1">To Do List</h4>
+              </div>
+
+              <div class="modal-body">
+                <form method="POST" onsubmit="parseDateNTime()" class="form-horizontal" id="showTodo">
+                    <div class="form-group">
+                      <label for="description" class="col-sm-2 control-label">Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="description" name="description" data-parsley-required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="todoStatus" class="col-sm-2 control-label">Status</label>
+                      <div class="col-sm-3">
+                        <select name="todoStatus" class="form-control">
+                          <option value="general">General</option>
+                          <option value="urgent">Urgent</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="dateNtime" class="col-sm-2 control-label">Date and Time</label>
+                      <div class="col-sm-5">
+                        <input type="datetime-local" name="dateNtime" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" name="sub" value="addTodo"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+<% include ../partials/footer.ejs %>
+
+<script src="/notif-doctor.js"></script>
+  <script>
+
+    $(function () {
+      /*
+       * DONUT CHART
+       * -----------
+       */
+      var data = [], totalPoints = 100;
+      var donutData = [
+        {label: "", data: <%= chart[0].military_dependent %>, color: "red"},
+        {label: "", data: <%= chart[0].civilian %>, color: "yellow"},
+        {label: "", data: <%= chart[0].military_officer %>, color: "aqua"},
+        {label: "", data: <%= chart[0].cadet %>, color: "gray"},
+        {label: "", data: <%= chart[0].authorized_civilian%>, color: "blue"}
+      ];
+      $.plot("#donut-chart1", donutData, {
+        series: {
+          pie: {
+            show: true,
+            radius: 1,
+            innerRadius: 0.5,
+            label: {
+              show: true,
+              radius: 2 / 3,
+              formatter: labelFormatter,
+              threshold: 0.1
+            }
+
+          }
+        },
+        legend: {
+          show: false
+        }
+      });
+      /*
+       * END DONUT CHART
+       */
+
+      var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+      // This will get the first returned node in the jQuery collection.
+      var areaChart = new Chart(areaChartCanvas);
+
+      var areaChartData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novermber", "December"],
+        datasets: [{
+          label: "Patient",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [<%-JSON.stringify(monthlyPatientCount[0].JAN)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].FEB)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].MARCH)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].APRIL)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].MAY)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].JUNE)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].JULY)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].AUGUST)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].SEPTEMBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].OCTOBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].NOVEMBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].DECEMBER)%>
+          ]
+        }]
+      };
+
+      var areaChartOptions = {
+        //Boolean - If we should show the scale at all
+        showScale: true,
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: false,
+        //String - Colour of the grid lines
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines: true,
+        //Boolean - Whether the line is curved between points
+        bezierCurve: true,
+        //Number - Tension of the bezier curve between points
+        bezierCurveTension: 0.3,
+        //Boolean - Whether to show a dot for each point
+        pointDot: false,
+        //Number - Radius of each point dot in pixels
+        pointDotRadius: 4,
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth: 1,
+        //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+        pointHitDetectionRadius: 20,
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke: true,
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth: 2,
+        //Boolean - Whether to fill the dataset with a color
+        datasetFill: true,
+        //String - A legend template
+        //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+        maintainAspectRatio: true,
+        //Boolean - whether to make the chart responsive to window resizing
+        responsive: true
+      };
+
+      areaChart.Line(areaChartData, areaChartOptions);
+
+    });
+    /*
+     * END DONUT CHART
+     */
+
+    function labelFormatter(label, series) {
+      return '<div style="font-size:13px; text-align:center; padding:0.5px; color: #fff; font-weight: 600;">' +
+        label +
+        "<br>" +
+        Math.round(series.percent) + "%</div>";
+    }
+
+    $(document).ready(function() {
+      $(".select2").select2();
+    });
+
+    function showSuccess() {
+       alert("Success !!");
+     }
+     function resetForm() {
+       document.getElementById("modal2").reset();
+       document.getElementById("immuRes").innerHTML = "";
+     }
+     function currentAdmitted() {
+       document.getElementById("showAdmitted").style.display = "block";
+     }
+     function showAccessment() {
+       document.getElementById("accessment").style.display = "block";
+     }
+     function showTodo() {
+       document.getElementById("showTodo").style.display = "block";
+     }
+     function showAppointmentForm() {
+       document.getElementById("showAppointmentForm").style.display = "block";
+     }
+
+  </script>
+</body>
+</html>
+<script type="text/javascript">
+  $(function () {
+    $("#example1").DataTable();
+    $("#example2").DataTable();
+    $('#example3').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": false,
+      "autoWidth": true
+    });
+  });
+</script>

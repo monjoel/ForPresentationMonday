@@ -1,0 +1,5 @@
+Bug FIX
+-ung nag n'new tab pag nag view full info sa patientmanagement ginawa kong page reload nalang, naiiwan kasi ung password pag new tab(Patient Management DOC,NURSE)
+-ung makikita sa patient history is ung mga na confirmed lang(Patient Management DOC, NURSE)
+-disabled ung confirm pag may pending request pa(Outpatient Management DOC)
+-Ward counter correct but has no content(DASHBOARD ALL MODULES)

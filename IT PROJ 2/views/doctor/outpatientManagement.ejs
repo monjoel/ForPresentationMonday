@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Outpatient Management</title>
+<% include ../partials/header.ejs %>
+    <style>
+
+    </style>
+
+</head>
+  <body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+<div class="wrapper">
+  <header class="main-header">
+    <a href="../doctor/dashboard" class="logo">
+      <span class="logo-mini"><b><%= username[0].account_type.charAt(0).toUpperCase()%></b></span>
+      <span class="logo-lg"><b><%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%></b></span>
+    </a>
+
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../dist/img/avatar04.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><%= username[0].name %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="user-header">
+                <img src="../dist/img/avatar04.png" class="img-circle" alt="User Image">
+                <p>
+                  <%=username[0].name%> - <%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="../doctor/profileManagement" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href='../logout' class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../dist/img/avatar04.png" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>
+            <%= username[0].name %>
+          </p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+          <li><a href="../doctor/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="../doctor/bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
+          <li><a href="../doctor/patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
+          <li class="active"><a href="../doctor/outpatientManagement" target="_self"><i class="fa fa-wheelchair"></i> <span>Outpatient Management</span></a></li>
+          <li><a href="../doctor/appointmentManagement"><i class="fa fa-calendar"></i> <span>Appointment Management</span></a></li>
+          <li><a href="../doctor/prescriptionManagement"><i class="fa fa-sticky-note"></i> <span>Prescription Management</span></a></li>
+          <li><a href="../doctor/labRequestManagement"><i class="fa fa-stethoscope"></i> <span>Lab Request Management</span></a></li>
+          <li><a href="../doctor/profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+      </ul>
+    </section>
+  </aside>
+
+       <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <section class="content-header">
+      <h1>
+        Patients
+        <small>List of Active Patients</small>
+      </h1>
+    </section>
+        <!-- Main content -->
+    <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+       <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+           <div class="box-header">
+              <h3 class="box-title">Outpatient</h3><small>  List of Outpatients</small>
+            </div>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Patient Type</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Vital Signs</th>
+                    <th>Initial Assessment</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <%for (var i = 0; i < opdInfo.length; i++) {%>
+                  <tr>
+                      <td><%=opdInfo[i].patient_type%></td>
+                      <td><%=opdInfo[i].name%></td>
+                      <td><%=opdInfo[i].age%></td>
+                      <td><%=opdInfo[i].sex%></td>
+                    <%if(opdInfo[i].vitals){%>
+                      <td style="font-size:10px;">
+                        <%
+                          var vitals = opdInfo[i].vitals.split('\n');
+                          for(var l=0; l < 7; l++){ %>
+                            <%=vitals[l]%><br>
+                        <%}%>
+                      </td>
+                    <%} else {%>
+                      <td></td>
+                    <%}%>
+                      <td><%=opdInfo[i].initial_assessment%></td>
+                      <td>
+                        <!-- VIEW -->
+                      <button type="button" class="btn btn-default btn-sm" name="button" data-toggle="modal" data-target="#showInputPassword" onclick="PasswordInput(<%= opdInfo[i].patient_id %>)">Profile</button>
+                        <!-- LAB -->
+                        <%
+                        var labArr= '';
+                          for (var j = 0; j < labSQL.length; j++){
+                            labArr += labSQL[j].patient_id;
+                          }
+                        if(labArr.includes(opdInfo[i].patient_id)){%>
+                          <a data-toggle="modal">
+                            <input class="btn btn-primary btn-sm" type="button" value="Lab Request" name="lab_request" data-toggle="modal" data-target="#labRequest" onclick="ShowLabRequest(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>,'laman')">
+                          </a>
+                        <%} else {%>
+                          <a data-toggle="modal">
+                            <input class="btn btn-default btn-sm" type="button" value="Lab Request" name="lab_request" data-toggle="modal" data-target="#labRequest2" onclick="ShowLabRequest2(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>,null)">
+                          </a>
+                        <%}%>
+                        <!-- PRESCRIPTION -->
+                        <%
+                        var prescribeArr= '';
+                          for (var j = 0; j < prescribeSQL.length; j++){
+                            prescribeArr += prescribeSQL[j].patient_id;
+                          }
+                        if(prescribeArr.includes(opdInfo[i].patient_id)){%>
+                          <input class="btn btn-primary btn-sm" type="button" name="prescribe" value="Prescription" data-toggle="modal" data-target="#prescribe" onclick="ShowPrescribe(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>,'laman')" >
+                        <%} else {%>
+                          <input class="btn btn-default btn-sm" type="button" name="prescribe" value="Prescription" data-toggle="modal" data-target="#prescribe" onclick="ShowPrescribe(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>,null)">
+                        <%}%>
+                        <!-- DIAGNOSIS -->
+                        <input class="btn btn-default btn-sm" type="button" name="diagnosis" value="<%if(opdInfo[i].diagnosis){%>View Diagnosis<%} else {%>Diagnosis<%}%>" data-toggle="modal" data-target="#diagnosis" onclick="ShowDiagnosis(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>,<%=JSON.stringify(opdInfo[i].diagnosis)%>)" >
+                      <!-- ADMIT -->
+                      <input type="button" class="btn btn-default btn-sm" name="admit" value="Admit" data-toggle="modal" data-target="#admit" onclick="ShowAdmit(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>)">
+                      </td>
+                    <form action="/doctor/outpatientManagement?id=<%= opdInfo[i].histo_id%>&name=<%= opdInfo[i].name%>" method="post">
+                      <td>
+                        <button <%if(labArr || prescribeArr){%> disabled <%}%> type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="confirmOPD"><i class="fa fa-mail-forward"></i> Confirm</button>
+                      </td>
+                    </form>
+                  </tr>
+                <%}%>
+              </table>
+          </div>
+        </div>
+          <div class="box">
+          <div class="box-header">
+              <h3 class="box-title">Ward/Admitted Patients</h3><small>  List of In-patients</small>
+            </div>
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-striped table-responsive">
+                <thead>
+                  <tr>
+                    <th>Patient Type</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Vital Signs</th>
+                    <th>Initial Assessment</th>
+                    <th>Bed</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <%for (var i = 0; i < opdInfo2.length; i++) {%>
+                  <tr>
+                      <td><%=opdInfo2[i].patient_type%></td>
+                      <td><%=opdInfo2[i].name%></td>
+                      <td><%=opdInfo2[i].age%></td>
+                      <td><%=opdInfo2[i].sex%></td>
+                      <td style="font-size:10px;">
+                      <% if(opdInfo2[i].vitals){
+                          var vitals = opdInfo2[i].vitals.split('\n');
+                          for(var l=0; l < 7; l++){ %>
+                            <%=vitals[l]%><br>
+                      <%}}%>
+                      </td>
+                      <td><% if(opdInfo2[i].vitals){%>
+                          <%=opdInfo2[i].initial_assessment%>
+                          <%} else{%>ER<%}%>
+                      </td>
+                      <td><%= opdInfo2[i].bed_id%><%if(opdInfo2[i].bed_id){%><a href="/doctor/bedManagement?bed_id=<%=opdInfo2[i].bed_id%>" style="font-size:10px;"></a><%}%></td>
+                      <td>
+                        <!-- VIEW -->
+                      <button type="button" class="btn btn-default btn-sm" name="button" data-toggle="modal" data-target="#showInputPassword" onclick="PasswordInput(<%= opdInfo2[i].patient_id %>)">Profile</button>
+                        <!-- LAB -->
+                        <%
+                        var labArr= '';
+                          for (var j = 0; j < labSQL.length; j++){
+                            labArr += labSQL[j].patient_id;
+                          }
+                        if(labArr.includes(opdInfo2[i].patient_id)){%>
+                          <a data-toggle="modal">
+                            <input class="btn btn-primary btn-sm" type="button" value="Lab Request" name="lab_request" data-toggle="modal" data-target="#labRequest" onclick="ShowLabRequest(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>,'laman')">
+                          </a>
+                        <%} else {%>
+                          <a data-toggle="modal">
+                            <input class="btn btn-default btn-sm" type="button" value="Lab Request" name="lab_request" data-toggle="modal" data-target="#labRequest2" onclick="ShowLabRequest2(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>,null)">
+                          </a>
+                        <%}%>
+                        <!-- PRESCRIPTION -->
+                        <%
+                        var prescribeArr= '';
+                          for (var j = 0; j < prescribeSQL.length; j++){
+                            prescribeArr += prescribeSQL[j].patient_id;
+                          }
+                        if(prescribeArr.includes(opdInfo2[i].patient_id)){%>
+                          <input class="btn btn-primary btn-sm" type="button" name="prescribe" value="Prescription" data-toggle="modal" data-target="#prescribe" onclick="ShowPrescribe(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>,'laman')">
+                        <%} else {%>
+                          <input class="btn btn-default btn-sm" type="button" name="prescribe" value="Prescription" data-toggle="modal" data-target="#prescribe" onclick="ShowPrescribe(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>,null)">
+                        <%}%>
+                        <!-- DIAGNOSIS -->
+                        <input class="btn btn-default btn-sm" type="button" name="diagnosis" value="<%if(opdInfo2[i].diagnosis){%>View Diagnosis<%} else {%>Diagnosis<%}%>" data-toggle="modal" data-target="#diagnosis" onclick="ShowDiagnosis(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>,<%=JSON.stringify(opdInfo2[i].diagnosis)%>)" >
+
+                        <%if(!opdInfo2[i].bed_id){%>
+                          <input type="button" class="btn btn-primary btn-sm" name="admit" value="Allot Bed" data-toggle="modal" data-target="#admit" onclick="ShowAdmit(<%=opdInfo2[i].patient_id%>,<%=JSON.stringify(opdInfo2[i].name)%>,<%=opdInfo2[i].histo_id%>)">
+                        <%}%>
+                          <%if(opdInfo2[i].bed_id){%>
+                          <form action="/doctor/bedManagement?bed=<%= opdInfo2[i].bed_id%>&id=<%= opdInfo2[i].patient_id%>" method="POST" style="display:inline-block;">
+                            <button class="btn btn-danger btn-sm">Change Bed</button>
+                          </form>
+                         <%}%>
+                      </td>
+                      <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>" method="post">
+                        <td><button type="submit" <%if(labArr || prescribeArr){%> disabled <%}%> data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="confirm" <%if(!opdInfo2[i].bed_id){%>
+
+                  <%} else {%>
+                  <%}%>><i class="fa fa-sign-out"></i> Discharge</button></td>
+                      </form>
+                  </tr>
+                <%}%>
+              </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAB REQUEST -->
+      <div class="modal fade" id="labRequest2" role="dialog" aria-labelledby="labRequestlabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="labRequestlabel">Lab Request</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <form class="form-horizontal" id="dynamicPatientIdForLab" method="post">
+                  <label for="testRequest" class="col-sm-2 control-label">Test Type:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="testRequest">
+                      <option value="Blood Chemistry">Blood Chemistry</option>
+                      <option value="Hematology">Hematology</option>
+                      <option value="Microscopy">Microscopy</option>
+                      <option value="Parasitology">Parasitology</option>
+                      <option value="Serotology">Serotology</option>
+                      <option value="Microbiology">Microbiology</option>
+                      <option value="X-Ray">X-Ray</option>
+                    </select>
+                  </div>
+                  <br>
+                  <br>
+                  <textarea name="labRequestremarks" class="form-control" rows="8" cols="80"></textarea>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="sub" value="labRequest"><i class="fa fa-sign-in"></i> Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAB REQUEST -->
+      <div class="modal fade" id="labRequest" role="dialog" aria-labelledby="labRequestlabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="labRequestlabel">Lab Request</h4>
+            </div>
+            <div class="modal-body">
+              <div>
+                <form class="form-horizontal" id="dynamicPatientIdForLab" method="post">
+                  <label for="testRequest" class="col-sm-2 control-label">Test Type:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="testRequest">
+                      <option value="Blood Chemistry">Blood Chemistry</option>
+                      <option value="Hematology">Hematology</option>
+                      <option value="Microscopy">Microscopy</option>
+                      <option value="Parasitology">Parasitology</option>
+                      <option value="Serotology">Serotology</option>
+                      <option value="Microbiology">Microbiology</option>
+                      <option value="X-Ray">X-Ray</option>
+                    </select>
+                  </div>
+                  <br>
+                  <br>
+                  <textarea name="labRequestremarks" class="form-control" rows="8" cols="80"></textarea>
+                  <div class="modal-footer" id="ShowLabRequestView">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="sub" value="labRequest"><i class="fa fa-sign-in"></i> Send</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--       <div class="modal fade" id="labRequest" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Lab Request</h4>
+            </div>
+            <div class="modal-body">
+              <form id="labViewPressed" class="form-horizontal" method="post" onsubmit="successAlert()">
+                <label for="testRequest" class="col-sm-2 control-label">Test Type:</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="testRequest">
+                    <option value="Blood Chemistry">Blood Chemistry</option>
+                    <option value="Hematology">Hematology</option>
+                    <option value="Microscopy">Microscopy</option>
+                    <option value="Parasitology">Parasitology</option>
+                    <option value="Serotology">Serotology</option>
+                    <option value="Microbiology">Microbiology</option>
+                    <option value="X-Ray">X-Ray</option>
+                  </select>
+                </div>
+                <br>
+                <br>
+                  <textarea name="labRequestremarks" class="form-control" rows="8" cols="80"></textarea>
+                  <div class="modal-footer">
+                    <a id="linkForLabView"><button id="labViewPressed" type="button" class="btn btn-default"><i class="fa fa-eye"></i> View</button><a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <button id="labAdd" type="submit" class="btn btn-primary" name="sub" value="labRequest"><i class="fa fa-plus"></i> Add</button>
+                  </div>
+              </form>
+            </div>p
+          </div>
+        </div>
+      </div> -->
+
+      <!-- ADMIT  -->
+      <div class="modal fade" id="admit" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Admission</h4>
+            </div>
+            <div class="modal-body">
+              <form id="dynamicPatientIdForAdmit" class="form-horizontal" method="post" onsubmit="successAlert()">
+                <div class="form-group">
+                  <label for="quantity" class="col-xs-3 control-label">Available Beds:</label>
+                  <div class="col-sm-8">
+                    <select name="bedNumber" class="form-control select2" style="width: 100%;">
+                      <%for (var i = 0; i < admitAvailableBeds.length; i++) { %>
+                        <option value="<%= admitAvailableBeds[i].bed_id%>"><%= admitAvailableBeds[i].bed_id%></option>
+                      <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                  <button type="submit" class="btn btn-primary" name="sub" value="admit"> <i class="fa fa-sign-in"></i> Admit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRESCRIBE -->
+      <div class="modal fade" id="prescribe" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add Prescription</h4>
+            </div>
+            <div class="modal-body">
+              <form id="dynamicPatientIdForPrescribe" class="form-horizontal" method="post">
+                <div class="form-group">
+                  <label for="medicine" class="col-sm-2 control-label">Medicine</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="medicine" name="medicine">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="quantity" class="col-sm-2 control-label">Quantity</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="quantity" name="quantity">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dosage" class="col-sm-2 control-label">Dosage</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="dosage" name="dosage">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="timeframe" class="col-sm-2 control-label">Timeframe</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="timeframe" name="timeframe">
+                  </div>
+                </div>
+
+                <div class="modal-footer" id="showPrescribeView">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                  <button type="submit" class="btn btn-primary" name="sub" value="prescribe"><i class="fa fa-plus"></i> Add</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRESCRIBE 2-->
+<!--       <div class="modal fade" id="prescribe" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add Prescription</h4>
+            </div>
+            <div class="modal-body">
+              <form id="ShowPrescribe2" class="form-horizontal" method="post">
+                <div class="form-group">
+                  <label for="medicine" class="col-sm-2 control-label">Medicine</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="medicine" name="medicine">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="quantity" class="col-sm-2 control-label">Quantity</label>
+                  <div class="col-sm-10">
+                    <input type="number" min="0" class="form-control" id="quantity" name="quantity">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dosage" class="col-sm-2 control-label">Dosage</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="dosage" name="dosage">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="timeframe" class="col-sm-2 control-label">Timeframe</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="timeframe" name="timeframe">
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <a id="linkForPrescribeView"><button id="prescribeViewPressed">view</button></a>
+                  <button type="submit" class="btn btn-primary" name="sub" value="prescribeAdd"><i class="fa fa-plus"></i> Add</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+      <div class="modal fade" id="diagnosis" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add Diagnosis</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                <label>Diagnoses</label>
+                <textarea id="prevDiag" readonly rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>New Diagnosis</label>
+                  <form id="linkDiagnosis" method="post">
+                    <textarea name="diagnosis" class="form-control" rows="8" cols="80"></textarea>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                      <button type="submit" class="btn btn-warning" name="sub" value="clear"><i class="fa fa-refresh"></i> Clear</button>
+                      <button type="submit" class="btn btn-primary" name="sub" value="diag"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade modal-info" id="showInputPassword" role="dialog" aria-labelledby="labRequestlabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="labRequestlabel"><%= username[0].name %>, please input your password.</h4>
+            </div>
+
+            <div id="PasswordInput" style="display:none;">
+              <form id="dynamicActionPassword" method="post" target="_blank">
+                <div class="modal-body">
+                      <input class="form-control" type="password" id="resetInput" name="patientPassword" placeholder="Password">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" name="sub" class="btn btn-outline" value="pass"><i class="fa fa-sign-in"></i> Enter</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+      <div class="control-sidebar-bg"></div>
+    </div>
+    </section>
+  </div>
+
+<% include ../partials/footer.ejs %>
+
+<script src="/notif-doctor.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable();
+  });
+
+  <%if(invalid){%>
+  swal({
+   title: "Invalid Password!",
+   text: "You clicked the button!",
+   icon: "warning",
+   button: "okay!",
+  });
+  $(document).ready(function(){
+    $("#dynamicActionPassword").show();
+  });
+<%}%>
+
+  function PasswordInput(id){
+    document.getElementById('PasswordInput').style.display = 'block';
+    document.getElementById('dynamicActionPassword').action = '/doctor/patientManagement?passPatient='+id+'';
+  }
+  function ShowLabRequest2(i,o,u,a){
+    document.getElementById('dynamicPatientIdForLab').action = '/doctor/outpatientManagement?patient_id='+i+'&patient_name='+o+'&histo_id='+u+'';
+  }
+  function ShowLabRequest(i,o,u,a){
+    document.getElementById('dynamicPatientIdForLab').action = '/doctor/outpatientManagement?patient_id='+i+'&patient_name='+o+'&histo_id='+u+'';
+    if (a == 'laman' && !document.getElementById("minsanLang")) {
+      var button = document.createElement('button');
+      button.setAttribute("class", "btn btn-default btn-sm pull-left");
+      button.setAttribute("id", "minsanLang");
+      button.innerHTML = '<i class="fa fa-eye"></i><a style="color:black;" href="/doctor/labRequestManagement?labPatientInfo='+i+'" target="_blank"> View Pending Requests</a>';
+      document.getElementById('ShowLabRequestView').appendChild(button);
+    }
+  }
+
+  function ShowPrescribe(i,o,u,a){
+    document.getElementById('dynamicPatientIdForPrescribe').action = '/doctor/outpatientManagement?patient_id='+i+'&patient_name='+o+'&histo_id='+u+'';
+    if (a == 'laman' && !document.getElementById("oneTimeOnly")) {
+      var button = document.createElement('button');
+      button.setAttribute("class", "btn btn-default btn-sm pull-left");
+      button.setAttribute("id", "oneTimeOnly");
+      button.innerHTML = '<i class="fa fa-eye"></i><a style="color:black;" href="/doctor/prescriptionManagement?opdPatient='+i+'" target="_blank"> View Pending Requests</a>';
+      document.getElementById('showPrescribeView').appendChild(button);
+    }
+  }
+
+
+  function ShowAdmit(i,o,u){
+    document.getElementById('dynamicPatientIdForAdmit').action = '/doctor/outpatientManagement?patient_id='+i+'&patient_name='+o+'&histo_id='+u+'';
+      document.getElementById('ShowAdmit').style.display = 'block';
+  }
+
+  function ShowDiagnosis(i,o,u,a){
+    //document.getElementById('ShowDiagnosis').style.display = 'block';
+    document.getElementById('linkDiagnosis').action = '/doctor/outpatientManagement?patient_id='+i+'&patient_name='+o+'&histo_id='+u+'';
+    document.getElementById('prevDiag').innerHTML = a;
+  }
+</script>
+<script>
+  $(document).ready(function() {
+      $(".select2").select2();
+  });
+$('[data-toggle=confirmation]').confirmation({
+  rootSelector: '[data-toggle=confirmation]',
+  // other options
+});
+
+//tooltip
+$(function() {
+    $('.tooltip-wrapper').tooltip({position: "bottom"});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dashboard</title>
+  <% include ../partials/header.ejs %>
+  <style>
+      .datepicker {
+        z-index: 1600 !important;
+      }
+  </style>
+</head>
+
+<body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+<div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+<div class="wrapper">
+  <header class="main-header">
+    <a href="dashboard" class="logo">
+      <span class="logo-mini"><b><%= username[0].account_type.charAt(0).toUpperCase()%></b></span>
+      <span class="logo-lg"><b><%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%></b></span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../dist/img/sample prof pic.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs"><%= username[0].name%></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="user-header">
+                <img src="../dist/img/sample prof pic.jpg" class="img-circle" alt="User Image">
+                <p>
+                  <%= username[0].name %> - <%= username[0].account_type %>
+                </p>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="profileManagement" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="../logout" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../dist/img/sample prof pic.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><%= username[0].name%></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="active"><a href="dashboard" target="_self"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="labRequestManagement"><i class="fa fa-stethoscope"></i> <span>Diagnosis Request Management</span></a></li>
+        <li><a href="patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
+        <li><a href="profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+      </ul>
+  </aside>
+
+  <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <section class="content-header"></section>
+
+    <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3><%= diagnosisSQL.length%></h3>
+              <p>Total Diagnosis Tests</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person"></i>
+            </div>
+            <a href="labRequestManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3><%= bloodChemistrySQL.length%></h3>
+              <p>Blood Chemistry</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showBloodChem()" class="small-box-footer" data-toggle="modal" data-target="#bloodChem">More info <i class="fa fa-arrow-circle-right"  data-target="#bloodChem"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><%= hermatology.length%></h3>
+              <p>Hematology</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showHerma()" class="small-box-footer" data-toggle="modal" data-target="#herma">More info <i class="fa fa-arrow-circle-right" data-target="#herma"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3><%= microscopy.length%></h3>
+              <p>Microscopy</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showMicroscopy()" class="small-box-footer" data-toggle="modal" data-target="#micro">More info <i class="fa fa-arrow-circle-right" data-target="#micro"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-orange">
+            <div class="inner">
+              <h3><%= parasitology.length%></h3>
+              <p>Parasitology</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showParasitology()" class="small-box-footer" data-toggle="modal" data-target="#para">More info <i class="fa fa-arrow-circle-right" data-target="#para"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-gray">
+            <div class="inner">
+              <h3><%= serology.length%></h3>
+              <p>Serology</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showSerology()" class="small-box-footer" data-toggle="modal" data-target="#sero">More info <i class="fa fa-arrow-circle-right" data-target="#sero"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-purple">
+            <div class="inner">
+              <h3><%= microbiology.length%></h3>
+              <p>Microbiology</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showMicrobiology()" class="small-box-footer" data-toggle="modal" data-target="#microBio">More info <i class="fa fa-arrow-circle-right" data-target="#microBio"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3><%= xRay.length%></h3>
+              <p>X-Ray</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a onclick="showXray()" class="small-box-footer" data-toggle="modal" data-target="#xray">More info <i class="fa fa-arrow-circle-right" data-target="#xray"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <section class="col-lg-12 connectedSortable">
+            
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Patient Count</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="areaChart" style="height:250px"></canvas>
+              </div>
+            </div>
+          </div>
+            
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">To Do List</h3>
+            </div>
+
+            <div class="box-body">
+              <table id="example3" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                     <th></th>
+                  </tr>
+                </thead>
+                <%for(var i=0; i < todoList.length; i++){%>
+                  <%if(new Date() < new Date(todoList[i].date)) {%>
+                    <tr>
+                      <td> <span class="text"><%= todoList[i].description%></span></td>
+                      <td> <%if(todoList[i].status == 'general'){%>
+                              <small class="label label-info"><i class="fa fa-clock-o"></i><%= moment(new Date(todoList[i].date)).format('MMM-DD-YYYY HH:mm')%></small>
+                            <%} else{%>
+                              <small class="label label-danger"><i class="fa fa-clock-o"></i><%= moment(new Date(todoList[i].date)).format('MMM-DD-YYYY HH:mm')%></small>
+                            <%}%>
+                      </td>
+                      <td><form action="/laboratorist/dashboard?tId=<%= todoList[i].todo_id%>" method="POST">
+                            <button type="submit" name="sub" value="delToDo" class="btn btn-default">Delete</button>
+                          </form>
+                      </td>
+                    </tr>
+                  <%}%>
+                <%}%>
+              </table>
+            </div>
+
+            <div class="box-footer clearfix no-border">
+              <button type="button" name="button" onclick="showTodo()" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal4"><i class="fa fa-plus" data-target="#myModal4"></i> Add item</button>
+            </div>
+          </div>
+
+          <section class="col-lg-5 connectedSortable">
+            <div class="box-header">
+              <div class="pull-right box-tools">
+              </div>
+            </div>
+          </section>
+
+
+<!---------------------------------------------------------------------------------------------- Modal for  Blood Chemistry ----------->
+  <div class="modal fade" id="bloodChem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+    <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+      <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Request for Blood Chemistry Test</h4>
+            </div>
+            <div class="modal-body" id="showBloodChem" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+          <section class="content">
+            <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Date and Time of Admission</th>
+                <th>Patient Name</th>
+              </tr>
+            </thead>
+              <%for (var i = 0; i < bloodChemistrySQL.length; i++) { %>
+                <tr>
+                  <td><%= moment(new Date(bloodChemistrySQL[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                  <td><%= bloodChemistrySQL[i].name%></td>
+                </tr>
+              <%}%>
+            </table>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---------------------------------------------------------------------------------------------- Modal for  Hermatology ----------->
+  <div class="modal fade" id="herma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+    <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+      <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Request for Hematology Test</h4>
+            </div>
+            <div class="modal-body" id="showHerma" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+          <section class="content">
+            <table id="example2" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Date and Time of Admission</th>
+                <th>Patient Name</th>
+              </tr>
+            </thead>
+              <%for (var i = 0; i < hermatology.length; i++) { %>
+                <tr>
+                  <td><%= moment(new Date(hermatology[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                  <td><%= hermatology[i].name%></td>
+                </tr>
+              <%}%>
+            </table>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!---------------------------------------------------------------------------------------------- Modal for  Microscopy ----------->
+    <div class="modal fade" id="micro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+      <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+        <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Request for Microscopy Test</h4>
+              </div>
+              <div class="modal-body" id="showMicroscopy" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+            <section class="content">
+              <table id="example4" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Date and Time of Admission</th>
+                  <th>Patient Name</th>
+                </tr>
+              </thead>
+                <%for (var i = 0; i < microscopy.length; i++) { %>
+                  <tr>
+                    <td><%= moment(new Date(microscopy[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                    <td><%= microscopy[i].name%></td>
+                  </tr>
+                <%}%>
+              </table>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!---------------------------------------------------------------------------------------------- Modal for  Parasitology ----------->
+      <div class="modal fade" id="para" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+        <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Request for Parasitology Test</h4>
+                </div>
+                <div class="modal-body" id="showParasitology" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+              <section class="content">
+                <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Date and Time of Admission</th>
+                    <th>Patient Name</th>
+                  </tr>
+                </thead>
+                  <%for (var i = 0; i < parasitology.length; i++) { %>
+                    <tr>
+                      <td><%= moment(new Date(parasitology[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                      <td><%= parasitology[i].name%></td>
+                    </tr>
+                  <%}%>
+                </table>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!---------------------------------------------------------------------------------------------- Modal for  Serology ----------->
+        <div class="modal fade" id="sero" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+          <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+            <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Request for Serology Test</h4>
+                  </div>
+                  <div class="modal-body" id="showSerology" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+                <section class="content">
+                  <table id="example6" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date and Time of Admission</th>
+                      <th>Patient Name</th>
+                    </tr>
+                  </thead>
+                    <%for (var i = 0; i < serology.length; i++) { %>
+                      <tr>
+                        <td><%= moment(new Date(serology[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                        <td><%= serology[i].name%></td>
+                      </tr>
+                    <%}%>
+                  </table>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!---------------------------------------------------------------------------------------------- Modal for  Microbiology ----------->
+          <div class="modal fade" id="microBio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+            <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+              <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Request for Microbiology Test</h4>
+                    </div>
+                    <div class="modal-body" id="showMicrobiology" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+                  <section class="content">
+                    <table id="example7" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Date and Time of Admission</th>
+                        <th>Patient Name</th>
+                      </tr>
+                    </thead>
+                      <%for (var i = 0; i < microbiology.length; i++) { %>
+                        <tr>
+                          <td><%= moment(new Date(microbiology[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                          <td><%= microbiology[i].name%></td>
+                        </tr>
+                      <%}%>
+                    </table>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!---------------------------------------------------------------------------------------------- Modal for  XRay ----------->
+            <div class="modal fade" id="xray" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+              <div class="modal-dialog" role="document" style="overflow-y: initial !important;">
+                <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Request for X-Ray Test</h4>
+                      </div>
+                      <div class="modal-body" id="showXray" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
+                    <section class="content">
+                      <table id="example8" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Date and Time of Admission</th>
+                          <th>Patient Name</th>
+                        </tr>
+                      </thead>
+                        <%for (var i = 0; i < xRay.length; i++) { %>
+                          <tr>
+                            <td><%= moment(new Date(xRay[i].timestamp)).format('MMM-DD-YYYY HH:mm')%></td>
+                            <td><%= xRay[i].name%></td>
+                          </tr>
+                        <%}%>
+                      </table>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!------------------------------------------------------------------------------------------ /Modal-->
+
+              <!-- -------------------------------------------------------------------------------------------- Modal of To Do List ----------->
+              <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" style="overflow:hidden;">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel1">To Do List</h4>
+                    </div>
+
+                    <div class="modal-body">
+                      <form method="POST" onsubmit="parseDateNTime()" class="form-horizontal" id="showTodo">
+                          <div class="form-group">
+                            <label for="description" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="description" name="description" data-parsley-required>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="todoStatus" class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-3">
+                              <select name="todoStatus" class="form-control">
+                                <option value="general">General</option>
+                                <option value="urgent">Urgent</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="dateNtime" class="col-sm-2 control-label">Date and Time</label>
+                            <div class="col-sm-5">
+                              <input type="datetime-local" name="dateNtime" class="form-control">
+                            </div>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" name="sub" value="addTodo"><i class="fa fa-plus"></i> Add</button>
+                          </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+<% include ../partials/footer.ejs %>
+
+<script src="/notif-lab.js"></script>
+<script>
+$(function () {
+    var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+    var areaChart = new Chart(areaChartCanvas);
+    var areaChartData = {
+      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September" ,"October", "November", "December"],
+      datasets: [
+        {
+          label: "Patient",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [<%-JSON.stringify(monthlyPatientCount[0].JAN)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].FEB)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].MARCH)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].APRIL)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].MAY)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].JUNE)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].JULY)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].AUGUST)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].SEPTEMBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].OCTOBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].NOVEMBER)%>,
+            <%-JSON.stringify(monthlyPatientCount[0].DECEMBER)%>]
+        }
+      ]
+    };
+
+    var areaChartOptions = {
+      //Boolean - If we should show the scale at all
+      showScale: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: false,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - Whether the line is curved between points
+      bezierCurve: true,
+      //Number - Tension of the bezier curve between points
+      bezierCurveTension: 0.3,
+      //Boolean - Whether to show a dot for each point
+      pointDot: false,
+      //Number - Radius of each point dot in pixels
+      pointDotRadius: 4,
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth: 1,
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius: 20,
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke: true,
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth: 2,
+      //Boolean - Whether to fill the dataset with a color
+      datasetFill: true,
+      //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true
+    };
+
+    //Create the line chart
+    areaChart.Line(areaChartData, areaChartOptions);
+
+  });
+
+  function showTodo() {
+    document.getElementById("showTodo").style.display = "block";
+  }
+  function showBloodChem() {
+    document.getElementById("showBloodChem").style.display = "block";
+  }
+  function showHerma() {
+    document.getElementById("showHerma").style.display = "block";
+  }
+  function showMicroscopy() {
+    document.getElementById("showMicroscopy").style.display = "block";
+  }
+  function showParasitology() {
+    document.getElementById("showParasitology").style.display = "block";
+  }
+  function showSerology() {
+    document.getElementById("showSerology").style.display = "block";
+  }
+  function showMicrobiology() {
+    document.getElementById("showMicrobiology").style.display = "block";
+  }
+  function showXray() {
+    document.getElementById("showXray").style.display = "block";
+  }
+
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:0.5px; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+
+    $(document).ready(function() {
+        $(".select2").select2();
+          $("#example1").DataTable();
+          $('#example2').DataTable();
+          $("#example4").DataTable();
+          $('#example5').DataTable();
+          $("#example6").DataTable();
+          $('#example7').DataTable();
+          $("#example8").DataTable();
+          $('#example3').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": false,
+          "autoWidth": true
+        });
+    });
+
+    //Date picker
+    $('.datepicker').datepicker({
+      autoclose: true
+    });
+
+</script>
