@@ -1,0 +1,2 @@
+Bug Fix
+-Action~button color string not an array;color static;status Dynamic(Outpatient Management Doctor) 

@@ -179,7 +179,7 @@ var availableBedss, p;
               if(isMatch) {
                 var sql  = "SELECT patient_id,patient_type,name,age,sex,blood_type FROM patient where patient_id = "+req.query.passPatient+";";
                 var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
-                var med = "select date_stamp, lab, medicine,diagnosis,bed from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp;";
+                var med = "select date_stamp, lab, medicine,diagnosis,bed from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp desc;";
                 db.query(sql + sql2 + med + name, function(err, successRows){
                   res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null});
                 });
