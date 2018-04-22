@@ -250,7 +250,7 @@
                           </form>
                          <%}%>
                       </td>
-                      <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>" method="post">
+                      <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
                         <td><button type="submit" <%if(labArr || prescribeArr){%> disabled <%}%> data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="confirm" <%if(!opdInfo2[i].bed_id){%>
 
                   <%} else {%>

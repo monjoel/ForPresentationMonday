@@ -1,0 +1,2 @@
+Bug Fix
+-Previous Confinement Period Bug Fix(Patient Management Doc Nurse Module)

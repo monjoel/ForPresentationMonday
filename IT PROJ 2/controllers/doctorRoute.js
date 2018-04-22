@@ -150,7 +150,7 @@ var availableBedss, p;
             });
           } else if (data.sub == 'confirm') {
             db.query('UPDATE patient_history inner join bed on patient_history.patient_id = bed.patient_id set patient_history.status = "confirmed", bed.status = "Unoccupied", bed.allotment_timestamp = NULL, bed.patient_id = NULL where patient_history.histo_id = '+req.query.id+';'
-              + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "confirmER", "Confirmed patient on WARD/ER, named: '+req.query.name+'!");', function(err){
+              + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "bedDischarge", "Discharged a patient from bed number : '+req.query.bed+'",'+req.query.pId+');'+'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "confirmER", "Confirmed patient on WARD/ER, named: '+req.query.name+'!",'+req.query.pId+');', function(err){
               if (err) {
                 console.log(err);
               } else {

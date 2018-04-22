@@ -157,7 +157,7 @@
                                 if(d1 == "Jan-01-1970 08:00"){
                                 d1 = " ";
                                 }
-                                if(d2 == "Jan-01-1970 08:00"){
+                                if(d2 == "Jan-01-1970 08:00" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                                 d2 = " "
                                 }
                                 %>
@@ -408,7 +408,7 @@
                         if(d1 == "Jan-01-1970 08:00" || d1 == "Invalid date"){
                             d1 = " ";
                         }
-                        if(d2 == "Jan-01-1970 08:00" || d2 == "Invalid date"){
+                        if(d2 == "Jan-01-1970 08:00" || d2 == "Invalid date" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                             d2 = " "
                         }
                     %>
