@@ -308,7 +308,7 @@ var availableBedss, p;
                 var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
                 var med = "select date_stamp, lab, medicine,diagnosis,bed, initial_assessment from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp desc;";
                 db.query(patientManSQL + sql2 + med + name, req.session.Aid, function(err, successRows){
-                  res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null});
+                  res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null, opd:req.query.OPD});
                 });
               } else {
                 var sql  = "SELECT patient_id,patient_type,name,age,sex,blood_type FROM patient where patient_id = "+req.query.passPatient+";";
