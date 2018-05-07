@@ -1,27 +1,23 @@
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<!-- SOCKET IO -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
 <link rel="shortcut icon" type="image/ico" href="favicon.ico">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- BOOTSTRAP NOTIFY -->
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css">
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/styles/alert-bangtidy.min.css">
- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/styles/alert-blackgloss.min.css">
-<!-- Bootstrap 3.3.6 -->
-<!--<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">-->
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Theme style -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css"> -->
+<link rel="stylesheet" href="/js/bootstrap-notify/alert-bangtidy.min.css">
+<link rel="stylesheet" href="/js/bootstrap-notify/alert-blackgloss.min.css">
+<!-- <script src="/js/bootstrap-notify/bootstrap-notify.min.js" charset="utf-8"></script> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/styles/alert-bangtidy.min.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/styles/alert-blackgloss.min.css"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="/js/fontawesome-free-5.0.12/web-fonts-with-css/css/fontawesome-all.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
+<link rel="stylesheet" href="/js/ionicons-1.5.2/css/ionicons.min.css">
 <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
-
 <link rel="stylesheet" href="/dist/css/parsley.css">
-
 <!-- iCheck -->
 <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
 <!-- Morris chart -->
@@ -31,64 +27,63 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="/plugins/select2/select2.min.css">
 <!-- jvectormap -->
-<link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
 <!-- Date Picker -->
 <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
 <!-- Daterange picker -->
 <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
 <!-- DataTables -->
-<link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
-
+<link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
 <style>
 /* Center the loader */
 #loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+position: absolute;
+left: 50%;
+top: 50%;
+z-index: 1;
+width: 150px;
+height: 150px;
+margin: -75px 0 0 -75px;
+border: 16px solid #f3f3f3;
+border-radius: 50%;
+border-top: 16px solid #3498db;
+width: 120px;
+height: 120px;
+-webkit-animation: spin 2s linear infinite;
+animation: spin 2s linear infinite;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 
 /* Add animation to "page content" */
 .animate-bottom {
-  position: relative;
-  -webkit-animation-name: animatebottom;
-  -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
+position: relative;
+-webkit-animation-name: animatebottom;
+-webkit-animation-duration: 1s;
+animation-name: animatebottom;
+animation-duration: 1s
 }
 
 @-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 }
-  to { bottom:0px; opacity:1 }
+from { bottom:-100px; opacity:0 }
+to { bottom:0px; opacity:1 }
 }
 
 @keyframes animatebottom {
-  from{ bottom:-100px; opacity:0 }
-  to{ bottom:0; opacity:1 }
+from{ bottom:-100px; opacity:0 }
+to{ bottom:0; opacity:1 }
 }
 
 #myDiv {
-  display: none;
-  text-align: center;
+display: none;
+text-align: center;
 }
 </style>
