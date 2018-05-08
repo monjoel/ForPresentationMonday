@@ -1,4 +1,4 @@
-module.exports = function(app, db, bcrypt, moment){
+module.exports = function(app, db, bcrypt, moment, CronJob, io){
   app.get('/', function(req, res){
     if(req.session.email){
         res.redirect(req.session.sino+'/dashboard');
@@ -50,6 +50,21 @@ module.exports = function(app, db, bcrypt, moment){
                   }
                 });
                 res.redirect(req.session.sino +'/dashboard');
+                if (req.session.sino == 'doctor') {
+                  new CronJob('* * * * *', function(){
+                    db.query('select name, appointment_timestamp, remarks from appointment inner join patient using(patient_id) where doctor_id = '+req.session.Aid+';', function(err, rows){
+                      if (err) {
+                        console.log(err);
+                      }
+                      var resultDB = JSON.parse(JSON.stringify(rows));
+                      for (var i in resultDB) {
+                        if (moment(new Date()).add(5, 'minute').format("MM-DD-YYYY HH:mm") == moment(resultDB[i].appointment_timestamp).format("MM-DD-YYYY HH:mm")) {
+                          io.emit('type', {what:'appointment', message:'Appointment for <strong>'+resultDB[i].name+'</strong> !!!<br>REMARKS: <strong>'+resultDB[i].remarks+'</strong><br><h3>In 5 Minutes !!</h3>'});
+                        }
+                      }
+                    });
+                  }, null, true);
+                }
               } else {
                 req.flash('danger', 'Invalid Credentials!');
                 res.redirect(req.get('referer'));

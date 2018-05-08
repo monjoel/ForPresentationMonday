@@ -1,5 +1,6 @@
-module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment){
-var availableBedss, p;
+module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment,CronJob){
+  //Check for notif of doctor
+  let availableBedss, p;
 
   app.get('/doctor/dashboard', function(req, res){
     if(req.session.email && req.session.sino == 'doctor'){

@@ -33,6 +33,7 @@ const io = require('socket.io')(server);
 //FOR AGE INCREMENT
 var pharmDailyReport;
 var CronJob = require('cron').CronJob;
+
 new CronJob('00 00 * * 1-7', function() {
     var checkBD = 'SELECT name, patient_id, birth_date, age from patient';
     db.query(checkBD, function(err, rows){
@@ -136,9 +137,9 @@ var patientManagementSQL = "SELECT *,"
                            +" (SELECT DATEDIFF(discharge,allotment)) as difference "
                            +" FROM patient left join activity_logs USING(patient_id) group by patient_id;";
 
-login (app,db,bcrypt,moment);
+login (app,db,bcrypt,moment,CronJob,io);
 nurse (app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,doctorList,patientManagementSQL,bcrypt,io,moment);
-doctor(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment);
+doctor(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment,CronJob);
 admin (app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment);
 pharmacist(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment,pharmDailyReport);
 laboratorist(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment);
