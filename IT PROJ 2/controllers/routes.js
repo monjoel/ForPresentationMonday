@@ -25,7 +25,7 @@ module.exports = function(app, db, bcrypt, moment, CronJob, io){
       }  else {
         var username = req.body.username;
         var password = req.body.pass;
-        var user  = "SELECT * FROM user_accounts WHERE username = ?;" ;
+        var user  = "SELECT * FROM user_accounts WHERE username = ? and status = 'active';" ;
 
         db.query(user, username, function(err, rows, fields){
           if(err){

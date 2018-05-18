@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2018 at 11:16 AM
+-- Generation Time: May 18, 2018 at 04:07 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
   `remarks` text NOT NULL,
   `patient_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`logs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `activity_logs`
@@ -253,7 +253,29 @@ INSERT INTO `activity_logs` (`logs_id`, `account_id`, `time`, `type`, `remarks`,
 (207, 40, '2018-05-18 19:08:32', 'bedDischarge', 'Discharged a patient from bed number : ', 98),
 (208, 40, '2018-05-18 19:08:32', 'requestConfirmationER', ' Request of Confirmation sent!', 98),
 (209, 40, '2018-05-18 19:08:36', 'bedDischarge', 'Discharged a patient from bed number : ', 95),
-(210, 40, '2018-05-18 19:08:36', 'requestConfirmationER', ' Request of Confirmation sent!', 95);
+(210, 40, '2018-05-18 19:08:36', 'requestConfirmationER', ' Request of Confirmation sent!', 95),
+(211, 25, '2018-05-18 21:58:22', 'log', 'Logged in', NULL),
+(212, 25, '2018-05-18 22:00:14', 'log', 'Logged out', NULL),
+(213, 25, '2018-05-18 22:00:19', 'log', 'Logged in', NULL),
+(214, 25, '2018-05-18 22:14:18', 'log', 'Logged out', NULL),
+(215, 25, '2018-05-18 22:14:57', 'log', 'Logged in', NULL),
+(216, 25, '2018-05-18 22:25:38', 'log', 'Logged out', NULL),
+(217, 25, '2018-05-18 22:25:44', 'log', 'Logged in', NULL),
+(218, 25, '2018-05-18 23:31:49', 'log', 'Logged in', NULL),
+(219, 25, '2018-05-18 23:33:16', 'log', 'Logged in', NULL),
+(220, 25, '2018-05-18 23:46:26', 'log', 'Logged in', NULL),
+(221, 25, '2018-05-18 23:47:53', 'addUser', 'Added user: Sherrie Em', NULL),
+(222, 25, '2018-05-18 23:49:47', 'removedUser', 'Deactivated user: Sherrie Em', NULL),
+(223, 25, '2018-05-19 00:00:51', 'log', 'Logged in', NULL),
+(224, 25, '2018-05-19 00:00:57', 'resetPassword', 'Reactivated user: Sherrie Em', NULL),
+(225, 25, '2018-05-19 00:04:36', 'log', 'Logged in', NULL),
+(226, 25, '2018-05-19 00:04:42', 'removedUser', 'Deactivated user: Sherrie Em', NULL),
+(227, 25, '2018-05-19 00:05:03', 'log', 'Logged in', NULL),
+(228, 25, '2018-05-19 00:05:09', 'resetPassword', 'Reactivated user: Sherrie Em', NULL),
+(229, 25, '2018-05-19 00:05:15', 'removedUser', 'Deactivated user: Sherrie Em', NULL),
+(230, 25, '2018-05-19 00:05:23', 'resetPassword', 'Reactivated user: Sherrie Em', NULL),
+(231, 25, '2018-05-19 00:06:02', 'removedUser', 'Deactivated user: Sherrie Em', NULL),
+(232, 25, '2018-05-19 00:06:09', 'resetPassword', 'Reactivated user: Sherrie Em', NULL);
 
 -- --------------------------------------------------------
 
@@ -807,20 +829,22 @@ CREATE TABLE IF NOT EXISTS `user_accounts` (
   `sex` varchar(1) NOT NULL,
   `address` text NOT NULL,
   `phone` varchar(11) NOT NULL,
+  `status` text NOT NULL,
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_accounts`
 --
 
-INSERT INTO `user_accounts` (`account_id`, `username`, `password`, `account_type`, `name`, `age`, `sex`, `address`, `phone`) VALUES
-(25, 'admin', '$2a$10$ezo.TIL9X06nBeej9SWsd.cGKphNYOrWmZKPvv59sfS0JUsu5wk86', 'admin', 'Anthony Grubat', 28, 'M', '68 Grayville, Baguio City', '9718236712'),
-(38, 'pharm', '$2a$10$XbmMdh3j6COxrrPoZRo6L.8lkjp4SLPLzX1SiMyjvZz6rktfFDiXa', 'pharmacist', 'Alyssa Mendoza', 26, 'F', '23 Green Acres, Hillside, Baguio City', '9185362142'),
-(39, 'lab', '$2a$10$YjaVhL3i3Jp6p0dE5GzBKOGJIKEvALDBOhFkO82nJN/c9A8dvszB2', 'laboratorist', 'Dominique Valdez', 27, 'F', '89 Woodsgate Square Subdivision, Baguio City', '9183241523'),
-(40, 'doctor', '$2a$10$kDE19DErM2VVWpUDvgLrIOJ1W9qbDRgcqoXoijzvhXpsXMkPTkqs6', 'doctor', 'Jeffrey Maneclang', 29, 'M', 'Camp Dangwa, La Trinidad, Benguet', '9063452819'),
-(41, 'nurse', '$2a$10$ba3obrkiv1P0/2yiLVzHZOt2epjsqbr6TJOCO8CxesTuSkBHp3fk2', 'nurse', 'Kyla Corpuz', 27, 'F', '12 Dizon Subdivision, Baguio City', '9173629081'),
-(42, 'doctor2', '$2a$10$wb/2vU3faoS3bVKRjjGNFe2.UYieqh3YXzUMEy4tspHrAZFdyjqwO', 'doctor', 'doctor2', 26, 'M', 'lower baguio', '29873');
+INSERT INTO `user_accounts` (`account_id`, `username`, `password`, `account_type`, `name`, `age`, `sex`, `address`, `phone`, `status`) VALUES
+(25, 'admin', '$2a$10$ezo.TIL9X06nBeej9SWsd.cGKphNYOrWmZKPvv59sfS0JUsu5wk86', 'admin', 'Anthony Grubat', 28, 'M', '68 Grayville, Baguio City', '9718236712', 'active'),
+(38, 'pharm', '$2a$10$XbmMdh3j6COxrrPoZRo6L.8lkjp4SLPLzX1SiMyjvZz6rktfFDiXa', 'pharmacist', 'Alyssa Mendoza', 26, 'F', '23 Green Acres, Hillside, Baguio City', '9185362142', 'active'),
+(39, 'lab', '$2a$10$YjaVhL3i3Jp6p0dE5GzBKOGJIKEvALDBOhFkO82nJN/c9A8dvszB2', 'laboratorist', 'Dominique Valdez', 27, 'F', '89 Woodsgate Square Subdivision, Baguio City', '9183241523', 'active'),
+(40, 'doctor', '$2a$10$kDE19DErM2VVWpUDvgLrIOJ1W9qbDRgcqoXoijzvhXpsXMkPTkqs6', 'doctor', 'Jeffrey Maneclang', 29, 'M', 'Camp Dangwa, La Trinidad, Benguet', '9063452819', 'active'),
+(41, 'nurse', '$2a$10$ba3obrkiv1P0/2yiLVzHZOt2epjsqbr6TJOCO8CxesTuSkBHp3fk2', 'nurse', 'Kyla Corpuz', 27, 'F', '12 Dizon Subdivision, Baguio City', '9173629081', 'active'),
+(42, 'doctor2', '$2a$10$wb/2vU3faoS3bVKRjjGNFe2.UYieqh3YXzUMEy4tspHrAZFdyjqwO', 'doctor', 'doctor2', 26, 'M', 'lower baguio', '29873', 'active'),
+(43, 'sherrie', '$2a$10$t8cpgFpDp/y0dZHSKDrFMOrqHcWbBagkDt/GyQgxSWB7Q0sii5X2a', 'nurse', 'Sherrie Em', 21, 'F', 'Loakan, Baguio City', '0912374873', 'active');
 
 -- --------------------------------------------------------
 
