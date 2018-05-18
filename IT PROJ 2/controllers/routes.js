@@ -25,14 +25,17 @@ module.exports = function(app, db, bcrypt, moment, CronJob, io){
       }  else {
         var username = req.body.username;
         var password = req.body.pass;
-        var user  = "SELECT * FROM user_accounts WHERE username = ? and status = 'active';" ;
+        var user  = "SELECT * FROM user_accounts WHERE username = ?;" ;
 
         db.query(user, username, function(err, rows, fields){
           if(err){
             console.log(err);
           }
           else if(rows == ''){
-            req.flash('danger', 'Invalid Credentials!');
+            req.flash('danger', 'User Account does not exist!');
+            res.redirect(req.get('referer'));
+          } else if(rows[0].status == 'deactivated'){
+            req.flash('danger', 'Account Deactivated! Please inquire from the System Admin.');
             res.redirect(req.get('referer'));
           } else {
             bcrypt.compare(password, rows[0].password, function(err, isMatch) {
@@ -66,7 +69,7 @@ module.exports = function(app, db, bcrypt, moment, CronJob, io){
                   }, null, true);
                 }
               } else {
-                req.flash('danger', 'Invalid Credentials!');
+                req.flash('danger', 'Invalid Password!');
                 res.redirect(req.get('referer'));
               }
             });
