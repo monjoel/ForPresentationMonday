@@ -11,99 +11,77 @@
       }
   </style>
   </head>
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav"  onload="myFunction()"  >
-<div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
-<div class="wrapper">
+  <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <div class="wrapper">
+    <header class="main-header">
 
-  <header class="main-header">
-    <nav class="navbar navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="#" class="navbar-brand"><b>FDPSH</b></a>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-            <i class="fa fa-bars"></i>
-          </button>
-        </div>
+    <a href="dashboard" class="logo">
+      <span class="logo-mini"><b><%= username[0].account_type.charAt(0).toUpperCase()%></b></span>
+      <span class="logo-lg"><b><%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%></b></span>
+    </a>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-          <ul class="nav navbar-nav">
-              <li id="dashboard" class="active"><a href="dashboard" target="_self"><span>Dashboard</span></a></li>
-              <li><a href="patientManagement"><span>Patient Profiles</span></a></li>
-              <li><a href="bedManagement"><span>Bed </span></a></li>
-              <li><a href="userAccountsManagement"><span>User Accounts</span></a></li>
-              <li><a href="profileManagement"><span>Profile</span></a></li>
-          </ul>
-<!--
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
-            </div>
-          </form>
--->
-        </div>
-        <!-- /.navbar-collapse -->
-        <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
-              <!-- Menu Toggle Button -->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <!-- The user image in the navbar-->
-                  <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs"><%= username[0].name %></span>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- The user image in the menu -->
-                  <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      <%= username[0].name %> - <%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%>
-                    </p>
-                  </li>
-                <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="profileManagement" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="../logout" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <!-- /.navbar-custom-menu -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs"><%= username[0].name %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="user-header">
+                <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <p>
+                  <%= username[0].name %> - <%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="profileManagement" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="../logout" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <!-- /.container-fluid -->
     </nav>
   </header>
-  <!-- Full Width Column -->
-  <div class="content-wrapper" style="background: url('../img/fdpsh logo faded.png')
-    !important; height: 100%;
-    background-position: center;
-    background-size: cover !important;
-    background-attachment: fixed !important;">
-    <div class="container">
-      <!-- Content Header (Page header) -->
-      <section class="content-header" id="myDiv1" style="background-color: rgba(236, 240, 245,0.8);">
-        <h1>
-<b>Welcome,</b> <%= username[0].account_type.charAt(0).toUpperCase() + username[0].account_type.slice(1);%> <%= username[0].name %>!
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-<!--
-          <li><a href="#">Layout</a></li>
-          <li class="active">Top Navigation</li>
--->
-        </ol>
-      </section>
+      <aside class="main-sidebar">
+        <section class="sidebar">
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p><%= username[0].name %></p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
 
-      <!-- Main content -->
-        <section class="content animate-bottom" style="background-color: rgba(236, 240, 245,0.8);"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+        <ul class="sidebar-menu">
+          <li id="dashboard" class="active"><a href="dashboard" target="_self"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
+          <li><a href="bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
+          <li><a href="userAccountsManagement"><i class="fa fa-user"></i> <span>User Accounts Management</span></a></li>
+          <li><a href="profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+        </ul>
+        </section>
+      </aside>
+      <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+        <section class="content-header">
+          <h1>
+            Welcome!
+          </h1>
+        </section>
+
+        <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
           <div class="row">
             <div class="col-lg-3 col-xs-6">
               <div class="small-box bg-aqua">
@@ -135,7 +113,7 @@
               <div class="small-box bg-yellow">
                 <div class="inner">
                   <h3><%= counts[0].OPD%></h3>
-                  <p>OPD Visits</p>
+                  <p>OPD</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -160,7 +138,7 @@
 
           <div class="row">
             <section class="col-lg-7 connectedSortable">
-              <div class="box box-primary">
+              <div class="box" style="border-top-color: #3e0901 !important;">
                 <div class="box-header with-border">
                   <h3 class="box-title">Patient Count</h3>
 
@@ -177,11 +155,11 @@
                 </div>
               </div>
 
-              <div class="box box-primary">
+              <div class="box"  style="border-top-color: #3e0901 !important;">
                 <div class="box-header">
                   <i class="ion ion-clipboard"></i>
                   <h3 class="box-title">To Do List</h3>
-                </div>
+                </div>  
 
                 <div class="box-body">
                   <table id="example3" class="table table-bordered table-striped">
@@ -205,7 +183,7 @@
                           <td><form action="/admin/dashboard?tId=<%= todoList[i].todo_id%>" method="POST">
                                 <button type="submit" name="sub" value="delToDo" class="btn btn-default">Delete</button>
                               </form>
-                          </td>
+                          </td>   
                         </tr>
                       <%}%>
                     <%}%>
@@ -215,7 +193,7 @@
                 <div class="box-footer clearfix no-border">
                   <button type="button" name="button" onclick="showTodo()" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal4"><i class="fa fa-plus" data-target="#myModal4"></i> Add item</button>
                 </div>
-              </div>
+              </div>            
 
             </section>
             <section class="col-lg-5 connectedSortable">
@@ -223,7 +201,7 @@
                   <div class="pull-right box-tools">
                   </div>
 
-                  <div class="box box-primary">
+                  <div class="box"  style="border-top-color: #3e0901 !important;">
                 <div class="box-header with-border">
                   <i class="fa fa-bar-chart-o"></i>
 
@@ -288,7 +266,7 @@
                             <input type="datetime-local" name="dateNtime" class="form-control" data-parsley-required>
                           </div>
                         </div>
-
+                        
                         <div class="modal-footer">
                           <button type="submit" class="btn btn-primary" name="sub" value="addTodo"><i class="fa fa-plus" onclick="validateDate()"></i> Add</button>
                         </div>
@@ -306,7 +284,7 @@
             <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">OPD Visits (Jan - Mar)</h4>
+                    <h4 class="modal-title" id="myModalLabel">OPD Transactions (Jan - Mar)</h4>
                   </div>
                   <div class="modal-body" id="ShowOpd" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
                 <section class="content">
@@ -368,7 +346,7 @@
 </body>
 <% include ../partials/footer.ejs %>
 </html>
-<script>
+<script>  
   function validateDate() {
     $('#myModal4').parsley().on('field:validated', function() {
       var ok = $('.parsley-error').length === 0;
@@ -532,6 +510,6 @@
     $(document).ready(function() {
         $(".select2").select2();
         var today = (new Date()).format('MM/DD/YYYY hh:mm A').toISOString().split('T')[0];
-        document.getElementById("#dateNtime").setAttribute('data-parsley-min', today);
+        document.getElementById("#dateNtime").setAttribute('data-parsley-min', today);  
     });
 </script>
