@@ -171,8 +171,8 @@
                             <button type="submit" data-toggle="confirmation"
                               data-popout="true"
                               data-singleton="true"
-                              class="btn btn-default btn-sm"
-                              name="sub" value="cancelConfirmOPD">
+                              class="btn btn-danger btn-sm"
+                              name="sub" value="cancelConfirmationOPD">
                               <i class="fa fa-mail-forward"></i>Cancel Confirmation</button>
                           </td>
                       </form>
@@ -280,7 +280,7 @@
                       if(requestArr.includes(opdInfo[i].patient_id)){%>
                         <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
                           <td>
-                            <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="cancelConfirmRequestER"<i class="fa fa-sign-out"></i> Cancel Discharge Confirmation</button>
+                            <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-danger btn-sm" value="cancelConfirmRequestER"<i class="fa fa-sign-out"></i> Cancel Discharge Confirmation</button>
                           </td>
                         </form>
                         <%}else{%>

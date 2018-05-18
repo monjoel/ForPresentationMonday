@@ -79,9 +79,9 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
   app.get('/doctor/outpatientManagement', function(req, res){
     if(req.session.email && req.session.sino == 'doctor'){
       if (req.session.sino == 'doctor') {
-          var outpatientDepartmentSQL = 'SELECT * from patient_history inner join patient using(patient_id) where patient_history.status = "pending" and doctor_id = '+req.session.Aid+' and bed is null;';
-          var outpatientDepartmentSQL2 = 'SELECT * from patient_history inner join patient using(patient_id) where patient_history.status = "confirmed" and doctor_id = '+req.session.Aid+';';
-          var outpatientDepartmentSQL3 = 'SELECT * from patient_history inner join patient using(patient_id) left join bed using(patient_id) where patient_history.status = "pending" and bed is not null and doctor_id = '+req.session.Aid+' group by patient_id;';
+          var outpatientDepartmentSQL = 'SELECT * from patient_history inner join patient using(patient_id) where patient_history.status = "pending" and bed is null;';
+          var outpatientDepartmentSQL2 = 'SELECT * from patient_history inner join patient using(patient_id) where patient_history.status = "confirmed";';
+          var outpatientDepartmentSQL3 = 'SELECT * from patient_history inner join patient using(patient_id) left join bed using(patient_id) where patient_history.status = "pending" and bed is not null group by patient_id;';
           var labSQL                  = 'SELECT * from lab_request left join patient_history using(patient_id)  where lab_status = "pending" group by patient_id;';
           var prescribeSQL            = 'SELECT * from prescription p inner join patient using(patient_id) where p.status = "pending" group by patient_id;';
           var requestConfirmation = 'SELECT request, patient_id from patient_history where request = "pending";';
@@ -162,6 +162,24 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
           } else if (data.sub == 'confirmOPD') {
             db.query('UPDATE patient_history set request = "pending" where histo_id = '+req.query.id+';'
               + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "requestConfirmationOPD", "Request of Confirmation sent!", '+req.query.pId+');', function(err){
+              if (err) {
+                console.log(err);
+              } else {
+                res.redirect(req.get('referer'));
+              }
+            });
+          } else if (data.sub = 'cancelConfirmRequestER') {
+            db.query('UPDATE patient_history set request = NULL where histo_id = '+req.query.id+';'
+              + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "calcelRequestConfirmationER", "Request of Confirmation Cancelled!", '+req.query.pId+');', function(err){
+              if (err) {
+                console.log(err);
+              } else {
+                res.redirect(req.get('referer'));
+              }
+            });
+          } else if (data.sub == 'cancelConfirmationOPD') {
+            db.query('UPDATE patient_history set request = NULL where histo_id = '+req.query.id+';'
+              + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "calcelRequestConfirmationOPD", "Request of Confirmation Cancelled!", '+req.query.pId+');', function(err){
               if (err) {
                 console.log(err);
               } else {
