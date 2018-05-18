@@ -7,8 +7,8 @@
   <% include ../partials/header.ejs %>
   <title>Dashboard</title>
 </head>
-  <body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
-    <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+  <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+    <div id="loader" style="background-color: #3e0901 !important"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
   <div class="wrapper">
     <header class="main-header">
       <a href="../doctor/dashboard" class="logo">
@@ -61,14 +61,14 @@
         </div>
 
         <ul class="sidebar-menu">
-          <li class="active"><a href="../doctor/dashboard" target="_self"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <li><a href="../doctor/bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
-          <li><a href="../doctor/patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
-          <li><a href="../doctor/outpatientManagement"><i class="fa fa-wheelchair"></i> <span>Outpatient Management</span></a></li>
-          <li><a href="../doctor/appointmentManagement"><i class="fa fa-calendar"></i> <span>Appointment Management</span></a></li>
-          <li><a href="../doctor/prescriptionManagement"><i class="fa fa-sticky-note"></i> <span>Prescription Management</span></a></li>
-          <li><a href="../doctor/labRequestManagement"><i class="fa fa-stethoscope"></i> <span>Lab Request Management</span></a></li>
-          <li><a href="../doctor/profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+          <li class="active"><a href="../doctor/dashboard" target="_self"><img src="../icons/medicine.png" alt="dboard" height="20px;" width="20px;"> <span>Dashboard</span></a></li>
+          <li><a href="../doctor/bedManagement"><img src="../icons/hospital-bed.png" alt="bed" height="20px;" width="20px;"> <span>Bed Management</span></a></li>
+          <li><a href="../doctor/patientManagement"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span>Patient Management</span></a></li>
+          <li><a href="../doctor/outpatientManagement"><img src="../icons/volunteer.png" alt="volunteer" height="20px;" width="20px;"> <span>Outpatient Management</span></a></li>
+          <li><a href="../doctor/appointmentManagement"><img src="../icons/notebook.png" alt="notebook" height="20px;" width="20px;"> <span>Appointment Management</span></a></li>
+          <li><a href="../doctor/prescriptionManagement"><img src="../icons/prescription.png" alt="prescription" height="20px;" width="20px;"> <span>Prescription Management</span></a></li>
+          <li><a href="../doctor/labRequestManagement"><img src="../icons/chemistry.png" alt="chemistry" height="20px;" width="20px;"> <span>Lab Request Management</span></a></li>
+          <li><a href="../doctor/profileManagement"><img src="../icons/doctor.png" alt="doctor" height="20px;" width="20px;"> <span>Profile Management</span></a></li>
         </ul>
       </section>
     </aside>
@@ -89,7 +89,7 @@
                 <p>Total Registered Patients</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person"></i>
+                <img src="../icons/health-care.png" alt="health-care" height="70px;" width="70px;">
               </div>
               <a href="../doctor/patientManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -102,7 +102,7 @@
                 <p>Currently Admitted</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <img src="../icons/pulse.png" alt="pulse" height="70px;" width="70px;">
               </div>
               <a href="../doctor/bedManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -112,10 +112,10 @@
             <div class="small-box bg-yellow">
               <div class="inner">
                 <h3><%= counts[0].OPD%></h3>
-                <p>OPD</p>
+                <p>Outpatient Department</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <img src="../icons/pharmacy.png" alt="pharm" height="70px;" width="70px;">
               </div>
               <a data-toggle="modal" data-target="#opdModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -128,7 +128,7 @@
                 <p>Ward</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <img src="../icons/nurse.png" alt="nurse" height="70px;" width="70px;">
               </div>
               <a data-toggle="modal" data-target="#wardModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -142,7 +142,7 @@
               </div>
               <div class="box-body">
                 <a class="btn btn-app" data-toggle="modal" data-target="#myModal2">
-                <i class="fa fa-calendar" data-target="#myModal2"></i> Set Appointment
+                <img src="../icons/notebook.png" alt="notebook" height="30px;" width="30px;" data-target="myModal2">Set Appointment
                 </a>
             </div>
             </center>
@@ -151,7 +151,7 @@
 
         <div class="row">
           <section class="col-lg-7 connectedSortable">
-            <div class="box box-primary">
+            <div class="box" style="border-top-color: #3e0901 !important;">
               <div class="box-header with-border">
                 <h3 class="box-title">Patient Count</h3>
                 <div class="box-tools pull-right">
@@ -166,7 +166,7 @@
                 </div>
               </div>
             </div>
-            <div class="box box-primary">
+            <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
               <h3 class="box-title">To Do List</h3>
@@ -216,7 +216,7 @@
             <div class="box-header">
               <div class="pull-right box-tools">
               </div>
-              <div class="box box-primary">
+              <div class="box" style="border-top-color: #3e0901 !important;">
                 <div class="box-header with-border">
                   <i class="fa fa-bar-chart-o"></i>
                   <h3 class="box-title">Patient Chart</h3>
@@ -243,7 +243,7 @@
           </section>
         </div>
 
-        <!-- OPD Modal --->
+        <!-- OPD Modal -->
         <div class="modal fade" id="opdModal" role="dialog" aria-labelledby="myModalLabel3">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -273,7 +273,7 @@
           </div>
         </div>
 
-        <!-- Ward Modal --->
+        <!-- Ward Modal -->
         <div class="modal fade" id="wardModal" role="dialog" aria-labelledby="myModalLabel4">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -303,7 +303,7 @@
           </div>
         </div>
 
-        <!------------------------- Modal of Adding Appointment --------------------->
+        <!-------------------- Modal of Adding Appointment -------------------->
         <div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -436,8 +436,8 @@
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novermber", "December"],
         datasets: [{
           label: "Patient",
-          fillColor: "rgba(60,141,188,0.9)",
-          strokeColor: "rgba(60,141,188,0.8)",
+          fillColor: "#3e0901",
+          strokeColor: "#3e0901",
           pointColor: "#3b8bba",
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
