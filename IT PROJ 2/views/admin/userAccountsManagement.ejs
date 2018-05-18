@@ -103,6 +103,7 @@
                     <th>Gender</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Username</th>
                     <th>Last Login</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -121,6 +122,7 @@
                     <td><%= p[i].sex %></td>
                     <td><%= p[i].address %></td>
                     <td><%= p[i].phone %></td>
+                    <td><%= p[i].username %></td>
                     <%if(p[i].last_Login){%>
                       <td><%= moment(p[i].last_Login).format('MMMM DD YYYY hh:mm A') %></td>
                     <%} else {%>

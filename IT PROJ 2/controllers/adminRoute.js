@@ -162,7 +162,7 @@ app.get('/admin/patientManagement', function(req, res){
   app.get('/admin/userAccountsManagement', function(req, res){
       if(req.session.email && req.session.sino == 'admin'){
         if(req.session.sino == 'admin'){
-            var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login, address, phone, status FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
+            var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login, address, phone, username, status FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
             var filterPharma = "select * from user_accounts where account_type = 'pharmacist';";
             var filterLab = "select * from user_accounts where account_type = 'laboratorist';";
             var filterAdmin = "select * from user_accounts where account_type = 'admin';";
