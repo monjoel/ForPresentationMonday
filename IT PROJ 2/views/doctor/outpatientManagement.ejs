@@ -161,11 +161,34 @@
                       <!-- ADMIT -->
                       <input type="button" class="btn btn-default btn-sm" name="admit" value="Admit" data-toggle="modal" data-target="#admit" onclick="ShowAdmit(<%=opdInfo[i].patient_id%>,<%=JSON.stringify(opdInfo[i].name)%>,<%=opdInfo[i].histo_id%>)">
                       </td>
-                    <form action="/doctor/outpatientManagement?id=<%= opdInfo[i].histo_id%>&name=<%= opdInfo[i].name%>" method="post">
-                      <td>
-                        <button <%if(labArr.includes(opdInfo[i].patient_id) || prescribeArr.includes(opdInfo[i].patient_id)){%> disabled <%}%> type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="confirmOPD"><i class="fa fa-mail-forward"></i> Confirm</button>
-                      </td>
-                    </form>
+                      <%var requestArr= '';
+                        for (var j = 0; j < request.length; j++){
+                          requestArr += request[j].patient_id;
+                        }
+                      if(requestArr.includes(opdInfo[i].patient_id)){%>
+                        <form action="/doctor/outpatientManagement?id=<%= opdInfo[i].histo_id%>&name=<%= opdInfo[i].name%>&pId=<%= opdInfo[i].patient_id%>" method="post">
+                          <td>
+                            <button type="submit" data-toggle="confirmation"
+                              data-popout="true"
+                              data-singleton="true"
+                              class="btn btn-default btn-sm"
+                              name="sub" value="cancelConfirmOPD">
+                              <i class="fa fa-mail-forward"></i>Cancel Confirmation</button>
+                          </td>
+                      </form>
+                      <%}else{%>
+                        <form action="/doctor/outpatientManagement?id=<%= opdInfo[i].histo_id%>&name=<%= opdInfo[i].name%>&pId=<%= opdInfo[i].patient_id%>" method="post">
+                          <td>
+                            <button <%if(labArr.includes(opdInfo[i].patient_id) || prescribeArr.includes(opdInfo[i].patient_id)){%> disabled <%}%>
+                              type="submit" data-toggle="confirmation"
+                              data-popout="true"
+                              data-singleton="true"
+                              class="btn btn-default btn-sm"
+                              name="sub" value="confirmOPD">
+                              <i class="fa fa-mail-forward"></i>Request Confirmation</button>
+                          </td>
+                        </form>
+                    <%}%>
                   </tr>
                 <%}%>
               </table>
@@ -250,12 +273,23 @@
                           </form>
                          <%}%>
                       </td>
-                      <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
-                        <td><button type="submit" <%if(labArr.includes(opdInfo2[i].patient_id) || prescribeArr.includes(opdInfo2[i].patient_id)){%> disabled <%}%> data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="confirm" <%if(!opdInfo2[i].bed_id){%>
-
-                  <%} else {%>
-                  <%}%>><i class="fa fa-sign-out"></i> Discharge</button></td>
-                      </form>
+                      <%var requestArr= '';
+                        for (var j = 0; j < request.length; j++){
+                          requestArr += request[j].patient_id;
+                        }
+                      if(requestArr.includes(opdInfo[i].patient_id)){%>
+                        <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
+                          <td>
+                            <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="cancelConfirmRequestER"<i class="fa fa-sign-out"></i> Cancel Discharge Confirmation</button>
+                          </td>
+                        </form>
+                        <%}else{%>
+                          <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
+                            <td><button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="confirm"
+                              <%if(labArr.includes(opdInfo2[i].patient_id) || prescribeArr.includes(opdInfo2[i].patient_id)){%> disabled <%}%>
+                              ><i class="fa fa-sign-out"></i> Request Discharge Confirmation</button></td>
+                          </form>
+                        <%}%>
                   </tr>
                 <%}%>
               </table>

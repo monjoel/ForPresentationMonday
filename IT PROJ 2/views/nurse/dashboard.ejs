@@ -289,10 +289,10 @@
                   <div class="form-group">
                     <label for="rankSN" class="col-sm-2 control-label">Rank</label>
                     <div class="col-xs-4">
-                      <select class="form-control select2" id="rankSN" name="rankSN" style="width: 100%;"">
-                        <option value="0" selected disabled hidden>Choose...</option>
+                      <select class="form-control select2" id="rankSN" name="rank" style="width: 100%;">
+                        <option value="" selected hidden>Choose...</option>
                         <%for(var i = 0; i < rank.length; i++){%>
-                            <option value="<%= rank[i].rank_id%>"><%= rank[i].rank_name%></option>
+                            <option value="<%= rank[i].rank_name%>"><%= rank[i].rank_name%></option>
                         <%}%>
                       </select>
                     </div>

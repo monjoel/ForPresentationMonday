@@ -76,18 +76,18 @@ var rankSQL     = "SELECT rank_name FROM rank;";
               var mother        = data.mother + '\n:' + data.motherO;
               var family_history = ""; for (var i = 0; i < fhParse.length; i++) {family_history += fhParse[i] + '\n';};
               var immunization   = ""; for (var i = 0; i < immuParse.length; i++) {immunization += immuParse[i] + '\n';};
-              var addSQL = "INSERT INTO patient (name, unit, address, age, religion, father, mother, allergies, birth_history,birth_date, sex, patient_type, status, blood_type, SN, rank_id, immunization, family_history)"
+              var addSQL = "INSERT INTO patient (name, unit, address, age, religion, father, mother, allergies, birth_history,birth_date, sex, patient_type, status, blood_type, SN, rank, immunization, family_history)"
                          +" VALUES ("+JSON.stringify(data.name)+", "+JSON.stringify(data.unit)+","+JSON.stringify(data.address)+","
                          +" "+age+", "+JSON.stringify(data.religion)+", "+JSON.stringify(father)+","+JSON.stringify(mother)+","
                          +" "+JSON.stringify(data.allergies)+", "+JSON.stringify(data.bh)+", "+birthDate+", "+JSON.stringify(data.gender)+","
                          +" "+JSON.stringify(data.type)+", "+JSON.stringify(data.status)+", "+JSON.stringify(data.blood)+","
-                         +" "+JSON.stringify(data.SN)+", "+JSON.stringify(data.rank_id) +", "+JSON.stringify(immunization)+", "+JSON.stringify(family_history)+");";
-
+                         +" "+JSON.stringify(data.SN)+", "+JSON.stringify(data.rank) +", "+JSON.stringify(immunization)+", "+JSON.stringify(family_history)+");";
+              var chartSQL = "INSERT INTO chart_count(date_stamp, patient_name, patient_type) values('"+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+"', "+JSON.stringify(data.name)+", "+JSON.stringify(data.type)+");";
               db.query(addSQL, function(err, rows){
                 if(err){
                   console.log(err);
                 } else {
-                  db.query('INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "add", "Added: '+data.type+' - '+data.name+'");', function(err){
+                  db.query(chartSQL + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "add", "Added: '+data.type+' - '+data.name+'");', function(err){
                     if (err) {
                       console.log(err);
                     }

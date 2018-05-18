@@ -101,11 +101,11 @@ var counts = "SELECT (SELECT COUNT(opd_count_id) from opd_count) as OPD, "
             +"(SELECT COUNT(ward_count_id) from ward_count) as WARD,"
             +"(SELECT count(name) pCount FROM patient) as totalRegisteredPatients,"
             +"(SELECT count(patient_id) admitted FROM bed) as currentlyAdmitted;";
-var chart  = "SELECT  (SELECT count(patient_id) from patient where patient_type = 'cadet') as cadet,"
-            +"(SELECT count(patient_id) from patient where patient_type = 'military officer') as military_officer,"
-            +"(SELECT count(patient_id) from patient where patient_type = 'military dependent') as military_dependent,"
-            +"(SELECT count(patient_id) from patient where patient_type = 'civilian') as civilian,"
-            +"(SELECT count(patient_id) from patient where patient_type = 'authorized civilian') as authorized_civilian;";
+var chart  = "SELECT  (SELECT count(patient_name) from chart_count where patient_type = 'cadet') as cadet,"
+            +"(SELECT count(patient_name) from chart_count where patient_type = 'military officer') as military_officer,"
+            +"(SELECT count(patient_name) from chart_count where patient_type = 'military dependent') as military_dependent,"
+            +"(SELECT count(patient_name) from chart_count where patient_type = 'civilian') as civilian,"
+            +"(SELECT count(patient_name) from chart_count where patient_type = 'authorized civilian') as authorized_civilian;";
 //COUNT
 var whoOPD               = "SELECT p.name, a.date_stamp as time From patient p inner join opd_count a USING(patient_id) order by a.date_stamp desc;";
 var whoWARD              = "SELECT p.name, a.date_stamp as time From patient p inner join ward_count a USING(patient_id) order by a.date_stamp desc;";
