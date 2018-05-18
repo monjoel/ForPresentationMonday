@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 22, 2018 at 02:22 PM
+-- Generation Time: May 18, 2018 at 02:52 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
   `remarks` text NOT NULL,
   `patient_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`logs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `activity_logs`
@@ -109,7 +109,77 @@ INSERT INTO `activity_logs` (`logs_id`, `account_id`, `time`, `type`, `remarks`,
 (63, 40, '2018-04-22 22:21:20', 'log', 'Logged in', NULL),
 (64, 40, '2018-04-22 22:21:27', 'confirmOPD', 'Confirmed patient on OPD, named: Greg Chicoine !', 6),
 (65, 40, '2018-04-22 22:21:51', 'settingsProfileManagement', 'Edited personal info.', NULL),
-(66, 40, '2018-04-22 22:21:54', 'log', 'Logged out', NULL);
+(66, 40, '2018-04-22 22:21:54', 'log', 'Logged out', NULL),
+(67, 40, '2018-04-23 09:05:13', 'log', 'Logged in', NULL),
+(68, 40, '2018-04-23 09:21:13', 'log', 'Logged out', NULL),
+(69, 41, '2018-04-23 09:21:28', 'log', 'Logged in', NULL),
+(70, 40, '2018-04-23 09:23:07', 'log', 'Logged in', NULL),
+(71, 40, '2018-04-23 09:23:38', 'log', 'Logged in', NULL),
+(72, 41, '2018-04-23 09:29:13', 'log', 'Logged in', NULL),
+(73, 41, '2018-04-23 09:50:45', 'log', 'Logged in', NULL),
+(74, 41, '2018-04-23 09:53:48', 'log', 'Logged out', NULL),
+(75, 40, '2018-04-23 09:53:52', 'log', 'Logged in', NULL),
+(76, 41, '2018-04-23 10:04:23', 'log', 'Logged in', NULL),
+(77, 41, '2018-04-23 10:05:04', 'initialAssessment', 'Outpatient Assessment for Roberto Garcia', 91),
+(78, 40, '2018-04-23 10:07:56', 'labRequest', 'Lab request for : Roberto Garcia', NULL),
+(79, 41, '2018-04-23 10:08:13', 'log', 'Logged out', NULL),
+(80, 39, '2018-04-23 10:08:19', 'log', 'Logged in', NULL),
+(81, 39, '2018-04-23 10:08:32', 'confirmedLabRequest', 'Confirmed lab request for: Roberto Garcia', NULL),
+(82, 40, '2018-04-23 10:09:32', 'confirmOPD', 'Confirmed patient on OPD, named: Roberto Garcia !', 9),
+(83, 39, '2018-04-23 10:25:05', 'log', 'Logged out', NULL),
+(84, 38, '2018-04-23 10:25:18', 'log', 'Logged in', NULL),
+(85, 40, '2018-04-23 10:25:39', 'prescription', 'Prescribed a medicine to : Rose Miller', NULL),
+(86, 38, '2018-04-23 10:34:57', 'log', 'Logged out', NULL),
+(87, 41, '2018-04-23 10:35:00', 'log', 'Logged in', NULL),
+(88, 41, '2018-04-23 10:35:04', 'bed', 'allotted bed number 2 for ER patient Greg Chicoine', 88),
+(89, 41, '2018-04-23 10:35:04', 'er', 'Added ER patient Greg Chicoine', 88),
+(90, 40, '2018-04-23 10:41:03', 'bedDischarge', 'Discharged a patient from bed number : 1', 100),
+(91, 40, '2018-04-23 10:41:03', 'confirmER', 'Confirmed patient on WARD/ER, named: Melissa Corpuz!', 100),
+(92, 41, '2018-04-23 10:46:33', 'log', 'Logged out', NULL),
+(93, 25, '2018-04-23 10:46:36', 'log', 'Logged in', NULL),
+(94, 25, '2018-04-23 10:48:51', 'addUser', 'Added user: doctor2', NULL),
+(95, 25, '2018-04-23 10:48:57', 'log', 'Logged out', NULL),
+(96, 41, '2018-04-23 10:49:01', 'log', 'Logged in', NULL),
+(97, 41, '2018-04-23 10:50:18', 'bed', 'allotted bed number 1 for ER patient Roberto Garcia', 91),
+(98, 41, '2018-04-23 10:50:18', 'er', 'Added ER patient Roberto Garcia', 91),
+(99, 40, '2018-04-23 10:50:31', 'log', 'Logged out', NULL),
+(100, 42, '2018-04-23 10:50:35', 'log', 'Logged in', NULL),
+(101, 42, '2018-04-23 10:54:23', 'bedDischarge', 'Discharged a patient from bed number : 1', 91),
+(102, 42, '2018-04-23 10:54:23', 'confirmER', 'Confirmed patient on WARD/ER, named: Roberto Garcia!', 91),
+(103, 41, '2018-04-23 10:54:54', 'bed', 'allotted bed number 1 for ER patient Roberto Garcia', 91),
+(104, 41, '2018-04-23 10:54:54', 'er', 'Added ER patient Roberto Garcia', 91),
+(105, 42, '2018-04-23 10:55:29', 'log', 'Logged out', NULL),
+(106, 40, '2018-04-23 10:55:33', 'log', 'Logged in', NULL),
+(107, 40, '2018-04-23 10:55:42', 'bedDischarge', 'Discharged a patient from bed number : 1', 91),
+(108, 40, '2018-04-23 10:55:42', 'confirmER', 'Confirmed patient on WARD/ER, named: Roberto Garcia!', 91),
+(109, 40, '2018-04-23 10:58:54', 'log', 'Logged out', NULL),
+(110, 25, '2018-04-23 10:58:58', 'log', 'Logged in', NULL),
+(111, 41, '2018-04-23 11:06:12', 'log', 'Logged out', NULL),
+(112, 40, '2018-04-23 11:06:15', 'log', 'Logged in', NULL),
+(113, 25, '2018-04-23 11:11:21', 'log', 'Logged out', NULL),
+(114, 41, '2018-04-23 11:11:26', 'log', 'Logged in', NULL),
+(115, 41, '2018-05-09 00:24:58', 'log', 'Logged in', NULL),
+(116, 25, '2018-05-10 21:23:45', 'log', 'Logged in', NULL),
+(117, 25, '2018-05-10 21:32:59', 'log', 'Logged out', NULL),
+(118, 41, '2018-05-10 21:33:04', 'log', 'Logged in', NULL),
+(119, 41, '2018-05-10 21:52:05', 'log', 'Logged in', NULL),
+(120, 41, '2018-05-10 21:52:46', 'add', 'Added: Military Dependent - Joey Tribbiani', NULL),
+(121, 41, '2018-05-10 21:55:14', 'add', 'Added: Military Officer - Phoebe Buffay', NULL),
+(122, 41, '2018-05-11 00:25:55', 'log', 'Logged in', NULL),
+(123, 41, '2018-05-11 00:29:45', 'log', 'Logged out', NULL),
+(124, 40, '2018-05-11 00:29:49', 'log', 'Logged in', NULL),
+(125, 40, '2018-05-11 00:30:24', 'log', 'Logged out', NULL),
+(126, 25, '2018-05-11 00:30:28', 'log', 'Logged in', NULL),
+(127, 25, '2018-05-11 00:30:49', 'log', 'Logged out', NULL),
+(128, 41, '2018-05-11 01:11:31', 'log', 'Logged in', NULL),
+(129, 41, '2018-05-11 01:13:29', 'patientInfoEdit', 'Edited patient Information of Melissa Corpuz', 100),
+(130, 25, '2018-05-13 08:21:59', 'log', 'Logged in', NULL),
+(131, 25, '2018-05-13 08:22:17', 'log', 'Logged out', NULL),
+(132, 41, '2018-05-13 08:22:20', 'log', 'Logged in', NULL),
+(133, 41, '2018-05-13 09:09:15', 'log', 'Logged out', NULL),
+(134, 25, '2018-05-13 09:09:18', 'log', 'Logged in', NULL),
+(135, 25, '2018-05-13 09:11:26', 'log', 'Logged out', NULL),
+(136, 25, '2018-05-13 11:49:20', 'log', 'Logged in', NULL);
 
 -- --------------------------------------------------------
 
@@ -148,15 +218,15 @@ CREATE TABLE IF NOT EXISTS `bed` (
   `description` text,
   `patient_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`bed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bed`
 --
 
 INSERT INTO `bed` (`bed_id`, `status`, `allotment_timestamp`, `description`, `patient_id`) VALUES
-(1, 'occupied', '2018-04-22 22:10:12', NULL, 100),
-(2, 'Unoccupied', NULL, NULL, NULL),
+(1, 'Unoccupied', NULL, NULL, NULL),
+(2, 'occupied', '2018-04-23 10:35:04', NULL, 88),
 (3, 'Unoccupied', NULL, NULL, NULL),
 (4, 'Unoccupied', NULL, NULL, NULL),
 (5, 'Unoccupied', NULL, NULL, NULL),
@@ -297,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `lab_counter` (
   `type` text NOT NULL,
   `name` text NOT NULL,
   PRIMARY KEY (`lab_counter_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lab_counter`
@@ -305,7 +375,8 @@ CREATE TABLE IF NOT EXISTS `lab_counter` (
 
 INSERT INTO `lab_counter` (`lab_counter_id`, `timestamp`, `patient_id`, `type`, `name`) VALUES
 (1, '2018-04-22 14:16:01', 93, 'X-Ray', 'Tom Aldrin III'),
-(2, '2018-04-22 14:17:16', 89, 'Parasitology', 'Carla Chicoine');
+(2, '2018-04-22 14:17:16', 89, 'Parasitology', 'Carla Chicoine'),
+(3, '2018-04-23 02:07:56', 91, 'Blood Chemistry', 'Roberto Garcia');
 
 -- --------------------------------------------------------
 
@@ -325,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `lab_request` (
   PRIMARY KEY (`request_id`),
   KEY `patient_id` (`patient_id`),
   KEY `doctor_id` (`doctor_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lab_request`
@@ -333,7 +404,8 @@ CREATE TABLE IF NOT EXISTS `lab_request` (
 
 INSERT INTO `lab_request` (`request_id`, `type`, `timestamp`, `remarks`, `doctor_id`, `patient_id`, `lab_status`) VALUES
 (1, 'X-Ray', '2018-04-22 14:16:01', 'Send back results asap', 40, 93, 'confirmed'),
-(2, 'Parasitology', '2018-04-22 14:17:16', 'Send back results asap', 40, 89, 'pending');
+(2, 'Parasitology', '2018-04-22 14:17:16', 'Send back results asap', 40, 89, 'pending'),
+(3, 'Blood Chemistry', '2018-04-23 02:07:56', 'blood test', 40, 91, 'confirmed');
 
 -- --------------------------------------------------------
 
@@ -347,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `opd_count` (
   `date_stamp` timestamp NOT NULL,
   `patient_id` int(11) NOT NULL,
   PRIMARY KEY (`opd_count_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `opd_count`
@@ -359,7 +431,8 @@ INSERT INTO `opd_count` (`opd_count_id`, `date_stamp`, `patient_id`) VALUES
 (3, '2018-04-22 14:12:28', 98),
 (4, '2018-04-22 14:13:03', 93),
 (5, '2018-04-22 14:13:38', 88),
-(6, '2018-04-22 14:14:08', 97);
+(6, '2018-04-22 14:14:08', 97),
+(7, '2018-04-23 02:05:04', 91);
 
 -- --------------------------------------------------------
 
@@ -384,30 +457,33 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `father` text,
   `mother` text,
   `birth_history` text,
-  `rankORsn` varchar(20) DEFAULT NULL,
+  `SN` text NOT NULL,
   `immunization` text,
   `family_history` text,
+  `rank_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patient_id`, `patient_type`, `name`, `age`, `unit`, `sex`, `status`, `birth_date`, `address`, `religion`, `blood_type`, `allergies`, `father`, `mother`, `birth_history`, `rankORsn`, `immunization`, `family_history`) VALUES
-(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '89163', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n'),
-(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n'),
-(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n'),
-(91, 'Authorized Civilian', 'Roberto Garcia', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia\n:', 'Maria Garcia\n:', '', '', '\n', 'Mental Illness\n\n'),
-(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n'),
-(93, 'Cadet', 'Tom Aldrin III', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II\n:Doctor', 'May Aldrin\n:Housewife', '', '', '\n', 'DM\n\n'),
-(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n'),
-(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '89172', '\n', '\n'),
-(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '89164', '', 'Asthma\r\n\r\n'),
-(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n'),
-(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n'),
-(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n'),
-(100, 'Authorized Civilian', 'Melissa Corpuz', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz\n:Fireman', 'Leslie Corpuz\n:Police Officer', '', '', '\n', 'Asthma\n\n');
+INSERT INTO `patient` (`patient_id`, `patient_type`, `name`, `age`, `unit`, `sex`, `status`, `birth_date`, `address`, `religion`, `blood_type`, `allergies`, `father`, `mother`, `birth_history`, `SN`, `immunization`, `family_history`, `rank_id`) VALUES
+(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n', 0),
+(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n', 0),
+(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n', 0),
+(91, 'Authorized Civilian', 'Roberto Garcia', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia\n:', 'Maria Garcia\n:', '', '', '\n', 'Mental Illness\n\n', 0),
+(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n', 0),
+(93, 'Cadet', 'Tom Aldrin III', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II\n:Doctor', 'May Aldrin\n:Housewife', '', '', '\n', 'DM\n\n', 0),
+(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n', 0),
+(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '', '\n', '\n', 0),
+(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '', '', 'Asthma\r\n\r\n', 0),
+(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n', 0),
+(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n', 0),
+(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n', 0),
+(100, 'Authorized Civilian', 'Melissa Corpuz', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz:Fireman', 'Leslie Corpuz:Police Officer', '', 'undefined', '', 'Asthma\r\n\r\n', 0),
+(101, 'Military Dependent', 'Joey Tribbiani', 25, '', 'M', 'Single', '1992-09-18', 'sabvjkasbnjkvasb j', '', 'A', '', 'bhbhjbhj\n:', 'vbhjvbhjbhj\n:', '', '', '\n', '\n', 0),
+(102, 'Military Officer', 'Phoebe Buffay', 18, '', 'F', 'Single', '1999-09-09', 'bhjkvbjh', '', 'A', '', 'vjhvbhj\n:', 'jbhj\n:bh', '', '0-17278', '\n', '\n', 0);
 
 -- --------------------------------------------------------
 
@@ -429,21 +505,25 @@ CREATE TABLE IF NOT EXISTS `patient_history` (
   `vitals` text,
   `status` text NOT NULL,
   PRIMARY KEY (`histo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `patient_history`
 --
 
 INSERT INTO `patient_history` (`histo_id`, `date_stamp`, `initial_assessment`, `lab`, `medicine`, `diagnosis`, `bed`, `patient_id`, `doctor_id`, `vitals`, `status`) VALUES
-(1, '2018-04-22 14:10:12', NULL, NULL, NULL, NULL, '1, ', 100, 40, NULL, 'pending'),
-(2, '2018-04-22 14:11:27', 'High temperature and migraine', NULL, 'Paracetamol,10,500mg,every 6 hours\n', NULL, NULL, 90, 40, 'BP: 90/70\nCR: 15\nPR: 16\nRR: 12\n TEMP: 38\nWT: 51', 'pending'),
+(1, '2018-04-22 14:10:12', NULL, NULL, NULL, NULL, '1, ', 100, 40, NULL, 'confirmed'),
+(2, '2018-04-22 14:11:27', 'High temperature and migraine', NULL, 'Paracetamol,10,500mg,every 6 hours\nsolmux,3,3,3 week\n', NULL, NULL, 90, 40, 'BP: 90/70\nCR: 15\nPR: 16\nRR: 12\n TEMP: 38\nWT: 51', 'pending'),
 (3, '2018-04-22 14:11:54', 'Stomach pain', 'Type: Parasitology\n Remarks: Send back results asap\n', NULL, NULL, NULL, 89, 40, 'BP: 100/90\nCR: 10\nPR: 12\nRR: 13\n TEMP: 37\nWT: 65', 'pending'),
 (4, '2018-04-22 14:12:28', 'Leg fracture', NULL, NULL, NULL, '3, ', 98, 40, 'BP: 120/110\nCR: 12\nPR: 12\nRR: 10\n TEMP: 37\nWT: 54', 'pending'),
 (5, '2018-04-22 14:13:03', 'Back pain', 'Type: X-Ray\n Remarks: Send back results asap\n', NULL, NULL, NULL, 93, 40, 'BP: 120/100\nCR: 12\nPR: 11\nRR: 15\n TEMP: 37\nWT: 60', 'pending'),
 (6, '2018-04-22 14:13:38', 'Headache', NULL, 'Biogesic,6,500mg,3x a day\n', NULL, NULL, 88, 40, 'BP: 100/80\nCR: 12\nPR: 16\nRR: 14\n TEMP: 37\nWT: 68', 'confirmed'),
 (7, '2018-04-22 14:14:08', 'High temperature', NULL, 'Paracetamol,12,300mg,every 8 hours\n', NULL, NULL, 97, 40, 'BP: 120/90\nCR: 14\nPR: 16\nRR: 14\n TEMP: 38.5\nWT: 52', 'pending'),
-(8, '2018-04-22 14:14:14', NULL, NULL, NULL, NULL, '4, ', 95, 40, NULL, 'pending');
+(8, '2018-04-22 14:14:14', NULL, NULL, NULL, NULL, '4, ', 95, 40, NULL, 'pending'),
+(9, '2018-04-23 02:05:04', 'check up', 'Type: Blood Chemistry\n Remarks: blood test\n', NULL, NULL, NULL, 91, 40, 'BP: 1/3\nCR: 3\nPR: 3\nRR: 3\n TEMP: 3\nWT: 3', 'confirmed'),
+(10, '2018-04-23 02:35:04', NULL, NULL, NULL, NULL, '2, ', 88, 40, NULL, 'pending'),
+(11, '2018-04-23 02:50:18', NULL, NULL, NULL, NULL, '1, ', 91, 42, NULL, 'confirmed'),
+(12, '2018-04-23 02:54:54', NULL, NULL, NULL, NULL, '1, ', 91, 40, NULL, 'confirmed');
 
 -- --------------------------------------------------------
 
@@ -465,7 +545,7 @@ CREATE TABLE IF NOT EXISTS `prescription` (
   PRIMARY KEY (`prescription_id`),
   KEY `patient_id` (`patient_id`),
   KEY `doctor_id` (`doctor_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `prescription`
@@ -474,7 +554,111 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 INSERT INTO `prescription` (`prescription_id`, `creation_stamp`, `medicine`, `quantity`, `dosage`, `timeframe`, `doctor_id`, `patient_id`, `status`) VALUES
 (1, '2018-04-22 14:17:49', 'Paracetamol', '10', '500mg', 'every 6 hours', 40, 90, 'pending'),
 (2, '2018-04-22 14:18:17', 'Paracetamol', '12', '300mg', 'every 8 hours', 40, 97, 'pending'),
-(3, '2018-04-22 14:19:11', 'Biogesic', '6', '500mg', '3x a day', 40, 88, 'confirmed');
+(3, '2018-04-22 14:19:11', 'Biogesic', '6', '500mg', '3x a day', 40, 88, 'confirmed'),
+(4, '2018-04-23 02:25:39', 'solmux', '3', '3', '3 week', 40, 90, 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rank`
+--
+
+DROP TABLE IF EXISTS `rank`;
+CREATE TABLE IF NOT EXISTS `rank` (
+  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rank_name` text NOT NULL,
+  PRIMARY KEY (`rank_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rank`
+--
+
+INSERT INTO `rank` (`rank_id`, `rank_name`) VALUES
+(1, '4C Cadet'),
+(2, '3C Cadet'),
+(3, '2C Cadet'),
+(4, '1C Cadet'),
+(5, 'Minister Marshal'),
+(6, 'General'),
+(7, 'Lieutenant General'),
+(8, 'Major General'),
+(9, 'Brigadier General'),
+(10, 'Colonel'),
+(11, 'Lieutenant Colonel'),
+(12, 'Major'),
+(13, 'Captain'),
+(14, 'Lieutenant'),
+(15, 'Alferez Second Lieutenant'),
+(16, 'Sergeant'),
+(17, 'Corporal'),
+(18, 'General/Admiral'),
+(19, 'Lieutenant General/Vice Admiral'),
+(20, 'Major General/Rear Admiral'),
+(21, 'Brigadier General/Commodore'),
+(22, 'Colonel/Captain'),
+(23, 'Lieutenant Colonel/Commander'),
+(24, 'Major/Lieutenant Commander'),
+(25, 'Captain/Lieutenant Senior Grade'),
+(26, 'First Lieutenant/Lieutenant Junior Grade'),
+(27, 'Second Lieutenant/Ensign'),
+(28, 'Chief Master Sergeant'),
+(29, 'Senior Master Sergeant'),
+(30, 'Master Sergeant'),
+(31, 'Technical Sergeant'),
+(32, 'Staff Sergeant'),
+(33, 'Private First Class'),
+(34, 'Private'),
+(35, 'Airman First Class'),
+(36, 'Airman Second Class'),
+(37, 'Airman Recruit'),
+(38, 'Master Chief Petty Officer'),
+(39, 'Senior Chief Petty Officer'),
+(40, 'Chief Petty Officer'),
+(41, 'Petty Officer, First Class'),
+(42, 'Petty Officer, Second Class'),
+(43, 'Petty Officer, Third Class'),
+(44, 'Seaman First Class'),
+(45, 'Seaman Second Glass'),
+(46, 'Apprentice Seaman'),
+(47, 'Brigadier General'),
+(48, 'Colonel'),
+(49, 'Lieutenant Colonel'),
+(50, 'Major'),
+(51, 'Captain'),
+(52, 'Lieutenant'),
+(53, 'Alferez Second Lieutenant'),
+(54, 'Sergeant'),
+(55, 'Corporal'),
+(56, 'General/Admiral'),
+(57, 'Lieutenant General/Vice Admiral'),
+(58, 'Major General/Rear Admiral'),
+(59, 'Brigadier General/Commodore'),
+(60, 'Colonel/Captain'),
+(61, 'Lieutenant Colonel/Commander'),
+(62, 'Major/Lieutenant Commander'),
+(63, 'Captain/Lieutenant Senior Grade'),
+(64, 'First Lieutenant/Lieutenant Junior Grade'),
+(65, 'Second Lieutenant/Ensign'),
+(66, 'Chief Master Sergeant'),
+(67, 'Senior Master Sergeant'),
+(68, 'Master Sergeant'),
+(69, 'Technical Sergeant'),
+(70, 'Staff Sergeant'),
+(71, 'Private First Class'),
+(72, 'Private'),
+(73, 'Airman First Class'),
+(74, 'Airman Second Class'),
+(75, 'Airman Recruit'),
+(76, 'Master Chief Petty Officer'),
+(77, 'Senior Chief Petty Officer'),
+(78, 'Chief Petty Officer'),
+(79, 'Petty Officer, First Class'),
+(80, 'Petty Officer, Second Class'),
+(81, 'Petty Officer, Third Class'),
+(82, 'Seaman First Class'),
+(83, 'Seaman Second Glass'),
+(84, 'Apprentice Seaman');
 
 -- --------------------------------------------------------
 
@@ -520,7 +704,7 @@ CREATE TABLE IF NOT EXISTS `user_accounts` (
   `address` text NOT NULL,
   `phone` varchar(11) NOT NULL,
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_accounts`
@@ -531,7 +715,8 @@ INSERT INTO `user_accounts` (`account_id`, `username`, `password`, `account_type
 (38, 'pharm', '$2a$10$XbmMdh3j6COxrrPoZRo6L.8lkjp4SLPLzX1SiMyjvZz6rktfFDiXa', 'pharmacist', 'Alyssa Mendoza', 26, 'F', '23 Green Acres, Hillside, Baguio City', '9185362142'),
 (39, 'lab', '$2a$10$YjaVhL3i3Jp6p0dE5GzBKOGJIKEvALDBOhFkO82nJN/c9A8dvszB2', 'laboratorist', 'Dominique Valdez', 27, 'F', '89 Woodsgate Square Subdivision, Baguio City', '9183241523'),
 (40, 'doctor', '$2a$10$kDE19DErM2VVWpUDvgLrIOJ1W9qbDRgcqoXoijzvhXpsXMkPTkqs6', 'doctor', 'Jeffrey Maneclang', 29, 'M', 'Camp Dangwa, La Trinidad, Benguet', '9063452819'),
-(41, 'nurse', '$2a$10$ba3obrkiv1P0/2yiLVzHZOt2epjsqbr6TJOCO8CxesTuSkBHp3fk2', 'nurse', 'Kyla Corpuz', 27, 'F', '12 Dizon Subdivision, Baguio City', '9173629081');
+(41, 'nurse', '$2a$10$ba3obrkiv1P0/2yiLVzHZOt2epjsqbr6TJOCO8CxesTuSkBHp3fk2', 'nurse', 'Kyla Corpuz', 27, 'F', '12 Dizon Subdivision, Baguio City', '9173629081'),
+(42, 'doctor2', '$2a$10$wb/2vU3faoS3bVKRjjGNFe2.UYieqh3YXzUMEy4tspHrAZFdyjqwO', 'doctor', 'doctor2', 26, 'M', 'lower baguio', '29873');
 
 -- --------------------------------------------------------
 
@@ -545,7 +730,7 @@ CREATE TABLE IF NOT EXISTS `ward_count` (
   `date_stamp` timestamp NOT NULL,
   `patient_id` int(11) NOT NULL,
   PRIMARY KEY (`ward_count_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ward_count`
@@ -554,7 +739,10 @@ CREATE TABLE IF NOT EXISTS `ward_count` (
 INSERT INTO `ward_count` (`ward_count_id`, `date_stamp`, `patient_id`) VALUES
 (1, '2018-04-22 14:10:12', 100),
 (2, '2018-04-22 14:14:14', 95),
-(3, '2018-04-22 14:16:13', 98);
+(3, '2018-04-22 14:16:13', 98),
+(4, '2018-04-23 02:35:04', 88),
+(5, '2018-04-23 02:50:18', 91),
+(6, '2018-04-23 02:54:54', 91);
 
 --
 -- Constraints for dumped tables
