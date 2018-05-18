@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2018 at 02:52 AM
+-- Generation Time: May 18, 2018 at 05:58 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
   `remarks` text NOT NULL,
   `patient_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`logs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `activity_logs`
@@ -179,7 +179,25 @@ INSERT INTO `activity_logs` (`logs_id`, `account_id`, `time`, `type`, `remarks`,
 (133, 41, '2018-05-13 09:09:15', 'log', 'Logged out', NULL),
 (134, 25, '2018-05-13 09:09:18', 'log', 'Logged in', NULL),
 (135, 25, '2018-05-13 09:11:26', 'log', 'Logged out', NULL),
-(136, 25, '2018-05-13 11:49:20', 'log', 'Logged in', NULL);
+(136, 25, '2018-05-13 11:49:20', 'log', 'Logged in', NULL),
+(137, 41, '2018-05-18 11:55:08', 'log', 'Logged in', NULL),
+(138, 41, '2018-05-18 12:13:53', 'log', 'Logged in', NULL),
+(139, 41, '2018-05-18 12:18:16', 'log', 'Logged in', NULL),
+(140, 41, '2018-05-18 12:49:41', 'log', 'Logged in', NULL),
+(141, 41, '2018-05-18 12:55:38', 'log', 'Logged in', NULL),
+(142, 41, '2018-05-18 13:02:42', 'log', 'Logged in', NULL),
+(143, 41, '2018-05-18 13:05:56', 'log', 'Logged in', NULL),
+(144, 41, '2018-05-18 13:09:01', 'log', 'Logged in', NULL),
+(145, 41, '2018-05-18 13:10:38', 'log', 'Logged in', NULL),
+(146, 41, '2018-05-18 13:16:40', 'log', 'Logged in', NULL),
+(147, 41, '2018-05-18 13:21:06', 'log', 'Logged in', NULL),
+(148, 41, '2018-05-18 13:22:45', 'log', 'Logged in', NULL),
+(149, 41, '2018-05-18 13:27:24', 'log', 'Logged in', NULL),
+(150, 41, '2018-05-18 13:36:09', 'log', 'Logged in', NULL),
+(151, 41, '2018-05-18 13:38:27', 'log', 'Logged in', NULL),
+(152, 41, '2018-05-18 13:39:38', 'log', 'Logged in', NULL),
+(153, 41, '2018-05-18 13:41:06', 'log', 'Logged in', NULL),
+(154, 41, '2018-05-18 13:52:34', 'log', 'Logged in', NULL);
 
 -- --------------------------------------------------------
 
@@ -469,21 +487,21 @@ CREATE TABLE IF NOT EXISTS `patient` (
 --
 
 INSERT INTO `patient` (`patient_id`, `patient_type`, `name`, `age`, `unit`, `sex`, `status`, `birth_date`, `address`, `religion`, `blood_type`, `allergies`, `father`, `mother`, `birth_history`, `SN`, `immunization`, `family_history`, `rank_id`) VALUES
-(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n', 0),
-(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n', 0),
-(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n', 0),
-(91, 'Authorized Civilian', 'Roberto Garcia', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia\n:', 'Maria Garcia\n:', '', '', '\n', 'Mental Illness\n\n', 0),
-(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n', 0),
-(93, 'Cadet', 'Tom Aldrin III', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II\n:Doctor', 'May Aldrin\n:Housewife', '', '', '\n', 'DM\n\n', 0),
-(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n', 0),
-(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '', '\n', '\n', 0),
-(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '', '', 'Asthma\r\n\r\n', 0),
-(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n', 0),
-(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n', 0),
-(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n', 0),
-(100, 'Authorized Civilian', 'Melissa Corpuz', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz:Fireman', 'Leslie Corpuz:Police Officer', '', 'undefined', '', 'Asthma\r\n\r\n', 0),
-(101, 'Military Dependent', 'Joey Tribbiani', 25, '', 'M', 'Single', '1992-09-18', 'sabvjkasbnjkvasb j', '', 'A', '', 'bhbhjbhj\n:', 'vbhjvbhjbhj\n:', '', '', '\n', '\n', 0),
-(102, 'Military Officer', 'Phoebe Buffay', 18, '', 'F', 'Single', '1999-09-09', 'bhjkvbjh', '', 'A', '', 'vjhvbhj\n:', 'jbhj\n:bh', '', '0-17278', '\n', '\n', 0);
+(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n', 12),
+(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n', 45),
+(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n', 1),
+(91, 'Authorized Civilian', 'Roberto Garcia', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia\n:', 'Maria Garcia\n:', '', '', '\n', 'Mental Illness\n\n', 4),
+(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n', 39),
+(93, 'Cadet', 'Tom Aldrin III', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II\n:Doctor', 'May Aldrin\n:Housewife', '', '', '\n', 'DM\n\n', 50),
+(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n', 51),
+(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '', '\n', '\n', 10),
+(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '', '', 'Asthma\r\n\r\n', 12),
+(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n', 12),
+(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n', 35),
+(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n', 76),
+(100, 'Authorized Civilian', 'Melissa Corpuz', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz:Fireman', 'Leslie Corpuz:Police Officer', '', 'undefined', '', 'Asthma\r\n\r\n', 60),
+(101, 'Military Dependent', 'Joey Tribbiani', 25, '', 'M', 'Single', '1992-09-18', 'sabvjkasbnjkvasb j', '', 'A', '', 'bhbhjbhj\n:', 'vbhjvbhjbhj\n:', '', '', '\n', '\n', 29),
+(102, 'Military Officer', 'Phoebe Buffay', 18, '', 'F', 'Single', '1999-09-09', 'bhjkvbjh', '', 'A', '', 'vjhvbhj\n:', 'jbhj\n:bh', '', '0-17278', '\n', '\n', 18);
 
 -- --------------------------------------------------------
 
@@ -568,17 +586,17 @@ CREATE TABLE IF NOT EXISTS `rank` (
   `rank_id` int(11) NOT NULL AUTO_INCREMENT,
   `rank_name` text NOT NULL,
   PRIMARY KEY (`rank_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rank`
 --
 
 INSERT INTO `rank` (`rank_id`, `rank_name`) VALUES
-(1, '4C Cadet'),
-(2, '3C Cadet'),
-(3, '2C Cadet'),
-(4, '1C Cadet'),
+(1, '4CL'),
+(2, '3CL'),
+(3, '2CL'),
+(4, '1CL'),
 (5, 'Minister Marshal'),
 (6, 'General'),
 (7, 'Lieutenant General'),
@@ -658,7 +676,8 @@ INSERT INTO `rank` (`rank_id`, `rank_name`) VALUES
 (81, 'Petty Officer, Third Class'),
 (82, 'Seaman First Class'),
 (83, 'Seaman Second Glass'),
-(84, 'Apprentice Seaman');
+(84, 'Apprentice Seaman'),
+(0, '');
 
 -- --------------------------------------------------------
 

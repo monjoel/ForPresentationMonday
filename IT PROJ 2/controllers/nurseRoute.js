@@ -1,6 +1,7 @@
 module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,doctorList,patientManagementSQL,bcrypt,io,moment){
 var immuSQL     = "SELECT name FROM immunization;";
 var fhSQL       = "SELECT name FROM family_history;";
+var rankSQL     = "SELECT rank_name FROM rank;";
 
   app.get('/nurse/dashboard', function(req, res){
     if(req.session.email && req.session.sino == 'nurse'){
@@ -8,12 +9,12 @@ var fhSQL       = "SELECT name FROM family_history;";
         var todoList    = "SELECT * from todo_list where account_id = "+req.session.Aid+";";
         var availablePatientOPD = "SELECT * from patient where patient_id NOT IN(SELECT patient_id from patient_history where status = 'pending');";
         var bed = "SELECT  * from bed where status = 'unoccupied';";
-        db.query(name + counts + chart + whoCurrentlyAdmitted + whoOPD + whoWARD + immuSQL + fhSQL + doctorList + availablePatientOPD + monthlyPatientCount + todoList + bed, req.session.Aid, function(err, rows, fields){
+        db.query(name + counts + chart + whoCurrentlyAdmitted + whoOPD + whoWARD + immuSQL + fhSQL + doctorList + availablePatientOPD + monthlyPatientCount + todoList + bed + rankSQL, req.session.Aid, function(err, rows, fields){
           if (err) {
             console.log(err);
           }
           res.render('nurse/dashboard', {counts:rows[1], chart:rows[2], whoCurrentlyAdmitted:rows[3], whoOPD:rows[4],whoWARD:rows[5], immu:rows[6],
-                                         fh:rows[7], doctorList:rows[8], availablePatientOPD:rows[9], monthlyPatientCount:rows[10], todoList:rows[11], bed:rows[12], username: rows[0], err:req.query.status});
+                                         fh:rows[7], doctorList:rows[8], availablePatientOPD:rows[9], monthlyPatientCount:rows[10], todoList:rows[11], bed:rows[12], rank:rows[13], username: rows[0], err:req.query.status});
         });
       } else {
         res.redirect(req.session.sino+'/dashboard');
@@ -75,12 +76,12 @@ var fhSQL       = "SELECT name FROM family_history;";
               var mother        = data.mother + '\n:' + data.motherO;
               var family_history = ""; for (var i = 0; i < fhParse.length; i++) {family_history += fhParse[i] + '\n';};
               var immunization   = ""; for (var i = 0; i < immuParse.length; i++) {immunization += immuParse[i] + '\n';};
-              var addSQL = "INSERT INTO patient (name, unit, address, age, religion, father, mother, allergies, birth_history,birth_date, sex, patient_type, status, blood_type, SN, rankORsn, immunization, family_history)"
+              var addSQL = "INSERT INTO patient (name, unit, address, age, religion, father, mother, allergies, birth_history,birth_date, sex, patient_type, status, blood_type, SN, rank_id, immunization, family_history)"
                          +" VALUES ("+JSON.stringify(data.name)+", "+JSON.stringify(data.unit)+","+JSON.stringify(data.address)+","
                          +" "+age+", "+JSON.stringify(data.religion)+", "+JSON.stringify(father)+","+JSON.stringify(mother)+","
                          +" "+JSON.stringify(data.allergies)+", "+JSON.stringify(data.bh)+", "+birthDate+", "+JSON.stringify(data.gender)+","
                          +" "+JSON.stringify(data.type)+", "+JSON.stringify(data.status)+", "+JSON.stringify(data.blood)+","
-                         +" "+JSON.stringify(data.SN)+", "+JSON.stringify(data.rankSN)+", "+JSON.stringify(immunization)+", "+JSON.stringify(family_history)+");";
+                         +" "+JSON.stringify(data.SN)+", "+JSON.stringify(data.rank_id) +", "+JSON.stringify(immunization)+", "+JSON.stringify(family_history)+");";
 
               db.query(addSQL, function(err, rows){
                 if(err){
@@ -189,7 +190,7 @@ var fhSQL       = "SELECT name FROM family_history;";
                          +" and d.patient_id = "+req.query.patient_id+";";
             var sql2  = "SELECT * FROM patient where patient_id = "+req.query.patient_id+";";
             var med = "select date_stamp, lab, medicine,diagnosis,bed from patient_history where patient_id = "+req.query.patient_id+" and status = 'confirmed' order by date_stamp;";
-            var patientInfoUpdate = 'UPDATE patient SET patient_type = IFNULL("'+data.patientType+'", patient_type), name = IFNULL("'+data.name+'", name), unit = IFNULL("'+data.unit+'", unit), status = IFNULL("'+data.status+'", status), address = IFNULL("'+data.address+'", address), religion = IFNULL("'+data.religion+'", religion),blood_type = IFNULL("'+data.bloodType+'", blood_type),allergies = IFNULL("'+data.allergies+'", allergies),father = IFNULL("'+data.father+'",father),mother = IFNULL("'+data.mother+'", mother),birth_history = IFNULL("'+data.birthHistory+'",birth_history),SN = IFNULL("'+data.SN+'", SN),rankORsn = IFNULL("'+data.rank+'", rankORsn),immunization = IFNULL("'+data.immunization+'", immunization),family_history = IFNULL("'+data.familyHistory+'",family_history) where patient_id = '+req.query.patient_id+'; ';
+            var patientInfoUpdate = 'UPDATE patient SET patient_type = IFNULL("'+data.patientType+'", patient_type), name = IFNULL("'+data.name+'", name), unit = IFNULL("'+data.unit+'", unit), status = IFNULL("'+data.status+'", status), address = IFNULL("'+data.address+'", address), religion = IFNULL("'+data.religion+'", religion),blood_type = IFNULL("'+data.bloodType+'", blood_type),allergies = IFNULL("'+data.allergies+'", allergies),father = IFNULL("'+data.father+'",father),mother = IFNULL("'+data.mother+'", mother),birth_history = IFNULL("'+data.birthHistory+'",birth_history),SN = IFNULL("'+data.SN+'", SN),rank_id = IFNULL("'+data.rankSN+'", rank_id),immunization = IFNULL("'+data.immunization+'", immunization),family_history = IFNULL("'+data.familyHistory+'",family_history) where patient_id = '+req.query.patient_id+'; ';
             db.query(patientManSQL + sql2 + med + patientInfoUpdate + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "patientInfoEdit", "Edited patient Information of '+data.name+'", '+req.query.patient_id+');', function(err, successRows){
               if (err) {
                 console.log(err);
