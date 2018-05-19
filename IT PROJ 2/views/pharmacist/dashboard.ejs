@@ -74,28 +74,7 @@
   <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <section class="content-header">
     </section>
-    <h3 style="color:red">REQUEST STATUS !!!!!!!!!!!!</h3>
-    <table>
-      <tr>
-        <th>patient id</th>
-        <th>patient name</th>
-        <th>lab request</th>
-        <th>pharm request</th>
-        <th>action</th>
-      </tr>
-      <%for (var i = 0; i < requestStatus.length; i++) {%>
-      <tr>
-        <td><%= requestStatus[i].patient_id%></td>
-        <td><%= requestStatus[i].name%></td>
-        <td><%= requestStatus[i].lab_confirm%></td>
-        <td><%= requestStatus[i].pharm_confirm%></td>
 
-        <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
-          <td><button name="sub" value="confirm">confirm</button></td>
-        </form>
-      </tr>
-      <%}%>
-    </table>
     <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
      <div class="row">
 
@@ -126,10 +105,49 @@
         </div>
 
       </div>
+<!-- Request Discharge -->
+      <div class="row">
+        <section class="col-xs-12 connectedSortable">
+          <div class="box" style="border-top-color: #00b300 !important;">
+            <div class="box-header with-border">
+              <h3 class="box-title">Request Discharge</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+               <table id="example12" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                      <th>Patient ID</th>
+                      <th>Name</th>
+                      <th>Lab Request Status</th>
+                      <th>Pharmacy Request Status</th>
+                      <th>Action</th>
+                  </tr>
+                      <%for (var i = 0; i < requestStatus.length; i++) {%>
+                      <tr>
+                        <td><%= requestStatus[i].patient_id%></td>
+                        <td><%= requestStatus[i].name%></td>
+                        <td><%= requestStatus[i].lab_confirm%></td>
+                        <td><%= requestStatus[i].pharm_confirm%></td>
+
+                        <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
+                          <td><button name="sub" value="confirm">confirm</button></td>
+                        </form>
+                      </tr>
+                      <%}%>
+                    </table>                                                   
+            </div>
+          </div>
+        </section>
+      </div>
 
       <div class="row">
         <section class="col-lg-12 connectedSortable">
-          <div class="box box-primary">
+          <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header with-border">
               <h3 class="box-title">Patient Count</h3>
               <div class="box-tools pull-right">
@@ -145,7 +163,7 @@
             </div>
           </div>
 
-          <div class="box box-primary">
+          <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
               <h3 class="box-title">To Do List</h3>

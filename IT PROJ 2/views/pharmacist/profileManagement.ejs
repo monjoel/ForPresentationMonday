@@ -88,7 +88,7 @@
       <div class="row">
         <div class="col-md-3">
 
-          <div class="box box-primary">
+          <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="../dist/img/avatar3.png" alt="User profile picture">
               <h3 class="profile-username text-center"><%=pInfo[0].name%></h3>
@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <div class="box box-primary">
+          <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header with-border">
               <h3 class="box-title">Basic Profile</h3>
             </div>
@@ -152,6 +152,12 @@
                     <%} else if (activityInfo[i].type == 'bedDischarge'){ %>
                       <i class="fa fa-sign-out bg-navy"></i>
                       <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'calcelRequestConfirmationER'){ %>
+                      <i class="fa fa-remove bg-red"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'calcelRequestConfirmationOPD'){ %>
+                      <i class="fa fa-remove bg-red"></i>
+                      <div class="timeline-item">    
                     <%} else if (activityInfo[i].type == 'approvedLabRequest'){ %>
                       <i class="fa fa-share bg-green"></i>
                       <div class="timeline-item">
@@ -161,9 +167,24 @@
                     <%} else if (activityInfo[i].type == 'cancelPrescription'){ %>
                       <i class="fa fa-reply bg-orange"></i>
                       <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmedLab'){ %>
+                      <i class="fa fa-check-circle bg-green"></i>
+                      <div class="timeline-item">    
                     <%} else if (activityInfo[i].type == 'confirmedLabRequest'){ %>
                       <i class="fa fa-share bg-green"></i>
                       <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmedPharm'){ %>
+                      <i class="fa fa-check-circle bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmER'){ %>
+                      <i class="fa fa-check-circle bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmOPD'){ %>
+                      <i class="fa fa-check-circle bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'er'){ %>
+                      <i class="fa fa-medkit bg-navy"></i>
+                      <div class="timeline-item">         
                     <%} else if (activityInfo[i].type == 'diagnosis'){ %>
                       <i class="fa fa-user-md bg-yellow"></i>
                       <div class="timeline-item">
@@ -176,6 +197,9 @@
                     <%} else if (activityInfo[i].type == 'log'){ %>
                       <i class="fa fa-check-circle bg-teal"></i>
                       <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'patientInfoEdit'){ %>
+                      <i class="fa fa-edit bg-navy"></i>
+                      <div class="timeline-item">    
                     <%} else if (activityInfo[i].type == 'prescription'){ %>
                       <i class="fa fa-share bg-orange"></i>
                       <div class="timeline-item">
@@ -197,6 +221,12 @@
                     <%} else if (activityInfo[i].type == 'generalTodo'){%>
                       <i class="fa fa-plus bg-green"></i>
                       <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'requestConfirmationER'){ %>
+                      <i class="fa fa-plus bg-orange"></i>
+                      <div class="timeline-item">  
+                    <%} else if (activityInfo[i].type == 'requestConfirmationOPD'){ %>
+                      <i class="fa fa-plus bg-orange"></i>
+                      <div class="timeline-item">    
                     <%}%>
                       <h3 class="timeline-header"><%= activityInfo[i].remarks%></a></h3>
                     </div>
