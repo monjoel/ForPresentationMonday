@@ -224,14 +224,7 @@
             </div>
             <div class="box-body">
               <div id="donut-chart1" style="height: 350px;"></div>
-                <br>
-                <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle text-gray"></i> Cadet</li>
-                    <li><i class="fa fa-circle text-blue"></i> Authorized Civilian</li>
-                    <li><i class="fa fa-circle text-red"></i> Military Dependent</li>
-                    <li><i class="fa fa-circle text-yellow"></i> Civilian Employees</li>
-                    <li><i class="fa fa-circle text-aqua"></i> Military Officer</li>
-                  </ul>
+
             </div>
           </div>
         </div>
@@ -705,8 +698,9 @@
       </div>
 </body>
 </html>
-
+<script src="/timeout.js"></script>
 <script type="text/javascript">
+idleTimer();
   function validateRegistration() {
     $('#modal2').parsley().on('field:validated', function() {
       var ok = $('.parsley-error').length === 0;
@@ -734,28 +728,28 @@
     var data = [], totalPoints = 100;
     var donutData = [
       {
-        label: "Label 1", 
-        data: 5, 
+        label: "Label 1",
+        data: 5,
         color: "#228B22"
       },
       {
-        label: "Label 2", 
-        data: 5, 
+        label: "Label 2",
+        data: 5,
         color: " #FF8C00"
       },
       {
-        label: "Label 3", 
-        data: 5, 
+        label: "Label 3",
+        data: 5,
         color: "#004d99"
       },
       {
-        label: "Label 4", 
-        data: 5, 
+        label: "Label 4",
+        data: 5,
         color: "gray"
       },
       {
-        label: "Label 5", 
-        data: 5, 
+        label: "Label 5",
+        data: 5,
         color: " #1E90FF"
       }
     ];

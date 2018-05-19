@@ -234,7 +234,7 @@
                       <td><%= opdInfo2[i].bed_id%><%if(opdInfo2[i].bed_id){%><a href="/doctor/bedManagement?bed_id=<%=opdInfo2[i].bed_id%>" style="font-size:10px;"></a><%}%></td>
                       <td>
                         <!-- VIEW -->
-                        <form action="/doctor/patientManagement?passPatient=<%= opdInfo2[i].patient_id%>&OPD=hoy" method="post">
+                        <form action="/doctor/patientManagement?passPatient=<%= opdInfo2[i].patient_id%>&OPD=NULL" method="post">
                           <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
                         </form>                               <!-- LAB -->
                         <%
@@ -610,9 +610,10 @@
   </div>
 
 <% include ../partials/footer.ejs %>
-
+<script src="/timeout.js"></script>
 <script src="/notif-doctor.js"></script>
 <script>
+idleTimer();
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable();

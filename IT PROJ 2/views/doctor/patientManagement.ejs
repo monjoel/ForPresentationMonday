@@ -90,7 +90,7 @@
         <!-- Main content -->
     <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
       <%if(p2){%>
-        <a href="/doctor/<%if(opd){%>outpatientManagement<%} else {%>patientManagement<%}%>" style="color:black"><button type="button" class="btn btn-primary" name="button"><i class="fa fa-mail-reply"></i> Back</button></a><br><br>
+        <a href="/doctor/<%if(opd != 'Y'){%>outpatientManagement<%} else {%>patientManagement<%}%>" style="color:black"><button type="button" class="btn btn-primary" name="button"><i class="fa fa-mail-reply"></i> Back</button></a><br><br>
                   <div class="row">
                     <div class="col-md-3">
 
@@ -432,7 +432,7 @@
                     <%= d1%> - <%= d2%>
                 </td>
                 <td>
-                  <form action="/doctor/patientManagement?passPatient=<%= p[i].patient_id%>&OPD=NULL" method="post">
+                  <form action="/doctor/patientManagement?passPatient=<%= p[i].patient_id%>&OPD=Y" method="post">
                     <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
                   </form>
                 </td>
@@ -469,6 +469,7 @@
           </div>
       <div class="control-sidebar-bg"></div>
     </div>
+  </body>
       <% include ../partials/footer.ejs %>
 
 <style>
@@ -481,9 +482,10 @@
   }
 
 </style>
-
+<script src="/timeout.js"></script>
 <script src="/notif-doctor.js"></script>
 <script type="text/javascript">
+  idleTimer();
   $(function () {
     $("#example1").DataTable();
     $("#example2").DataTable();

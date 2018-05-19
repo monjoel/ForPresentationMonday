@@ -284,9 +284,10 @@
 <% include ../partials/footer.ejs %>
 </body>
 </html>
-
+<script src="/timeout.js"></script>
 <script src="/notif-doctor.js"></script>
 <script>
+idleTimer();
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({

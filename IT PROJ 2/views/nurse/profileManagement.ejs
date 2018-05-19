@@ -6,7 +6,7 @@
   <title>Profile Management</title>
   <% include ../partials/header.ejs %>
 </head>
-  <body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+  <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div class="wrapper">
 
@@ -62,10 +62,10 @@
       </div>
 
       <ul class="sidebar-menu">
-        <li><a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="patientManagement"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
-        <li><a href="bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
-        <li class="active"><a href="profileManagement" target="_self"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+        <li><a href="dashboard"><img src="../icons/medicine.png" alt="dboard" height="20px;" width="20px;"> <span>Dashboard</span></a></li>
+        <li><a href="patientManagement"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span>Patient Management</span></a></li>
+        <li><a href="bedManagement"><img src="../icons/hospital-bed.png" alt="bed" height="20px;" width="20px;"> <span>Bed Management</span></a></li>
+        <li class="active"><a href="profileManagement" target="_self"><img src="../icons/doctor.png" alt="doctor" height="20px;" width="20px;"> <span>Profile Management</span></a></li>
       </ul>
     </section>
   </aside>
@@ -172,7 +172,7 @@
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'patientInfoEdit'){ %>
                       <i class="fa fa-check-circle bg-blue"></i>
-                      <div class="timeline-item">    
+                      <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'prescription'){ %>
                       <i class="fa fa-share bg-orange"></i>
                       <div class="timeline-item">
@@ -268,8 +268,9 @@
 <% include ../partials/footer.ejs %>
 </body>
 </html>
-
+<script src="/timeout.js"></script>
 <script>
+idleTimer();
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({

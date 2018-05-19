@@ -206,9 +206,10 @@
 
 
 <% include ../partials/footer.ejs %>
-
+<script src="/timeout.js"></script>
 <script src="/notif-doctor.js"></script>
 <script>
+    idleTimer();
     $(document).ready(function() {
         $(".select2").select2();
     });

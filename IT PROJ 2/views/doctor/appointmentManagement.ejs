@@ -144,7 +144,7 @@
           </div>
           <div class="form-group">
             <label for="date1">Date: </label>
-            <input id="date1" type="datetime-local" name="dateNtime" min="2000-10-06T00:00:00" max="9000-11-16T21:25:33" class="form-control" required>            
+            <input id="date1" type="datetime-local" name="dateNtime" min="2000-10-06T00:00:00" max="9000-11-16T21:25:33" class="form-control" required>
           </div>
           <div class="form-group">
             <label id="appointmentText">Appointment Details: </label>
@@ -161,9 +161,10 @@
 </div>
 
 <% include ../partials/footer.ejs %>
-
+<script src="/timeout.js"></script>
 <script src="/notif-doctor.js"></script>
 <script type="text/javascript">
+idleTimer();
 $(function () {
  $("#example1").DataTable();
  $('#example2').DataTable({

@@ -90,10 +90,12 @@
                     <td><%= DT%></td>
                   <%}%>
                   <form action="/doctor/bedManagement?bed=<%= bedDetails[i].bed_id%>&id=<%= bedDetails[i].patient_id%>" method="POST">
-                    <td><button class="btn btn-danger" <%if(bedDetails[i].status == 'Unoccupied'){%>
+                    <td>
+                      <!-- <button class="btn btn-danger" <%if(bedDetails[i].status == 'Unoccupied'){%>
                     disabled
                   <%} else {%>
-                  <%}%>><i class="fa fa-sign-out"></i> Discharge</button></td>
+                  <%}%>><i class="fa fa-sign-out"></i> Discharge</button> -->
+                    </td>
                   </form>
                 </tr>
                 <%}%>
@@ -186,7 +188,9 @@
 <script src="../plugins/chartjs/Chart.min.js"></script>
 
 <script src="/notif-doctor.js"></script>
+<script src="/timeout.js"></script>
 <script>
+idleTimer();
   $(function () {
   $("#example1").DataTable();
   $('#example2').DataTable({
