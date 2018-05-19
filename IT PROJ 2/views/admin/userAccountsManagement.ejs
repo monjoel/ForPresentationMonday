@@ -166,15 +166,8 @@
                     <label for="inputName" class="col-sm-2 control-label">User Type</label>
                     <div class="col-sm-10">
                       <select class="form-control" name="type" data-parsley-required>
-                        <option></option>
-                        <% if(!pharma[0]){%>
-                          <option value="pharmacist">Pharmacist</option>
-                        <%} else {%>
-                        <%}%>
-                        <%if(!lab[0]){%>
-                          <option value="laboratorist">Laboratorist</option>
-                        <%} else {%>
-                        <%}%>
+                        <option value="pharmacist">Pharmacist</option>
+                        <option value="laboratorist">Laboratorist</option>
                         <%if(!adm[0]){%>
                           <option value="admin">Admin</option>
                         <%} else {%>
