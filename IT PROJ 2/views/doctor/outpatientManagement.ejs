@@ -277,19 +277,34 @@
                         for (var j = 0; j < request.length; j++){
                           requestArr += request[j].patient_id;
                         }
-                      if(requestArr.includes(opdInfo[i].patient_id)){%>
-                        <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
+                        var admitAvailableBedsArr = '';
+                        for (var j = 0; j < bedDisable.length; j++){
+                          admitAvailableBedsArr += bedDisable[j].patient_id;
+                        }
+                      if(requestArr.includes(opdInfo2[i].patient_id)){%>
+                        <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
                           <td>
-                            <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-danger btn-sm" value="cancelConfirmRequestER"<i class="fa fa-sign-out"></i> Cancel Discharge Confirmation</button>
+                            <button type="submit" data-toggle="confirmation"
+                              data-popout="true"
+                              data-singleton="true"
+                              class="btn btn-danger btn-sm"
+                              name="sub" value="cancelConfirmRequestER">
+                              <i class="fa fa-mail-forward"></i>Cancel Discharge Confirmation</button>
+                          </td>
+                      </form>
+                      <%}else{%>
+                        <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
+                          <td>
+                            <button <%if(labArr.includes(opdInfo2[i].patient_id) || prescribeArr.includes(opdInfo2[i].patient_id) || admitAvailableBedsArr.includes(opdInfo2[i].patient_id)){%> disabled <%}%>
+                              type="submit" data-toggle="confirmation"
+                              data-popout="true"
+                              data-singleton="true"
+                              class="btn btn-default btn-sm"
+                              name="sub" value="confirm">
+                              <i class="fa fa-mail-forward"></i>Request Discharge Confirmation</button>
                           </td>
                         </form>
-                        <%}else{%>
-                          <form action="/doctor/outpatientManagement?id=<%= opdInfo2[i].histo_id%>&name=<%= opdInfo2[i].name%>&bed=<%= opdInfo2[i].bed_id%>&pId=<%= opdInfo2[i].patient_id%>" method="post">
-                            <td><button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" name="sub" class="btn btn-default btn-sm" value="confirm"
-                              <%if(labArr.includes(opdInfo2[i].patient_id) || prescribeArr.includes(opdInfo2[i].patient_id)){%> disabled <%}%>
-                              ><i class="fa fa-sign-out"></i> Request Discharge Confirmation</button></td>
-                          </form>
-                        <%}%>
+                    <%}%>
                   </tr>
                 <%}%>
               </table>
@@ -549,6 +564,24 @@
           </div>
       <div class="control-sidebar-bg"></div>
     </div>
+    <h3 style="color:red">REQUEST STATUS !!!!!!!!!!!!</h3>
+    <table>
+      <tr>
+        <th>patient id</th>
+        <th>patient name</th>
+        <th>lab request</th>
+        <th>pharm request</th>
+      </tr>
+      <%for (var i = 0; i < requestStatus.length; i++) {%>
+      <tr>
+        <td><%= requestStatus[i].patient_id%></td>
+        <td><%= requestStatus[i].name%></td>
+        <td><%= requestStatus[i].lab_confirm%></td>
+        <td><%= requestStatus[i].pharm_confirm%></td>
+        <td></td>
+      </tr>
+      <%}%>
+    </table>
     </section>
   </div>
 

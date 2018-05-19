@@ -85,12 +85,13 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
           var labSQL                  = 'SELECT * from lab_request left join patient_history using(patient_id)  where lab_status = "pending" group by patient_id;';
           var prescribeSQL            = 'SELECT * from prescription p inner join patient using(patient_id) where p.status = "pending" group by patient_id;';
           var requestConfirmation = 'SELECT request, patient_id from patient_history where request = "pending";';
-
-          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation,req.session.Aid, function(err, rows){
+          var bedDisabble = 'SELECT patient_id from bed;';
+          var requestStatusSQL = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
+          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation + bedDisabble + requestStatusSQL,req.session.Aid, function(err, rows){
           if (err) {
             console.log(err);
           } else {
-              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], invalid:null});
+              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], bedDisable:rows[8], requestStatus:rows[9], invalid:null});
           }
         });
       } else {
@@ -151,7 +152,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else if (data.sub == 'confirm') {
-            db.query('UPDATE patient_history inner join bed on patient_history.patient_id = bed.patient_id set patient_history.request = "pending", bed.status = "Unoccupied", bed.allotment_timestamp = NULL, bed.patient_id = NULL where patient_history.histo_id = '+req.query.id+';'
+            db.query('UPDATE patient_history set request = "pending", pharm_confirm = "pending", lab_confirm = "pending" where histo_id = '+req.query.id+';'
               + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "bedDischarge", "Discharged a patient from bed number : '+req.query.bed+'",'+req.query.pId+');'+'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "requestConfirmationER", " Request of Confirmation sent!", '+req.query.pId+' );', function(err){
               if (err) {
                 console.log(err);
@@ -160,7 +161,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else if (data.sub == 'confirmOPD') {
-            db.query('UPDATE patient_history set request = "pending" where histo_id = '+req.query.id+';'
+            db.query('UPDATE patient_history set request = "pending", pharm_confirm = "pending", lab_confirm = "pending" where histo_id = '+req.query.id+';'
               + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "requestConfirmationOPD", "Request of Confirmation sent!", '+req.query.pId+');', function(err){
               if (err) {
                 console.log(err);
@@ -169,7 +170,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else if (data.sub = 'cancelConfirmRequestER') {
-            db.query('UPDATE patient_history set request = NULL where histo_id = '+req.query.id+';'
+            db.query('UPDATE patient_history set request = NULL, lab_confirm = "pending", pharm_confirm = "pending" where histo_id = '+req.query.id+';'
               + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "calcelRequestConfirmationER", "Request of Confirmation Cancelled!", '+req.query.pId+');', function(err){
               if (err) {
                 console.log(err);
