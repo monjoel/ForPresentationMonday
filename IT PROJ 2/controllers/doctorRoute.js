@@ -169,7 +169,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
                 res.redirect(req.get('referer'));
               }
             });
-          } else if (data.sub = 'cancelConfirmRequestER') {
+          } else if (data.sub == 'cancelConfirmRequestER') {
             db.query('UPDATE patient_history set request = NULL, lab_confirm = "pending", pharm_confirm = "pending" where histo_id = '+req.query.id+';'
               + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "calcelRequestConfirmationER", "Request of Confirmation Cancelled!", '+req.query.pId+');', function(err){
               if (err) {
@@ -187,6 +187,13 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
                 res.redirect(req.get('referer'));
               }
             });
+          } else if(data.sub == 'confirmRequest') {
+              db.query('UPDATE patient_history set request = "confirmed" where histo_id ='+req.query.histoId+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "confirmedHisto", "Confirmed Discharge Request for patient '+req.query.pqName+'");', function(err){
+                if (err) {
+                  console.log(err);
+                }
+                res.redirect(req.get('referer'));
+              });
           } else if (data.sub == 'clear'){
             db.query('UPDATE patient_history set diagnosis = NULL where histo_id = '+req.query.histo_id+';', function(err){
               if (err) {

@@ -301,7 +301,7 @@
                               data-singleton="true"
                               class="btn btn-default btn-sm"
                               name="sub" value="confirm">
-                              <i class="fa fa-mail-forward"></i>Request Discharge Confirmation</button>
+                              <i class="fa fa-mail-forward"></i>Request Confirmation</button>
                           </td>
                         </form>
                     <%}%>
@@ -564,6 +564,7 @@
           </div>
       <div class="control-sidebar-bg"></div>
     </div>
+    </section>
     <h3 style="color:red">REQUEST STATUS !!!!!!!!!!!!</h3>
     <table>
       <tr>
@@ -571,18 +572,25 @@
         <th>patient name</th>
         <th>lab request</th>
         <th>pharm request</th>
+        <th>action</th>
       </tr>
       <%for (var i = 0; i < requestStatus.length; i++) {%>
-      <tr>
-        <td><%= requestStatus[i].patient_id%></td>
-        <td><%= requestStatus[i].name%></td>
-        <td><%= requestStatus[i].lab_confirm%></td>
-        <td><%= requestStatus[i].pharm_confirm%></td>
-        <td></td>
-      </tr>
-      <%}%>
-    </table>
-    </section>
+        <tr>
+          <td><%= requestStatus[i].patient_id%></td>
+          <td><%= requestStatus[i].name%></td>
+          <td><%= requestStatus[i].lab_confirm%></td>
+          <td><%= requestStatus[i].pharm_confirm%></td>
+          <form action="/doctor/outpatientManagement?pqName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
+            <td>
+              <button name="sub" value="confirmRequest"
+              <%if(requestStatus[i].lab_confirm == "pending" || requestStatus[i].pharm_confirm == "pending"){%>disabled<%}%>
+              >confirm
+              </button>
+            </td>
+          </form>
+        </tr>
+        <%}%>
+      </table>
   </div>
 
 <% include ../partials/footer.ejs %>

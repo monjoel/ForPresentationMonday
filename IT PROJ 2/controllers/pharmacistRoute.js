@@ -11,12 +11,14 @@ var confirmedprescriptionSQL = 'SELECT CONCAT("medicine:",medicine,"\nquantity:"
         var acceptedRequestSQL = 'SELECT * from prescription r inner join patient p using(patient_id) where r.status="confirmed";';
         var pendingRequestSQL  = 'SELECT * from prescription r inner join patient p using(patient_id) where r.status="pending";';
         var todoList           = "SELECT * from todo_list where account_id = "+Aid+";";
-        db.query(prescriptionSQL + acceptedRequestSQL + pendingRequestSQL + todoList + monthlyPatientCount + name + prescriptionSQL + confirmedprescriptionSQL, Aid, function(err, rows){
+        var requestStatusSQL = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
+
+        db.query(prescriptionSQL + acceptedRequestSQL + pendingRequestSQL + todoList + monthlyPatientCount + name + prescriptionSQL + confirmedprescriptionSQL + requestStatusSQL, Aid, function(err, rows){
           if (err) {
             console.log(err);
           } else {
             user = rows[5];
-            res.render('pharmacist/dashboard', {prescriptionInfo:rows[0], accepted:rows[1], pending:rows[2], todoList:rows[3], monthlyPatientCount:rows[4] ,prescriptionDetails:rows[6] ,confirmedprescriptionSQL:rows[7] , username:user});
+            res.render('pharmacist/dashboard', {prescriptionInfo:rows[0], accepted:rows[1], pending:rows[2], todoList:rows[3], monthlyPatientCount:rows[4] ,prescriptionDetails:rows[6] ,confirmedprescriptionSQL:rows[7] , requestStatus:rows[8], username:user});
           }
         });
       } else {
@@ -69,6 +71,13 @@ var confirmedprescriptionSQL = 'SELECT CONCAT("medicine:",medicine,"\nquantity:"
                 }
               });
               res.redirect(req.get('referer'));
+        } else if(data.sub == 'confirm') {
+            db.query('UPDATE patient_history set pharm_confirm = "confirmed" where histo_id ='+req.query.histoId+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "confirmedPharm", "Confirmed pharm discharge Request for patient '+req.query.pName+'");', function(err){
+              if (err) {
+                console.log(err);
+              }
+            });
+            res.redirect(req.get('referer'));
         }
 
   } else {
@@ -147,7 +156,7 @@ res.redirect('../login');
         res.redirect('../login');
       }
     });
-    
+
 // PROFILE MANAGEMENT
     app.get('/pharmacist/profileManagement', function(req, res){
       if(req.session.email && req.session.sino == 'pharmacist'){
@@ -186,7 +195,7 @@ res.redirect('../login');
                       } else {
                           res.redirect('../logout');
                       }
-                    });                    
+                    });
                   } else {
                     var updateProfileSQL = 'UPDATE user_accounts SET name = "'+data.name+'", address = "'+data.address+'", phone = '+data.phone+' WHERE account_id = '+req.session.Aid+';';
                     db.query(updateProfileSQL + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "settingsProfileManagement", "Edited personal info.");', function(err, rows){
@@ -195,7 +204,7 @@ res.redirect('../login');
                       } else {
                           res.redirect(req.get('referer'));
                       }
-                    });                    
+                    });
                   }
                 });
               });

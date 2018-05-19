@@ -14,13 +14,15 @@ var user, Aid;
         var microbiology      = 'SELECT * from lab_counter l inner join patient using(patient_id) where l.type = "Microbiology";';
         var xRay              = 'SELECT * from lab_counter l inner join patient using(patient_id) where l.type = "X-Ray";';
         var todoList          = "SELECT * from todo_list where account_id = "+Aid+";";
-        db.query(todoList + diagnosisSQL + bloodChemistrySQL + hermatology + microscopy + parasitology + serology + microbiology + xRay + monthlyPatientCount + name, Aid, function(err, rows){
+        var requestStatusSQL = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
+
+        db.query(todoList + diagnosisSQL + bloodChemistrySQL + hermatology + microscopy + parasitology + serology + microbiology + xRay + monthlyPatientCount + name + requestStatusSQL, Aid, function(err, rows){
           if (err) {
             console.log(err);
           } else {
             user = rows[10];
             res.render('laboratorist/dashboard', {todoList:rows[0],diagnosisSQL:rows[1],bloodChemistrySQL:rows[2],hermatology:rows[3],microscopy:rows[4],parasitology:rows[5],
-                                                  serology:rows[6],microbiology:rows[7],xRay:rows[8],monthlyPatientCount:rows[9], username: user});
+                                                  serology:rows[6],microbiology:rows[7],xRay:rows[8],monthlyPatientCount:rows[9], requestStatus:rows[11], username: user});
           }
         });
       } else {
@@ -61,19 +63,13 @@ var user, Aid;
             }
           });
           res.redirect(req.get('referer'));
-
-        } else if(data.sub == 'appointment') {
-              var splitDateNTime = data.dateNtime.split('T');
-              var parseDate      = splitDateNTime[0];
-              var parseTime      = splitDateNTime[1] + ':00';
-              var parseDateNTime = parseDate+' '+parseTime;
-              var addAppointment = 'INSERT into appointment (doctor_id, patient_id, appointment_timestamp, remarks) VALUES ('+Aid+', '+data.appointmentPatientID+', "'+parseDateNTime+'", "'+data.appointmentRemarks+'");';
-              db.query(addAppointment + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "appointment", "Set Appointment with '+req.query.appointmentPatientName+' on '+parseDateNTime+'");', function(err){
-                if (err) {
-                  console.log(err);
-                }
-              });
-              res.redirect(req.get('referer'));
+        } else if(data.sub == 'confirm') {
+            db.query('UPDATE patient_history set lab_confirm = "confirmed" where histo_id ='+req.query.histoId+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "confirmedLab", "Confirmed lab discharge Request for patient '+req.query.pName+'");', function(err){
+              if (err) {
+                console.log(err);
+              }
+            });
+            res.redirect(req.get('referer'));
         }
 
   } else {

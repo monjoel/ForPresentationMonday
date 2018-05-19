@@ -74,7 +74,28 @@
   <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <section class="content-header">
     </section>
+    <h3 style="color:red">REQUEST STATUS !!!!!!!!!!!!</h3>
+    <table>
+      <tr>
+        <th>patient id</th>
+        <th>patient name</th>
+        <th>lab request</th>
+        <th>pharm request</th>
+        <th>action</th>
+      </tr>
+      <%for (var i = 0; i < requestStatus.length; i++) {%>
+      <tr>
+        <td><%= requestStatus[i].patient_id%></td>
+        <td><%= requestStatus[i].name%></td>
+        <td><%= requestStatus[i].lab_confirm%></td>
+        <td><%= requestStatus[i].pharm_confirm%></td>
 
+        <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
+          <td><button name="sub" value="confirm">confirm</button></td>
+        </form>
+      </tr>
+      <%}%>
+    </table>
     <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
      <div class="row">
 
@@ -123,7 +144,7 @@
               </div>
             </div>
           </div>
-            
+
           <div class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
@@ -162,7 +183,7 @@
             <div class="box-footer clearfix no-border">
               <button type="button" name="button" onclick="showTodo()" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal4"><i class="fa fa-plus" data-target="#myModal4"></i> Add item</button>
             </div>
-          </div>   
+          </div>
 
         </div>
 
