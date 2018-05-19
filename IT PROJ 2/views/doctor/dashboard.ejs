@@ -394,28 +394,28 @@
       var data = [], totalPoints = 100;
       var donutData = [
       {
-        label: "Label 1",
-        data: 5,
+        label: "Military Dependent",
+        data: <%= chart[0].military_dependent%>,
         color: "#228B22"
       },
       {
-        label: "Label 2",
-        data: 5,
+        label: "Civilian",
+        data: <%= chart[0].civilian%>,
         color: " #FF8C00"
       },
       {
-        label: "Label 3",
-        data: 5,
+        label: "Military Officer",
+        data: <%= chart[0].military_officer%>,
         color: "#004d99"
       },
       {
-        label: "Label 4",
-        data: 5,
+        label: "Cadet",
+        data: <%= chart[0].cadet%>,
         color: "gray"
       },
       {
-        label: "Label 5",
-        data: 5,
+        label: "Authorized Civilian",
+        data: <%= chart[0].authorized_civilian%>,
         color: " #1E90FF"
       }
       ];
@@ -429,13 +429,13 @@
               show: true,
               radius: 2 / 3,
               formatter: labelFormatter,
-              threshold: 0.1
+              threshold: 0.1,
             }
 
           }
         },
         legend: {
-          show: false
+          show: true
         }
       });
       /*
