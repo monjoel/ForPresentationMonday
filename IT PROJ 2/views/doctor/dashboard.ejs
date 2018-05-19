@@ -89,7 +89,7 @@
                 <p>Total Registered Patients</p>
               </div>
               <div class="icon">
-                <img src="../icons/health-care.png" alt="health-care" height="70px;" width="70px;">
+                <i class="ion ion-person"></i>
               </div>
               <a href="../doctor/patientManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -102,7 +102,7 @@
                 <p>Currently Admitted</p>
               </div>
               <div class="icon">
-                <img src="../icons/pulse.png" alt="pulse" height="70px;" width="70px;">
+                <i class="ion ion-person"></i>
               </div>
               <a href="../doctor/bedManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -112,23 +112,23 @@
             <div class="small-box bg-yellow">
               <div class="inner">
                 <h3><%= counts[0].OPD%></h3>
-                <p>Outpatient Department</p>
+                <p>Outpatient Department Information</p>
               </div>
               <div class="icon">
-                <img src="../icons/pharmacy.png" alt="pharm" height="70px;" width="70px;">
+                <i class="ion ion-person"></i>
               </div>
               <a data-toggle="modal" data-target="#opdModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
           <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-aqua" style="background-color: #0039e6 !important;">
+            <div class="small-box bg-blue">
               <div class="inner">
                 <h3><%= counts[0].WARD%></h3>
-                <p>Ward</p>
+                <p>Ward Information</p>
               </div>
               <div class="icon">
-                <img src="../icons/nurse.png" alt="nurse" height="70px;" width="70px;">
+                <i class="ion ion-person"></i>
               </div>
               <a data-toggle="modal" data-target="#wardModal" class="btn small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -228,14 +228,6 @@
                 </div>
                 <div class="box-body">
                   <div id="donut-chart1" style="height: 350px;"></div>
-                  <br>
-                  <ul class="chart-legend clearfix">
-                      <li><i class="fa fa-circle text-gray"></i> Cadet</li>
-                      <li><i class="fa fa-circle text-blue"></i> Authorized Civilian</li>
-                      <li><i class="fa fa-circle text-red"></i> Military Dependent</li>
-                      <li><i class="fa fa-circle text-yellow"></i> Civilian Employees</li>
-                      <li><i class="fa fa-circle text-aqua"></i> Military Officer</li>
-                    </ul>
                 </div>
               </div>
             </div>
@@ -399,11 +391,31 @@
        */
       var data = [], totalPoints = 100;
       var donutData = [
-        {label: "", data: <%= chart[0].military_dependent %>, color: "red"},
-        {label: "", data: <%= chart[0].civilian %>, color: "yellow"},
-        {label: "", data: <%= chart[0].military_officer %>, color: "aqua"},
-        {label: "", data: <%= chart[0].cadet %>, color: "gray"},
-        {label: "", data: <%= chart[0].authorized_civilian%>, color: "blue"}
+      {
+        label: "Label 1", 
+        data: 5, 
+        color: "#228B22"
+      },
+      {
+        label: "Label 2", 
+        data: 5, 
+        color: " #FF8C00"
+      },
+      {
+        label: "Label 3", 
+        data: 5, 
+        color: "#004d99"
+      },
+      {
+        label: "Label 4", 
+        data: 5, 
+        color: "gray"
+      },
+      {
+        label: "Label 5", 
+        data: 5, 
+        color: " #1E90FF"
+      }
       ];
       $.plot("#donut-chart1", donutData, {
         series: {
@@ -436,8 +448,8 @@
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Novermber", "December"],
         datasets: [{
           label: "Patient",
-          fillColor: "#3e0901",
-          strokeColor: "#3e0901",
+          fillColor: " #da3e3e",
+          strokeColor: "  #B22222",
           pointColor: "#3b8bba",
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",

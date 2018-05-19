@@ -6,7 +6,7 @@
   <title>Dashboard</title>
   <% include ../partials/header.ejs %>
 </head>
-  <body class="hold-transition skin-blue fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+  <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div class="wrapper">
   <header class="main-header">
@@ -60,10 +60,10 @@
       </div>
 
     <ul class="sidebar-menu">
-        <li class="active"><a href="dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="patientManagement" target="_self"><i class="fa fa-users"></i> <span>Patient Management</span></a></li>
-        <li><a href="bedManagement"><i class="fa fa-bed"></i> <span>Bed Management</span></a></li>
-        <li><a href="profileManagement"><i class="fa fa-info"></i> <span>Profile Management</span></a></li>
+        <li class="active"><a href="dashboard"><img src="../icons/medicine.png" alt="dboard" height="20px;" width="20px;"> <span>Dashboard</span></a></li>
+        <li><a href="patientManagement" target="_self"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span>Patient Management</span></a></li>
+        <li><a href="bedManagement"><img src="../icons/hospital-bed.png" alt="bed" height="20px;" width="20px;"> <span>Bed Management</span></a></li>
+        <li><a href="profileManagement"><img src="../icons/doctor.png" alt="doctor" height="20px;" width="20px;"> <span>Profile Management</span></a></li>
     </ul>
     </section>
   </aside>
@@ -92,7 +92,7 @@
               <p>Currently Admitted</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="ion ion-person"></i>
             </div>
             <a href="bedManagement" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -105,20 +105,20 @@
               <p>OPD</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="ion ion-person"></i>
             </div>
             <a onclick="OPD()" class="small-box-footer" data-toggle="modal" data-target="#opdmodal">More info <i class="fa fa-arrow-circle-right" data-target="#opdmodal"></i></a>
           </div>
         </div>
 
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
+          <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= counts[0].WARD%></h3>
               <p>Ward</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="ion ion-person"></i>
             </div>
               <a onclick="WARD()" class="small-box-footer" data-toggle="modal" data-target="#myModal3">More info <i class="fa fa-arrow-circle-right" data-target="#myModal3"></i></a>
           </div>
@@ -471,7 +471,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="BP" class="col-sm-2 control-label">BP</label>
+                    <label for="BP" class="col-sm-2 control-label">BP(mmHg)</label>
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="BP" name="BP" data-parsley-pattern="/^\d{1,3}\/\d{1,3}$/" data-parsley-validation-threshold="1" data-parsley-required>
                     </div>
@@ -482,22 +482,22 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="PR" class="col-sm-2 control-label">PR</label>
+                    <label for="PR" class="col-sm-2 control-label">PR(bpm)</label>
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="PR" name="PR" data-parsley-type="number" data-parsley-validation-threshold="1" data-parsley-required>
                     </div>
-                    <label for="RR" class="col-sm-2 control-label">RR</label>
+                    <label for="RR" class="col-sm-2 control-label">RR(bpm)</label>
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="RR" name="RR" data-parsley-type="number" data-parsley-validation-threshold="1" data-parsley-required>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="temperature" class="col-sm-2 control-label">Temperature</label>
+                    <label for="temperature" class="col-sm-2 control-label">Temperature(°C)</label>
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="temperature" name="temperature" data-parsley-type="number" data-parsley-validation-threshold="1" data-parsley-required >
                     </div>
-                    <label for="Wt" class="col-sm-2 control-label">Weight</label>
+                    <label for="Wt" class="col-sm-2 control-label">Weight(kg)</label>
                     <div class="col-sm-4">
                       <input type="text" class="form-control" id="Wt" name="Wt" data-parsley-type="number" data-parsley-validation-threshold="1" data-parsley-required>
                     </div>
@@ -733,11 +733,31 @@
      */
     var data = [], totalPoints = 100;
     var donutData = [
-      {label: "", data: <%= chart[0].military_dependent %>, color: "red"},
-      {label: "", data: <%= chart[0].civilian %>, color: "yellow"},
-      {label: "", data: <%= chart[0].military_officer %>, color: "aqua"},
-      {label: "", data: <%= chart[0].cadet %>, color: "gray"},
-      {label: "", data: <%= chart[0].authorized_civilian%>, color: "blue"}
+      {
+        label: "Label 1", 
+        data: 5, 
+        color: "#228B22"
+      },
+      {
+        label: "Label 2", 
+        data: 5, 
+        color: " #FF8C00"
+      },
+      {
+        label: "Label 3", 
+        data: 5, 
+        color: "#004d99"
+      },
+      {
+        label: "Label 4", 
+        data: 5, 
+        color: "gray"
+      },
+      {
+        label: "Label 5", 
+        data: 5, 
+        color: " #1E90FF"
+      }
     ];
     $.plot("#donut-chart1", donutData, {
       series: {
@@ -770,8 +790,8 @@
       datasets: [
         {
           label: "Patient",
-          fillColor: "rgba(60,141,188,0.9)",
-          strokeColor: "rgba(60,141,188,0.8)",
+          fillColor: " #da3e3e",
+          strokeColor: "  #B22222",
           pointColor: "#3b8bba",
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
