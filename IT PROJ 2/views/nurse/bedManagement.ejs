@@ -78,8 +78,9 @@
                     <%}%>
                     <%if(bedDetails[i].status == 'Unoccupied'){%>
                     style="color:green; font-weight: bold;"
+                  <%} else if(bedDetails[i].status == 'unavailable'){%> style="color:orange; font-weight: bold;"
                   <%} else {%> style="color:red; font-weight: bold;"
-                  <%}%>><%= bedDetails[i].status.charAt(0).toUpperCase() + bedDetails[i].status.slice(1);%></td>
+                  <%}%>><%= bedDetails[i].status.charAt(0).toUpperCase() + bedDetails[i].status.slice(1);%> </td>
                   <td><%= bedDetails[i].bed_id%></td>
                   <td><%= bedDetails[i].patient_type%></td>
                   <td><%= bedDetails[i].name%></td>
