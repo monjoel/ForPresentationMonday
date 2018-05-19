@@ -170,7 +170,7 @@
                       <i class="fa fa-share bg-orange"></i>
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'removedUser'){ %>
-                      <i class="fa fa-share bg-red"></i>
+                      <i class="fa fa-minus bg-red"></i>
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'settingsProfileManagement'){ %>
                       <i class="fa fa-edit bg-blue"></i>
@@ -186,6 +186,27 @@
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'generalTodo'){%>
                       <i class="fa fa-plus bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'resetPassword'){%>
+                      <i class="fa fa-share bg-orange"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'cancelConfirmRequestER'){ %>
+                      <i class="fa fa-reply bg-red"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'calcelRequestConfirmationER'){ %>
+                      <i class="fa fa-reply bg-red"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmRequest'){ %>
+                      <i class="fa fa-share bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmOPD'){ %>
+                      <i class="fa fa-share bg-green"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'requestConfirmationER'){ %>
+                      <i class="fa fa-edit bg-purple"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'requestConfirmationOPD'){ %>
+                      <i class="fa fa-edit bg-purple"></i>
                       <div class="timeline-item">
                     <%}%>
                       <h3 class="timeline-header"><%= activityInfo[i].remarks%></a></h3>
