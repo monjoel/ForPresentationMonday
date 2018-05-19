@@ -403,13 +403,20 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
         res.redirect('../login');
       }
     });
+    
     //PRESCRIPTION
     app.get('/doctor/prescriptionManagement', function(req, res){
       if(req.session.email && req.session.sino == 'doctor'){
         if(req.session.sino == 'doctor'){
           if (req.query.opdPatient) {
-            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nQuantity:",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and patient_id = '+req.query.opdPatient+' and p.status ="pending" ORDER BY creation_stamp desc;';
-            var confirmedprescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where p.status = "confirmed" and doctor_id='+req.session.Aid+' ORDER BY creation_stamp desc LIMIT 50;';
+            var brand;
+            if (data.brand == '') {
+              data.brand = 'Generic';
+            } else {
+              brand = data.brand;
+            }
+            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,\nQuantity:",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and patient_id = '+req.query.opdPatient+' and p.status ="pending" ORDER BY creation_stamp desc;';
+            var confirmedprescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where p.status = "confirmed" and doctor_id='+req.session.Aid+' ORDER BY creation_stamp desc LIMIT 50;';
 
             db.query(prescriptionSQL+confirmedprescriptionSQL + name,req.session.Aid, function(err, rows){
               if (err) {
@@ -419,8 +426,8 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else {
-            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and p.status ="pending" ORDER BY creation_stamp desc;';
-            var confirmedprescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where p.status = "confirmed" and doctor_id='+req.session.Aid+' ORDER BY creation_stamp desc LIMIT 50;';
+            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and p.status ="pending" ORDER BY creation_stamp desc;';
+            var confirmedprescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where p.status = "confirmed" and doctor_id='+req.session.Aid+' ORDER BY creation_stamp desc LIMIT 50;';
 
             db.query(prescriptionSQL+confirmedprescriptionSQL + name,req.session.Aid, function(err, rows){
               if (err) {
