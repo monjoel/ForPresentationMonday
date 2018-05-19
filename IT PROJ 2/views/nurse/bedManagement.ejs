@@ -73,7 +73,10 @@
                 </thead>
                 <%for(var i=0; i < bedDetails.length; i++){%>
                 <tr>
-                  <td <%if(bedDetails[i].status == 'Unoccupied'){%>
+                  <td <%if(bedDetails[i].bed_id >= 47) {%>
+                    style="color:blue; font-weight: bold;"
+                    <%}%>
+                    <%if(bedDetails[i].status == 'Unoccupied'){%>
                     style="color:green; font-weight: bold;"
                   <%} else {%> style="color:red; font-weight: bold;"
                   <%}%>><%= bedDetails[i].status.charAt(0).toUpperCase() + bedDetails[i].status.slice(1);%></td>
@@ -87,9 +90,15 @@
                   <%} else {%>
                     <td><%= DT%></td>
                   <%}%>
+                  <td>
                   <form action="/nurse/bedManagement?bed=<%= bedDetails[i].bed_id%>" method="POST">
-                    <td><button class="btn btn-default btn-sm" name="editButton" data-toggle="modal" data-target="showStatusOptions"><i class="fa fa-sign-out"></i> Edit Status</button></td>
+                    <%if(bedDetails[i].status == 'Unoccupied' || bedDetails[i].status == 'Occupied'){%>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setUnavailable"><i class="fa fa-fw fa-archive"></i> Set Unavailable</button>
+                        <%} else {%>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setAvailable"><i class="fa fa-fw fa-archive"></i> Set Available</button>
+                        <%}%>
                   </form>
+                  </td>
                 </tr>
                 <%}%>
               </table>
@@ -185,6 +194,12 @@
         function discharge(bedID){
            document.getElementById('dis').value = bedID;
         }
+
+        $('[data-toggle=confirmation]').confirmation({
+          rootSelector: '[data-toggle=confirmation]',
+          // other options
+        });
+
       </script>
 
 </html>
