@@ -203,21 +203,14 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else {
-            bcrypt.compare(data.patientPassword, req.session.password, function(err, isMatch){
-              if(isMatch) {
+
                 var sql  = "SELECT patient_id,patient_type,name,age,sex,blood_type FROM patient where patient_id = "+req.query.passPatient+";";
                 var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
                 var med = "select date_stamp, lab, medicine,diagnosis,bed from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp desc;";
                 db.query(sql + sql2 + med + name, function(err, successRows){
                   res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null});
                 });
-              } else {
-                var sql  = "SELECT patient_id,patient_type,name,age,sex,blood_type FROM patient where patient_id = "+req.query.passPatient+";";
-                db.query(sql + name,req.session.Aid, function(err, errorRows){
-                  res.render('doctor/patientManagement', {p:errorRows[0], p2:null, med:null, username:errorRows[1], invalid:'error'});
-                });
-              }
-            });
+
         }
 
       } else {
@@ -307,7 +300,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
 
             var sql2  = "SELECT * FROM patient where patient_id = "+req.query.patient_id+";";
             var med = "select date_stamp, lab, medicine,diagnosis,bed, initial_assessment from patient_history where patient_id = "+req.query.patient_id+" and status = 'confirmed' order by date_stamp desc;";
-            var patientInfoUpdate = 'UPDATE patient SET patient_type = IFNULL("'+data.patientType+'", patient_type), name = IFNULL("'+data.name+'", name), unit = IFNULL("'+data.unit+'", unit), status = IFNULL("'+data.status+'", status), address = IFNULL("'+data.address+'", address), religion = IFNULL("'+data.religion+'", religion),blood_type = IFNULL("'+data.bloodType+'", blood_type),allergies = IFNULL("'+data.allergies+'", allergies),father = IFNULL("'+data.father+'",father),mother = IFNULL("'+data.mother+'", mother),birth_history = IFNULL("'+data.birthHistory+'",birth_history),rankORsn = IFNULL("'+data.rank+'", rankORsn),immunization = IFNULL("'+data.immunization+'", immunization),family_history = IFNULL("'+data.familyHistory+'",family_history) where patient_id = '+req.query.patient_id+'; ';
+            var patientInfoUpdate = 'UPDATE patient SET patient_type = IFNULL("'+data.patientType+'", patient_type), name = IFNULL("'+data.name+'", name), unit = IFNULL("'+data.unit+'", unit), status = IFNULL("'+data.status+'", status), address = IFNULL("'+data.address+'", address), religion = IFNULL("'+data.religion+'", religion),blood_type = IFNULL("'+data.bloodType+'", blood_type),allergies = IFNULL("'+data.allergies+'", allergies),father = IFNULL("'+data.father+'",father),mother = IFNULL("'+data.mother+'", mother),birth_history = IFNULL("'+data.birthHistory+'",birth_history),rank = IFNULL("'+data.rank+'", rank),immunization = IFNULL("'+data.immunization+'", immunization),family_history = IFNULL("'+data.familyHistory+'",family_history) where patient_id = '+req.query.patient_id+'; ';
             db.query(patientManSQL + sql2 + med + patientInfoUpdate + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "patientInfoEdit", "Edited patient Information of '+data.name+'", '+req.query.patient_id+');', function(err, successRows){
               if (err) {
                 console.log(err);
@@ -320,30 +313,21 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
                 var updatedSql2  = "SELECT * FROM patient where patient_id = "+req.query.patient_id+";";
 
                 db.query(patientManSQL + updatedSql2 + med + name,req.session.Aid, function(err, successRows2){
-                  res.render('doctor/patientManagement', {p:successRows2[0], p2:successRows2[1], med:successRows2[2], username:successRows2[3], invalid:null});
+                  res.render('doctor/patientManagement', {p:successRows2[0], p2:successRows2[1], med:successRows2[2], username:successRows2[3], invalid:null, opd:req.query.OPD});
                 });
               }
             });
           } else {
-            bcrypt.compare(data.patientPassword, req.session.password, function(err, isMatch){
-              if(isMatch) {
-                var patientManSQL = "SELECT *,"
-                                   +" (SELECT time from activity_logs where type='bed' and patient.patient_id = activity_logs.patient_id order by time desc limit 1) as allotment, "
-                                   +" (SELECT time from activity_logs where type='bedDischarge' and patient.patient_id = activity_logs.patient_id order by time desc limit 1) as discharge, "
-                                   +" (SELECT DATEDIFF(discharge,allotment)) as difference "
-                                   +" FROM patient inner join activity_logs USING(patient_id) where patient_id = "+req.query.passPatient+" group by patient_id;";
+            var patientManSQL = "SELECT *,"
+                               +" (SELECT time from activity_logs where type='bed' and patient.patient_id = activity_logs.patient_id order by time desc limit 1) as allotment, "
+                               +" (SELECT time from activity_logs where type='bedDischarge' and patient.patient_id = activity_logs.patient_id order by time desc limit 1) as discharge, "
+                               +" (SELECT DATEDIFF(discharge,allotment)) as difference "
+                               +" FROM patient inner join activity_logs USING(patient_id) where patient_id = "+req.query.passPatient+" group by patient_id;";
 
-                var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
-                var med = "select date_stamp, lab, medicine,diagnosis,bed, initial_assessment from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp desc;";
-                db.query(patientManSQL + sql2 + med + name, req.session.Aid, function(err, successRows){
-                  res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null, opd:req.query.OPD});
-                });
-              } else {
-                var sql  = "SELECT patient_id,patient_type,name,age,sex,blood_type FROM patient where patient_id = "+req.query.passPatient+";";
-                db.query(sql + name, req.session.Aid,function(err, errorRows){
-                  res.render('doctor/patientManagement', {p:errorRows[0], p2:null, med:null, username:errorRows[1], invalid:'error'});
-                });
-              }
+            var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
+            var med = "select date_stamp, lab, medicine,diagnosis,bed, initial_assessment from patient_history where patient_id = "+req.query.passPatient+" and status = 'confirmed' order by date_stamp desc;";
+            db.query(patientManSQL + sql2 + med + name, req.session.Aid, function(err, successRows){
+              res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null, opd:req.query.OPD});
             });
           }
         } else {
@@ -410,7 +394,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
         res.redirect('../login');
       }
     });
-    
+
     //PRESCRIPTION
     app.get('/doctor/prescriptionManagement', function(req, res){
       if(req.session.email && req.session.sino == 'doctor'){

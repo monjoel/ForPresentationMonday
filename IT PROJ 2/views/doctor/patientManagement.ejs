@@ -432,7 +432,9 @@
                     <%= d1%> - <%= d2%>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" name="button" data-toggle="modal" data-target="#showInputPassword" onclick="PasswordInput(<%= p[i].patient_id %>)"><i class="fa fa-user"></i> Profile</button>
+                  <form action="/doctor/patientManagement?passPatient=<%= p[i].patient_id%>&OPD=NULL" method="post">
+                    <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
+                  </form>
                 </td>
               </tr>
               <%}%>
