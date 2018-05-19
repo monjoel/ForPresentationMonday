@@ -131,7 +131,7 @@
                     <td <%if(p[i].status == 'active'){%>
                     style="color:green; font-weight: bold;"
                   <%} else {%> style="color:red; font-weight: bold;"
-                  <%}%>><%= p[i].status %></td>
+                  <%}%>><%= p[i].status.charAt(0).toUpperCase() + p[i].status.slice(1); %></td>
                     <td>
                       <form action="/admin/userAccountsManagement?name=<%=p[i].name%>&account=<%=p[i].account_id%>" method="post">
                         <%if(p[i].status == 'active'){%>
