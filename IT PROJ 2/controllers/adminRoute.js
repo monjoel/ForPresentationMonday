@@ -162,7 +162,7 @@ app.get('/admin/patientManagement', function(req, res){
   app.get('/admin/userAccountsManagement', function(req, res){
       if(req.session.email && req.session.sino == 'admin'){
         if(req.session.sino == 'admin'){
-            var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
+            var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login, address, phone, username, status FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
             var filterPharma = "select * from user_accounts where account_type = 'pharmacist';";
             var filterLab = "select * from user_accounts where account_type = 'laboratorist';";
             var filterAdmin = "select * from user_accounts where account_type = 'admin';";
@@ -182,11 +182,12 @@ app.get('/admin/patientManagement', function(req, res){
       if (req.session.email && req.session.sino == 'admin') {
         if (req.session.sino == 'admin') {
           if (data.sub == 'remove') {
-            var deleteUserAccount = 'DELETE FROM user_accounts where account_id = '+req.query.account+';';
-            db.query(deleteUserAccount + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "removedUser", "Removed user: '+req.query.name+'");', function(err, rows){
+            var deleteUserAccount = 'UPDATE user_accounts set status = "deactivated" where account_id = '+req.query.account+';';
+            db.query(deleteUserAccount + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "removedUser", "Deactivated user: '+req.query.name+'");', function(err, rows){
               if (err) {
                 console.log(err);
               } else {
+                req.flash('success', 'Successfully Deactivated '+req.query.name+'!');
                 res.redirect(req.get('referer'));
               }
             });
@@ -198,6 +199,19 @@ app.get('/admin/patientManagement', function(req, res){
                     console.log(err);
                   } else {
                     req.flash('success', 'Reset password for '+req.query.name+' with password "123"!');
+                    res.redirect(req.get('referer'));
+                  }
+                });
+              });
+            });
+          } else if(data.sub == 'activate'){
+            bcrypt.genSalt(10, function(err, salt){
+              bcrypt.hash('123', salt, function(err, hash){
+                db.query('UPDATE user_accounts set status = "active" where account_id = '+req.query.account+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "resetPassword", "Reactivated user: '+req.query.name+'");',function(err){
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    req.flash('success', 'Successfully Reactivated '+req.query.name+'!');
                     res.redirect(req.get('referer'));
                   }
                 });
@@ -232,7 +246,7 @@ app.get('/admin/patientManagement', function(req, res){
                       if (err) {
                         console.log(err);
                       }
-                      var addUserAccount = 'INSERT into user_accounts (username, password, account_type, name, age, sex, address, phone) VALUES ("'+data.user+'","'+hash+'","'+data.type+'","'+data.name+'",'+age+',"'+data.gender+'","'+data.address+'","'+data.phone+'");';
+                      var addUserAccount = 'INSERT into user_accounts (username, password, account_type, name, age, sex, address, phone, status) VALUES ("'+data.user+'","'+hash+'","'+data.type+'","'+data.name+'",'+age+',"'+data.gender+'","'+data.address+'","'+data.phone+'","active");';
                       db.query(addUserAccount + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "addUser", "Added user: '+data.name+'");', function(err, rows){
                         if (err) {
                           console.log(err);

@@ -11,7 +11,7 @@
     }
   </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini fixed" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+<body class="hold-transition skin-fdpsh sidebar-mini fixed" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div class="wrapper">
   <header class="main-header">
@@ -87,9 +87,9 @@
        <div class="row">
         <div class="col-xs-12">
 
-          <div class="box">
-            <%- messages('message', locals) %>
+          <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header">
+              <%- messages('message', locals) %>
               <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add New User</button>
             </div>
             <div class="box-body">
@@ -101,7 +101,11 @@
                     <th>Name</th>
                     <th>Age</th>
                     <th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Username</th>
                     <th>Last Login</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -116,15 +120,27 @@
                     <td><%= p[i].name %></td>
                     <td><%= p[i].age %></td>
                     <td><%= p[i].sex %></td>
+                    <td><%= p[i].address %></td>
+                    <td><%= p[i].phone %></td>
+                    <td><%= p[i].username %></td>
                     <%if(p[i].last_Login){%>
-                      <td><%= p[i].last_Login %></td>
+                      <td><%= moment(p[i].last_Login).format('MMMM DD YYYY hh:mm A') %></td>
                     <%} else {%>
                       <td style="color:green; font-weight: bold;">New User</td>
                     <%}%>
+                    <td <%if(p[i].status == 'active'){%>
+                    style="color:green; font-weight: bold;"
+                  <%} else {%> style="color:red; font-weight: bold;"
+                  <%}%>><%= p[i].status %></td>
                     <td>
                       <form action="/admin/userAccountsManagement?name=<%=p[i].name%>&account=<%=p[i].account_id%>" method="post">
-                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="remove"><i class="fa fa-fw fa-archive"></i> Remove</button>
-                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="reset"><i class="fa fa-fw fa-archive"></i> Reset</button>
+                        <%if(p[i].status == 'active'){%>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="remove"><i class="fa fa-fw fa-archive"></i> Deactivate</button>
+                        <%} else {%>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="activate"><i class="fa fa-fw fa-archive"></i> Activate</button>
+                        <%}%>
+                          
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="reset"><i class="fa fa-fw fa-retweet"></i> Reset</button>
                       </form>
                     </td>
                   </tr>
