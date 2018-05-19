@@ -96,9 +96,9 @@
                   <td>
                   <form action="/doctor/bedManagement?bed=<%= bedDetails[i].bed_id%>" method="POST">
                     <%if(bedDetails[i].status == 'Unoccupied' || bedDetails[i].status == 'Occupied'){%>
-                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setUnavailable"><i class="fa fa-fw fa-archive"></i> Set Unavailable</button>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setUnavailable"><i class="fa fa-fw fa-times-circle"></i> Set Unavailable</button>
                         <%} else {%>
-                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setAvailable"><i class="fa fa-fw fa-archive"></i> Set Available</button>
+                          <button type="submit" data-toggle="confirmation" data-popout="true" data-singleton="true" class="btn btn-default btn-sm" name="sub" value="setAvailable"><i class="fa fa-fw fa-times-circle"></i> Set Available</button>
                         <%}%>
                   </form>
                   </td>
