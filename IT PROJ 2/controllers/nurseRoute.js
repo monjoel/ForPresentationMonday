@@ -309,27 +309,28 @@ var rankSQL     = "SELECT rank_name FROM rank;";
   });
 
   app.post('/nurse/bedManagement', function(req, res){
+    var data = req.body;
     if(req.session.email && req.session.sino == 'nurse'){
       if(req.session.sino == 'nurse') {
-        
-        if (data.sub == 'setUnavailable') {
-            var setBedUnavailable = 'UPDATE bed set status = "unavailable" where bed_id = '+req.query.bed+';';
-            db.query(deleteUserAccount + 'INSERT into activity_logs(bed_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedUnavailable", "Set to unavailable bed number: '+req.query.name+'");', function(err, rows){
-              if (err) {
-                console.log(err);
-              } else {
-                res.redirect(req.get('referer'));
-              }
-        });
-        } else if (data.sub == 'setAvailable') {
-            var setBedAvailable = 'UPDATE bed set status = "Unoccupied" where bed_id = '+req.query.bed+';';
-            db.query(deleteUserAccount + 'INSERT into activity_logs(bed_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedAvailable", "Set to available bed number: '+req.query.name+'");', function(err, rows){
-              if (err) {
-                console.log(err);
-              } else {
-                res.redirect(req.get('referer'));
-              }
-        });
+          if (data.sub == 'setUnavailable') {
+              var setBedUnavailable = 'UPDATE bed set status = "unavailable" where bed_id = '+req.query.bed+';';
+              db.query(setBedUnavailable + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedUnavailable", "Set to unavailable bed number: '+req.query.bed+'");', function(err, rows){
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.redirect(req.get('referer'));
+                }
+          });
+          } else if (data.sub == 'setAvailable') {
+              var setBedAvailable = 'UPDATE bed set status = "Unoccupied" where bed_id = '+req.query.bed+';';
+              db.query(setBedAvailable + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedAvailable", "Set to available bed number: '+req.query.bed+'");', function(err, rows){
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.redirect(req.get('referer'));
+                }
+          });
+        }
       } else {
         res.redirect(req.session.sino+'/dashboard');
       }
