@@ -110,7 +110,7 @@
                           <td align="center">
                             <form action="/laboratorist/labRequestManagement?requestId=<%=pendingLabRequestSQL[i].request_id%>&labrequestPatientName=<%=pendingLabRequestSQL[i].name%>" method="post">
                               <button type="submit" name="sub" value="confirm" class="btn btn-primary btn-sm">Confirm</button>
-                              <button type="button" name="button" onClick="actionUpload(<%=pendingLabRequestSQL[i].patient_id%>,<%=JSON.stringify(pendingLabRequestSQL[i].name)%>)">import img</button>
+                              <button type="button" name="button" onClick="actionUpload(<%=pendingLabRequestSQL[i].patient_id%>,<%=JSON.stringify(pendingLabRequestSQL[i].name)%>)" class="btn btn-default btn-sm" data-toggle="modal" data-target="#import">Import image</button>
                             </form>
                           </td>
                       </tr>
@@ -120,18 +120,29 @@
           </div>
         </div>
       </div>
-<br>
-<br>
-      <div id="upload" style="color:red; display:none;">
-        <h2>modal !!</h2>
-        <form id="dynaAction" method="post" enctype="multipart/form-data">
-          <input type="file" name="labIMG" accept="image/*" required>
-          <button type="submit" name="sub" value="saveIMG">save</button>
-        </form>
 
-      </div>
-<br>
-<br>
+        <div class="modal fade" id="import" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Import Image</h4>
+              </div>
+              <div class="modal-body">
+                <form id="dynaAction" method="post" enctype="multipart/form-data" onsubmit="successAlert()">
+                  <div class="form-group">
+                    <input type="file" name="labIMG" accept="image/*" required>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                      <button type="submit" name="sub" value="saveIMG" class="btn btn-primary"><i class="fa fa-check"></i> Save </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
      <div class="row">
       <div class="col-xs-12">
         <div class="box" style="border-top-color: #3e0901 !important;">
