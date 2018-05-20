@@ -469,7 +469,13 @@
                   <div class="col-sm-8">
                     <select name="bedNumber" class="form-control select2" style="width: 100%;">
                       <%for (var i = 0; i < admitAvailableBeds.length; i++) { %>
-                        <option value="<%= admitAvailableBeds[i].bed_id%>"><%= admitAvailableBeds[i].bed_id%></option>
+                        <%if (admitAvailableBeds[i].bed_id < 47) {%>
+                          <option value="<%= admitAvailableBeds[i].bed_id%>"><%= admitAvailableBeds[i].bed_id%></option>
+                        <%} else {%>
+                          <optgroup label = 'Isolated Ward'>
+                            <option value="<%= admitAvailableBeds[i].bed_id%>"><%= admitAvailableBeds[i].bed_id%></option>
+                          </optgroup>
+                        <%}%>
                       <%}%>
                     </select>
                   </div>
