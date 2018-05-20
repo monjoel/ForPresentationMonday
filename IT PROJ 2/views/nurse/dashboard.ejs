@@ -543,7 +543,13 @@
                         <div class="col-sm-10">
                           <select name="bed" class="form-control select2" style="width: 100%;">
                               <%for(var i = 0; i < bed.length; i++){%>
-                                <option  value="<%= bed[i].bed_id%>"><%= bed[i].bed_id%></option>
+                                <%if (bed[i].bed_id < 47) {%>
+                                  <option value="<%= bed[i].bed_id%>"><%= bed[i].bed_id%></option>
+                                <%} else {%>
+                                  <optgroup label = 'Isolated Ward'>
+                                    <option value="<%= bed[i].bed_id%>"><%= bed[i].bed_id%></option>
+                                  </optgroup>
+                                <%}%>
                               <%}%>
                           </select>
                         </div>
