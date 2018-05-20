@@ -202,13 +202,14 @@
                         <td><%= requestStatus[i].name%></td>
                         <td><%= requestStatus[i].lab_confirm%></td>
                         <td><%= requestStatus[i].pharm_confirm%></td>
-
+                        <%if(!(requestStatus[i].lab_confirm == "confirmed")){%>
                         <form action="/laboratorist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
                           <td><button name="sub" value="confirm">confirm</button></td>
                         </form>
                       </tr>
                       <%}%>
-                    </table>                                                   
+                      <%}%>
+                    </table>
             </div>
           </div>
         </section>

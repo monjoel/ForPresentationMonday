@@ -87,11 +87,12 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
           var requestConfirmation = 'SELECT request, patient_id from patient_history where request = "pending";';
           var bedDisabble = 'SELECT patient_id from bed;';
           var requestStatusSQL = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
-          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation + bedDisabble + requestStatusSQL,req.session.Aid, function(err, rows){
+          var pendingLabRequestSQL = 'select * from lab_request where lab_status = "pending";'
+          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation + bedDisabble + requestStatusSQL + pendingLabRequestSQL,req.session.Aid, function(err, rows){
           if (err) {
             console.log(err);
           } else {
-              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], bedDisable:rows[8], requestStatus:rows[9], invalid:null});
+              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], bedDisable:rows[8], requestStatus:rows[9],pendingLabRequestSQL:rows[10], invalid:null});
           }
         });
       } else {
@@ -117,8 +118,11 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               }
             });
           } else if(data.sub == 'prescribe') {
-            var prescribeSQL = 'INSERT into prescription (creation_stamp, medicine, quantity, dosage, timeframe, doctor_id, patient_id, status) VALUES ("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'","'+data.medicine+'","'+data.quantity+'","'+data.dosage+'","'+data.timeframe+'",'+req.session.Aid+','+req.query.patient_id+',"pending");';
-            var medicines    = data.medicine + ","+ data.quantity + "," + data.dosage + "," + data.timeframe;
+            if (data.brand == "") {
+              data.brand = 'generic';
+            }
+            var prescribeSQL = 'INSERT into prescription (creation_stamp, medicine, quantity, dosage, timeframe, doctor_id, patient_id, status, brand) VALUES ("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'","'+data.medicine+'","'+data.quantity+'","'+data.dosage+'","'+data.timeframe+'",'+req.session.Aid+','+req.query.patient_id+',"pending","'+data.brand+'");';
+            var medicines    = data.medicine + ","+ data.quantity + "," + data.dosage + "," + data.timeframe + "," + data.brand;
             var historySQL = 'UPDATE patient_history set medicine = CONCAT(IFNULL(medicine, ""),"'+medicines+'\n") where histo_id ='+req.query.histo_id+';';
             db.query(prescribeSQL + historySQL +  'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "prescription", "Prescribed a medicine to : '+req.query.patient_name+'");', function(err){
               if (err) {
@@ -412,13 +416,7 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
       if(req.session.email && req.session.sino == 'doctor'){
         if(req.session.sino == 'doctor'){
           if (req.query.opdPatient) {
-            var brand;
-            if (data.brand == '') {
-              data.brand = 'Generic';
-            } else {
-              brand = data.brand;
-            }
-            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,\nQuantity:",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and patient_id = '+req.query.opdPatient+' and p.status ="pending" ORDER BY creation_stamp desc;';
+            var prescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,"\nQuantity:",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where doctor_id = '+req.session.Aid+' and patient_id = '+req.query.opdPatient+' and p.status ="pending" ORDER BY creation_stamp desc;';
             var confirmedprescriptionSQL = 'SELECT CONCAT("Medicine: ",medicine,"\nBrand:",brand,"\nQuantity: ",quantity,"\nDosage: ", dosage,"\nTimeframe: ", timeframe) AS medications, p.status as STATUS,creation_stamp,patient_type,name,age,prescription_id from prescription p inner join patient using(patient_id) where p.status = "confirmed" and doctor_id='+req.session.Aid+' ORDER BY creation_stamp desc LIMIT 50;';
 
             db.query(prescriptionSQL+confirmedprescriptionSQL + name,req.session.Aid, function(err, rows){
