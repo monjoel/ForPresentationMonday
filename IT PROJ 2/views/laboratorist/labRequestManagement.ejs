@@ -107,9 +107,12 @@
                           <td><%=pendingLabRequestSQL[i].type%></td>
                           <td><%=pendingLabRequestSQL[i].remarks%></td>
                           <td><%=pendingLabRequestSQL[i].lab_status.charAt(0).toUpperCase() + pendingLabRequestSQL[i].lab_status.slice(1);%></td>
-                          <form action="/laboratorist/labRequestManagement?requestId=<%=pendingLabRequestSQL[i].request_id%>&labrequestPatientName=<%=pendingLabRequestSQL[i].name%>" method="post">
-                          <td align="center"><button type="submit" name="sub" value="confirm" class="btn btn-primary btn-sm">Confirm</button></td>
-                          </form>
+                          <td align="center">
+                            <form action="/laboratorist/labRequestManagement?requestId=<%=pendingLabRequestSQL[i].request_id%>&labrequestPatientName=<%=pendingLabRequestSQL[i].name%>" method="post">
+                              <button type="submit" name="sub" value="confirm" class="btn btn-primary btn-sm">Confirm</button>
+                              <button type="button" name="button" onClick="actionUpload(<%=pendingLabRequestSQL[i].patient_id%>,<%=JSON.stringify(pendingLabRequestSQL[i].name)%>)">import img</button>
+                            </form>
+                          </td>
                       </tr>
                     <%}%>
               </table>
@@ -117,7 +120,18 @@
           </div>
         </div>
       </div>
+<br>
+<br>
+      <div id="upload" style="color:red; display:none;">
+        <h2>modal !!</h2>
+        <form id="dynaAction" method="post" enctype="multipart/form-data">
+          <input type="file" name="labIMG" accept="image/*" required>
+          <button type="submit" name="sub" value="saveIMG">save</button>
+        </form>
 
+      </div>
+<br>
+<br>
      <div class="row">
       <div class="col-xs-12">
         <div class="box" style="border-top-color: #3e0901 !important;">
@@ -166,6 +180,10 @@ $(function () {
   $("#example1").DataTable();
   $('#example2').DataTable();
 });
+function actionUpload(i,name){
+ $('#upload').show();
+ document.getElementById('dynaAction').action = '/laboratorist/labRequestManagement?pId='+i+'&pName='+name+'';
+}
 </script>
 </body>
 </html>

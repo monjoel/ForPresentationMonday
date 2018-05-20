@@ -1,4 +1,4 @@
-module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment){
+module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment,upload){
 var user, Aid;
 
   app.get('/laboratorist/dashboard', function(req, res){
@@ -101,7 +101,7 @@ res.redirect('../login');
         res.redirect('../login');
     }
   });
-  app.post('/laboratorist/labRequestManagement', function(req, res){
+  app.post('/laboratorist/labRequestManagement', upload.any(), function(req, res){
     var data = req.body;
     if(req.session.email && req.session.sino == 'laboratorist'){
       if(req.session.sino == 'laboratorist') {
@@ -116,12 +116,15 @@ res.redirect('../login');
             }
           });
         } else {
-          var cancelLabRequestSQL = 'DELETE FROM lab_request where request_id = '+req.query.requestId+';';
-          db.query(cancelLabRequestSQL + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "cancelLabRequest", "Canceled lab request for: '+req.query.labrequestPatientName+'");', function(err){
+          var img = data.labIMG;
+          console.log(req.files);
+          console.log(req.files[0].path);
+
+          var uploadIMGlab = 'UPDATE patient SET lab_img = "'+req.files[0].filename+'" where patient_id = '+req.query.pId+';';
+          db.query(uploadIMGlab + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "imgUploadLab", "Image Upload for patient: '+req.query.pName+'");', function(err){
             if(err){
               console.log(err);
             } else {
-              io.emit('type', {what:'cancelLabRequest',message:'Canceled Lab Request for <strong>'+req.query.labrequestPatientName+'</strong>'});
               res.redirect(req.get('referer'));
             }
           });

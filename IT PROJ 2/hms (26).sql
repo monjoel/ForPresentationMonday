@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 19, 2018 at 01:42 PM
+-- Generation Time: May 20, 2018 at 05:39 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
   `remarks` text NOT NULL,
   `patient_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`logs_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=358 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `activity_logs`
@@ -400,7 +400,106 @@ INSERT INTO `activity_logs` (`logs_id`, `account_id`, `time`, `type`, `remarks`,
 (354, 40, '2018-05-19 21:32:52', 'patientInfoEdit', 'Edited patient Information of Roberto Garciaaaashhhqweqwe', 91),
 (355, 40, '2018-05-19 21:32:59', 'patientInfoEdit', 'Edited patient Information of Tom Aldrin III blah blahsasdasdaasdasda', 93),
 (356, 40, '2018-05-19 21:35:31', 'patientInfoEdit', 'Edited patient Information of Melissa Corpuzal', 100),
-(357, 40, '2018-05-19 21:35:40', 'patientInfoEdit', 'Edited patient Information of Melissa Corpuzal', 100);
+(357, 40, '2018-05-19 21:35:40', 'patientInfoEdit', 'Edited patient Information of Melissa Corpuzal', 100),
+(358, 40, '2018-05-19 21:46:38', 'calcelRequestConfirmationER', 'Request of Confirmation Cancelled!', 91),
+(359, 40, '2018-05-19 21:50:19', 'cancelLabRequest', 'Canceled lab request for: Rose Miller', NULL),
+(360, 40, '2018-05-19 21:50:26', 'requestConfirmationOPD', 'Request of Confirmation sent!', 90),
+(361, 40, '2018-05-19 21:50:32', 'bed', 'Alloted bed number: 1 to patient:Roberto Garciaaaashhhqweqwe', 91),
+(362, 40, '2018-05-19 21:50:35', 'bedDischarge', 'Discharged a patient from bed number : 1', 91),
+(363, 40, '2018-05-19 21:52:41', 'calcelRequestConfirmationOPD', 'Request of Confirmation Cancelled!', 90),
+(364, 40, '2018-05-19 21:59:48', 'log', 'Logged in', NULL),
+(365, 40, '2018-05-19 22:01:01', 'log', 'Logged in', NULL),
+(366, 40, '2018-05-19 22:01:57', 'log', 'Logged in', NULL),
+(367, 40, '2018-05-19 22:02:51', 'log', 'Logged in', NULL),
+(368, 40, '2018-05-19 22:04:26', 'log', 'Logged in', NULL),
+(369, 40, '2018-05-19 22:04:30', 'log', 'Logged out', NULL),
+(370, 41, '2018-05-19 22:04:33', 'log', 'Logged in', NULL),
+(371, 41, '2018-05-19 23:27:10', 'log', 'Logged in', NULL),
+(372, 41, '2018-05-19 23:27:41', 'log', 'Logged out', NULL),
+(373, 40, '2018-05-19 23:27:44', 'log', 'Logged in', NULL),
+(374, 40, '2018-05-20 00:04:29', 'log', 'Logged in', NULL),
+(375, 40, '2018-05-20 00:05:14', 'log', 'Logged in', NULL),
+(376, 40, '2018-05-20 00:05:45', 'log', 'Logged in', NULL),
+(377, 40, '2018-05-20 00:20:48', 'log', 'Logged in', NULL),
+(378, 40, '2018-05-20 00:21:18', 'log', 'Logged out', NULL),
+(379, 40, '2018-05-20 00:22:01', 'log', 'Logged in', NULL),
+(380, 40, '2018-05-20 00:22:09', 'log', 'Logged out', NULL),
+(381, 40, '2018-05-20 00:23:31', 'log', 'Logged in', NULL),
+(382, 40, '2018-05-20 00:23:44', 'log', 'Logged out', NULL),
+(383, 40, '2018-05-20 00:23:44', 'log', 'Logged out', NULL),
+(384, 40, '2018-05-20 00:23:44', 'log', 'Logged out', NULL),
+(385, 40, '2018-05-20 00:23:56', 'log', 'Logged in', NULL),
+(386, 40, '2018-05-20 00:24:03', 'log', 'Logged out', NULL),
+(387, 40, '2018-05-20 00:26:02', 'log', 'Logged in', NULL),
+(388, 40, '2018-05-20 00:35:23', 'log', 'Logged out', NULL),
+(389, 40, '2018-05-20 01:08:02', 'log', 'Logged in', NULL),
+(390, 40, '2018-05-20 01:08:23', 'log', 'Logged out', NULL),
+(391, 40, '2018-05-20 01:08:23', 'log', 'Logged out', NULL),
+(392, 40, '2018-05-20 01:08:23', 'log', 'Logged out', NULL),
+(393, 40, '2018-05-20 01:09:16', 'log', 'Logged in', NULL),
+(394, 40, '2018-05-20 01:09:51', 'log', 'Logged out', NULL),
+(395, 40, '2018-05-20 01:09:51', 'log', 'Logged out', NULL),
+(396, 40, '2018-05-20 01:09:51', 'log', 'Logged out', NULL),
+(397, 40, '2018-05-20 01:10:06', 'log', 'Logged in', NULL),
+(398, 40, '2018-05-20 01:10:59', 'log', 'Logged out', NULL),
+(399, 40, '2018-05-20 01:11:06', 'log', 'Logged in', NULL),
+(400, 40, '2018-05-20 01:11:45', 'log', 'Logged out', NULL),
+(401, 40, '2018-05-20 01:13:13', 'log', 'Logged in', NULL),
+(402, 40, '2018-05-20 01:13:27', 'log', 'Logged out', NULL),
+(403, 40, '2018-05-20 01:13:59', 'log', 'Logged in', NULL),
+(404, 40, '2018-05-20 01:14:06', 'log', 'Logged out', NULL),
+(405, 40, '2018-05-20 01:14:11', 'log', 'Logged in', NULL),
+(406, 40, '2018-05-20 01:14:18', 'log', 'Logged out', NULL),
+(407, 40, '2018-05-20 01:16:37', 'log', 'Logged in', NULL),
+(408, 40, '2018-05-20 01:19:38', 'log', 'Logged out', NULL),
+(409, 40, '2018-05-20 01:20:47', 'log', 'Logged in', NULL),
+(410, 40, '2018-05-20 01:25:48', 'log', 'Logged out', NULL),
+(411, 40, '2018-05-20 01:30:22', 'log', 'Logged in', NULL),
+(412, 41, '2018-05-20 01:55:18', 'log', 'Logged in', NULL),
+(413, 41, '2018-05-20 01:56:02', 'log', 'Logged in', NULL),
+(414, 41, '2018-05-20 01:57:09', 'log', 'Logged in', NULL),
+(415, 41, '2018-05-20 02:08:30', 'log', 'Logged in', NULL),
+(416, 41, '2018-05-20 02:08:42', 'setBedAvailable', 'Set to available bed number: 1', NULL),
+(417, 41, '2018-05-20 02:08:44', 'setBedUnavailable', 'Set to unavailable bed number: 1', NULL),
+(418, 41, '2018-05-20 02:08:59', 'setBedAvailable', 'Set to available bed number: 1', NULL),
+(419, 41, '2018-05-20 02:10:33', 'log', 'Logged in', NULL),
+(420, 41, '2018-05-20 02:10:38', 'setBedUnavailable', 'Set to unavailable bed number: 1', NULL),
+(421, 41, '2018-05-20 02:10:40', 'setBedAvailable', 'Set to available bed number: 1', NULL),
+(422, 41, '2018-05-20 02:12:32', 'log', 'Logged out', NULL),
+(423, 40, '2018-05-20 02:12:37', 'log', 'Logged in', NULL),
+(424, 40, '2018-05-20 02:28:05', 'log', 'Logged out', NULL),
+(425, 40, '2018-05-20 09:56:05', 'log', 'Logged in', NULL),
+(426, 40, '2018-05-20 09:56:18', 'setBedUnavailable', 'Set to unavailable bed number: 1', NULL),
+(427, 40, '2018-05-20 09:56:23', 'setBedAvailable', 'Set to available bed number: 1', NULL),
+(428, 40, '2018-05-20 10:52:54', 'log', 'Logged out', NULL),
+(429, 39, '2018-05-20 11:35:44', 'log', 'Logged in', NULL),
+(430, 39, '2018-05-20 11:56:33', 'log', 'Logged in', NULL),
+(431, 39, '2018-05-20 12:03:04', 'log', 'Logged in', NULL),
+(432, 39, '2018-05-20 12:03:33', 'log', 'Logged in', NULL),
+(433, 39, '2018-05-20 12:16:38', 'log', 'Logged in', NULL),
+(434, 39, '2018-05-20 12:51:26', 'log', 'Logged in', NULL),
+(435, 39, '2018-05-20 12:52:56', 'log', 'Logged in', NULL),
+(436, 39, '2018-05-20 12:55:42', 'log', 'Logged in', NULL),
+(437, 39, '2018-05-20 13:13:28', 'log', 'Logged in', NULL),
+(438, 39, '2018-05-20 13:13:54', 'log', 'Logged in', NULL),
+(439, 39, '2018-05-20 13:14:30', 'log', 'Logged in', NULL),
+(440, 39, '2018-05-20 13:15:44', 'log', 'Logged in', NULL),
+(441, 39, '2018-05-20 13:16:02', 'log', 'Logged in', NULL),
+(442, 39, '2018-05-20 13:16:54', 'log', 'Logged in', NULL),
+(443, 39, '2018-05-20 13:17:21', 'log', 'Logged in', NULL),
+(444, 39, '2018-05-20 13:19:46', 'log', 'Logged in', NULL),
+(445, 39, '2018-05-20 13:20:13', 'log', 'Logged in', NULL),
+(446, 39, '2018-05-20 13:21:22', 'log', 'Logged in', NULL),
+(447, 39, '2018-05-20 13:21:43', 'log', 'Logged in', NULL),
+(448, 39, '2018-05-20 13:22:09', 'log', 'Logged in', NULL),
+(449, 39, '2018-05-20 13:22:16', 'imgUploadLab', 'Image Upload for patient: Tom Aldrin III blah blahsasdasdaasdasda', NULL),
+(450, 39, '2018-05-20 13:25:21', 'log', 'Logged out', NULL),
+(451, 40, '2018-05-20 13:25:26', 'log', 'Logged in', NULL),
+(452, 39, '2018-05-20 13:36:11', 'log', 'Logged in', NULL),
+(453, 39, '2018-05-20 13:36:27', 'imgUploadLab', 'Image Upload for patient: Tom Aldrin III blah blahsasdasdaasdasda', NULL),
+(454, 39, '2018-05-20 13:36:30', 'log', 'Logged out', NULL),
+(455, 40, '2018-05-20 13:36:33', 'log', 'Logged in', NULL),
+(456, 40, '2018-05-20 13:38:21', 'log', 'Logged out', NULL);
 
 -- --------------------------------------------------------
 
@@ -644,7 +743,7 @@ CREATE TABLE IF NOT EXISTS `lab_request` (
   PRIMARY KEY (`request_id`),
   KEY `patient_id` (`patient_id`),
   KEY `doctor_id` (`doctor_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lab_request`
@@ -653,8 +752,7 @@ CREATE TABLE IF NOT EXISTS `lab_request` (
 INSERT INTO `lab_request` (`request_id`, `type`, `timestamp`, `remarks`, `doctor_id`, `patient_id`, `lab_status`) VALUES
 (1, 'X-Ray', '2018-04-22 14:16:01', 'Send back results asap', 40, 93, 'confirmed'),
 (3, 'Blood Chemistry', '2018-04-23 02:07:56', 'blood test', 40, 91, 'confirmed'),
-(4, 'Blood Chemistry', '2018-05-18 10:46:00', 'qwe', 42, 93, 'pending'),
-(6, 'Blood Chemistry', '2018-05-18 11:53:10', 'qwe', 40, 90, 'pending');
+(4, 'Blood Chemistry', '2018-05-18 10:46:00', 'qwe', 42, 93, 'pending');
 
 -- --------------------------------------------------------
 
@@ -710,6 +808,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `immunization` text,
   `family_history` text,
   `rank` text,
+  `lab_img` blob,
   PRIMARY KEY (`patient_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 
@@ -717,25 +816,25 @@ CREATE TABLE IF NOT EXISTS `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patient_id`, `patient_type`, `name`, `age`, `unit`, `sex`, `status`, `birth_date`, `address`, `religion`, `blood_type`, `allergies`, `father`, `mother`, `birth_history`, `SN`, `immunization`, `family_history`, `rank`) VALUES
-(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n', '0'),
-(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n', '0'),
-(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n', '0'),
-(91, 'Authorized Civilian', 'Roberto Garciaaaashhhqweqwe', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia:', 'Maria Garcia:', '', '', '', 'Mental Illness\r\n\r\n', ''),
-(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n', '0'),
-(93, 'Cadet', 'Tom Aldrin III blah blahsasdasdaasdasda', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II:Doctor', 'May Aldrin:Housewife', '', '', '', 'DM\r\n\r\n', ''),
-(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n', '0'),
-(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '', '\n', '\n', '0'),
-(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '', '', 'Asthma\r\n\r\n', '0'),
-(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n', '0'),
-(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n', '0'),
-(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n', '0'),
-(100, 'Authorized Civilian', 'Melissa Corpuzal', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz:Fireman', 'Leslie Corpuz:Police Officer', '', 'undefined', '', 'Asthma\r\newan\r\n', ''),
-(101, 'Military Dependent', 'Joey Tribbiani', 25, '', 'M', 'Single', '1992-09-18', 'sabvjkasbnjkvasb j', '', 'A', '', 'bhbhjbhj\n:', 'vbhjvbhjbhj\n:', '', '', '\n', '\n', '0'),
-(102, 'Military Officer', 'Phoebe Buffay', 18, '', 'F', 'Single', '1999-09-09', 'bhjkvbjh', '', 'A', '', 'vjhvbhj\n:', 'jbhj\n:bh', '', '0-17278', '\n', '\n', '0'),
-(103, 'Cadet', 'qwe', 0, '', 'M', 'Single', '2018-05-02', 'e', 'qwe', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', '4C Cadet'),
-(104, 'Military Officer', 'qwe', 0, '', 'M', 'Single', '2018-05-02', 'e', '', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', 'tangina'),
-(105, 'Military Officer', 'qwe', 0, '', 'M', 'Single', '2018-05-03', 'qwe', '', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', '');
+INSERT INTO `patient` (`patient_id`, `patient_type`, `name`, `age`, `unit`, `sex`, `status`, `birth_date`, `address`, `religion`, `blood_type`, `allergies`, `father`, `mother`, `birth_history`, `SN`, `immunization`, `family_history`, `rank`, `lab_img`) VALUES
+(88, 'Military Officer', 'Greg Chicoine', 32, '', 'M', 'Married', '1985-10-01', '27 Montebello Subdivision, Baguio City', 'Anglican', 'A', 'Peanuts', 'Elmer Chicoine\n:Doctor', 'Mary Chicoine\n:Doctor', '', '', 'BCD:1985-11-01\n\n', 'DM\nCA\n\n', '0', NULL),
+(89, 'Military Dependent', 'Carla Chicoine', 15, '', 'F', 'Single', '2002-09-29', '23 Sta. Barbara, Caguio City', 'Anglican', 'A', '', 'Greg Chicoine\n:Military Officer', 'Carrie Chicoine\n:Housewife', '', '', '\n', 'Asthma\n\n', '0', NULL),
+(90, 'Civilian', 'Rose Miller', 29, '', 'F', 'Married', '1988-11-11', 'Pines Village, Baguio City', 'Roman Catholic', 'B', '', 'Karl Miller\n:Fireman', 'Rachel Miller\n:Nurse', '', '', 'Chicken Pox:1998-04-15\n\n', 'CVD\n\n', '0', NULL),
+(91, 'Authorized Civilian', 'Roberto Garciaaaashhhqweqwe', 37, '', 'M', 'Married', '1980-08-18', 'Camp Bado, Dangwa, La Trinidad', 'Roman Catholic', 'AB', '', 'Marcello Garcia:', 'Maria Garcia:', '', '', '', 'Mental Illness\r\n\r\n', '', NULL),
+(92, 'Cadet', 'David Estrella', 27, '14th Infantry Battalion', 'M', 'Single', '1990-09-16', 'Unit 6, Sta. Cecilia Compound, Baguio City', 'Born Again', 'O', 'Cheese', 'Carlo Estrella\n:Barista', 'Jaimie Estrella\n:Waitress', '', '', '\n', 'CA\n\n', '0', NULL),
+(93, 'Cadet', 'Tom Aldrin III blah blahsasdasdaasdasda', 27, '14th Infantry Battalion', 'M', 'Single', '1991-01-02', '17 Richgate Subdivision, Baguio City', 'Iglesia ni Cristo', 'A', '', 'Tom Aldrin II:Doctor', 'May Aldrin:Housewife', '', '', '', 'DM\r\n\r\n', '', 0x3362396564356630383362336365396264336638663938373462633063323034),
+(94, 'Cadet', 'Hailey Sanchez', 26, '17th Infantry Battalion', 'F', 'Single', '1991-08-08', '15 Richgate Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Carlo Sanchez\n:Police Officer', 'May Sanchez\n:Police Officer', '', '', '\n', 'CA\nCVD\n\n', '0', NULL),
+(95, 'Military Officer', 'Teo Boston', 32, '', 'M', 'Married', '1985-09-19', 'Arc Residences Compound, Baguio City', 'Roman Catholic', 'B', '', 'Carlos Boston\n:Military Officer', 'Carla Boston\n:Housewife', '', '', '\n', '\n', '0', NULL),
+(96, 'Military Officer', 'Rachelle Ortega', 28, '', 'F', 'Maried', '1989-12-18', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', '', 'Paulo Ortega:Politician', 'Paula Ortega:Housewife', '', '', '', 'Asthma\r\n\r\n', '0', NULL),
+(97, 'Military Dependent', 'Mikhee Ortega', 12, '', 'F', 'Single', '2005-07-27', '19 Woodsville Subdivision, Baguio City', 'Roman Catholic', 'A', 'Kiwi', 'Rodolfo Ortega\n:Chef', 'Rachelle Ortega\n:Military Officer', '', '', '\n', '\n', '0', NULL),
+(98, 'Civilian', 'Miguel Santos', 30, '', 'M', 'Married', '1987-05-16', '29 Lower Liwanag, Loakan, Baguio City', '', 'A', '', 'Conrad Santos\n:Professor', 'Mylene Santos\n:Professor', '', '', '\n', 'Hypertension\n\n', '0', NULL),
+(99, 'Civilian', 'Joey Cortez', 27, '', 'M', 'Single', '1990-11-17', '26 Upper Liwanag, Loakan, Baguio City', '', 'B', '', 'Joseph Cortez\n:Journalist', 'Josephine Cortez\n:Professor', '', '', '\n', '\n', '0', NULL),
+(100, 'Authorized Civilian', 'Melissa Corpuzal', 10, '', 'F', 'Single', '2007-12-06', '18 Pines Compound, Kias, Baguio City', '', 'O', '', 'Derick Corpuz:Fireman', 'Leslie Corpuz:Police Officer', '', 'undefined', '', 'Asthma\r\newan\r\n', '', NULL),
+(101, 'Military Dependent', 'Joey Tribbiani', 25, '', 'M', 'Single', '1992-09-18', 'sabvjkasbnjkvasb j', '', 'A', '', 'bhbhjbhj\n:', 'vbhjvbhjbhj\n:', '', '', '\n', '\n', '0', NULL),
+(102, 'Military Officer', 'Phoebe Buffay', 18, '', 'F', 'Single', '1999-09-09', 'bhjkvbjh', '', 'A', '', 'vjhvbhj\n:', 'jbhj\n:bh', '', '0-17278', '\n', '\n', '0', NULL),
+(103, 'Cadet', 'qwe', 0, '', 'M', 'Single', '2018-05-02', 'e', 'qwe', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', '4C Cadet', NULL),
+(104, 'Military Officer', 'qwe', 0, '', 'M', 'Single', '2018-05-02', 'e', '', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', 'tangina', NULL),
+(105, 'Military Officer', 'qwe', 0, '', 'M', 'Single', '2018-05-03', 'qwe', '', ' ', '', 'e\n:e', 'e\n:e', '', '', '\n', '\n', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -768,7 +867,7 @@ CREATE TABLE IF NOT EXISTS `patient_history` (
 
 INSERT INTO `patient_history` (`histo_id`, `date_stamp`, `initial_assessment`, `lab`, `medicine`, `diagnosis`, `bed`, `patient_id`, `doctor_id`, `vitals`, `status`, `request`, `pharm_confirm`, `lab_confirm`) VALUES
 (1, '2018-04-22 14:10:12', NULL, NULL, NULL, NULL, '1, ', 100, 40, NULL, 'confirmed', NULL, '', ''),
-(2, '2018-04-22 14:11:27', 'High temperature and migraine', 'Type: Blood Chemistry\n Remarks: qwe\n', 'Paracetamol,10,500mg,every 6 hours\nsolmux,3,3,3 week\n', NULL, NULL, 90, 40, 'BP: 90/70\nCR: 15\nPR: 16\nRR: 12\n TEMP: 38\nWT: 51', 'pending', NULL, '', ''),
+(2, '2018-04-22 14:11:27', 'High temperature and migraine', 'Type: Blood Chemistry\n Remarks: qwe\n', 'Paracetamol,10,500mg,every 6 hours\nsolmux,3,3,3 week\n', NULL, NULL, 90, 40, 'BP: 90/70\nCR: 15\nPR: 16\nRR: 12\n TEMP: 38\nWT: 51', 'pending', NULL, 'pending', 'pending'),
 (3, '2018-04-22 14:11:54', 'Stomach pain', 'Type: Parasitology\n Remarks: Send back results asap\n', NULL, NULL, NULL, 89, 40, 'BP: 100/90\nCR: 10\nPR: 12\nRR: 13\n TEMP: 37\nWT: 65', 'confirmed', 'confirmed', 'pending', 'pending'),
 (4, '2018-04-22 14:12:28', 'Leg fracture', 'Type: Blood Chemistry\n Remarks: \n', NULL, NULL, '3, 1, 1, 1, 1, ', 98, 40, 'BP: 120/110\nCR: 12\nPR: 12\nRR: 10\n TEMP: 37\nWT: 54', 'pending', NULL, 'pending', 'pending'),
 (5, '2018-04-22 14:13:03', 'Back pain', 'Type: X-Ray\n Remarks: Send back results asap\nType: Blood Chemistry\n Remarks: qwe\n', 'qwe,3,qwe,qwe\n', NULL, NULL, 93, 40, 'BP: 120/100\nCR: 12\nPR: 11\nRR: 15\n TEMP: 37\nWT: 60', 'pending', NULL, '', ''),
@@ -778,7 +877,7 @@ INSERT INTO `patient_history` (`histo_id`, `date_stamp`, `initial_assessment`, `
 (10, '2018-04-23 02:35:04', NULL, NULL, NULL, NULL, '2, ', 88, 40, NULL, 'pending', NULL, '', ''),
 (11, '2018-04-23 02:50:18', NULL, NULL, NULL, NULL, '1, ', 91, 42, NULL, 'confirmed', NULL, '', ''),
 (12, '2018-04-23 02:54:54', NULL, NULL, NULL, NULL, '1, ', 91, 40, NULL, 'confirmed', NULL, '', ''),
-(13, '2018-05-18 12:34:27', NULL, NULL, NULL, NULL, '1, ', 91, 40, NULL, 'pending', 'pending', 'pending', 'pending');
+(13, '2018-05-18 12:34:27', NULL, NULL, NULL, NULL, '1, 1, ', 91, 40, NULL, 'pending', NULL, 'pending', 'pending');
 
 -- --------------------------------------------------------
 
@@ -983,7 +1082,7 @@ CREATE TABLE IF NOT EXISTS `ward_count` (
   `date_stamp` timestamp NOT NULL,
   `patient_id` int(11) NOT NULL,
   PRIMARY KEY (`ward_count_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ward_count`
@@ -1000,7 +1099,8 @@ INSERT INTO `ward_count` (`ward_count_id`, `date_stamp`, `patient_id`) VALUES
 (8, '2018-05-18 11:08:27', 98),
 (9, '2018-05-18 11:43:25', 98),
 (10, '2018-05-18 11:51:26', 98),
-(11, '2018-05-18 12:34:27', 91);
+(11, '2018-05-18 12:34:27', 91),
+(12, '2018-05-19 13:50:32', 91);
 
 --
 -- Constraints for dumped tables

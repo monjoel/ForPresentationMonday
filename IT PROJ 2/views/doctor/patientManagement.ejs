@@ -79,8 +79,10 @@
     </aside>
 
 
+
       <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
+
     <section class="content-header">
       <h1>
         Patient Management
@@ -90,15 +92,17 @@
         <!-- Main content -->
     <section class="content animate-bottom"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
       <%if(p2){%>
+        <h3>LAB IMG</h3>
+        <img src="../uploads/<%=p2[0].lab_img%>" style="width:20%;  height:auto;">
+        <br>
         <a href="/doctor/<%if(opd != 'Y'){%>outpatientManagement<%} else {%>patientManagement<%}%>" style="color:black"><button type="button" class="btn btn-primary" name="button"><i class="fa fa-mail-reply"></i> Back</button></a><br><br>
                   <div class="row">
                     <div class="col-md-3">
-
                       <!-- Profile Image -->
                       <div class="box box-primary" style="border-top-color: #3e0901 !important;">
                         <div class="box-body box-profile">
 
-                          <h3 class="profile-username text-center"><%= p2[0].name %></h3>
+                          <h3 class="profile-username text-center"><%= p2[0].name %> </h3>
 
                           <h5 class="text-muted text-center"><%= p2[0].patient_type %></h5>
 

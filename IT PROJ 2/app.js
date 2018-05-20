@@ -13,6 +13,8 @@ var helmet = require('helmet');
 var bcrypt = require('bcryptjs');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
+var multer  = require('multer');
+var upload = multer({ dest: 'public/uploads/' });
 var app = express();
 
 //MIDDLEWARES
@@ -142,4 +144,4 @@ nurse (app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatie
 doctor(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment,CronJob);
 admin (app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,availableBeds,patientManagementSQL,bcrypt,io,moment);
 pharmacist(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment,pharmDailyReport);
-laboratorist(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment);
+laboratorist(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,whoWARD,monthlyPatientCount,patientList,bcrypt,io,moment,upload);
