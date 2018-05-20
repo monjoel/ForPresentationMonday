@@ -226,6 +226,9 @@
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'setBedUnavailable'){ %>
                       <i class="fa fa-times-circle bg-red"></i>
+                      <div class="timeline-item">    
+                    <%} else if (activityInfo[i].type == 'imgUploadLab'){ %>
+                      <i class="fa fa-image bg-navy"></i>
                       <div class="timeline-item">        
                     <%}%>
                       <h3 class="timeline-header"><%= activityInfo[i].remarks%></a></h3>
