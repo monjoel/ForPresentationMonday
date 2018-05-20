@@ -163,11 +163,12 @@ app.get('/admin/patientManagement', function(req, res){
       if(req.session.email && req.session.sino == 'admin'){
         if(req.session.sino == 'admin'){
             var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login, address, phone, username, status FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
+            var userLogs = "SELECT a.time, a.remarks, u.name, u.username, u.account_type from activity_logs as a inner join user_accounts as u where u.account_id != "+Aid+" and (a.time BETWEEN DATE_SUB(NOW(), INTERVAL 14 DAY) AND NOW()) order by a.time desc";
             var filterPharma = "select * from user_accounts where account_type = 'pharmacist';";
             var filterLab = "select * from user_accounts where account_type = 'laboratorist';";
             var filterAdmin = "select * from user_accounts where account_type = 'admin';";
-            db.query(sql + filterPharma +filterLab + filterAdmin, function(err, rows){
-              res.render('admin/userAccountsManagement', {p:rows[0], pharma:rows[1], lab:rows[2], adm:rows[3], username:user});
+            db.query(sql + filterPharma +filterLab + filterAdmin + userLogs, function(err, rows){
+              res.render('admin/userAccountsManagement', {p:rows[0], pharma:rows[1], lab:rows[2], adm:rows[3], uLogs:rows[4], username:user});
             });
         } else {
           res.redirect(req.session.sino+'/dashboard');
@@ -207,7 +208,7 @@ app.get('/admin/patientManagement', function(req, res){
           } else if(data.sub == 'activate'){
             bcrypt.genSalt(10, function(err, salt){
               bcrypt.hash('123', salt, function(err, hash){
-                db.query('UPDATE user_accounts set status = "active" where account_id = '+req.query.account+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "resetPassword", "Reactivated user: '+req.query.name+'");',function(err){
+                db.query('UPDATE user_accounts set status = "active" where account_id = '+req.query.account+';' + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "reactivation", "Reactivated user: '+req.query.name+'");',function(err){
                   if (err) {
                     console.log(err);
                   } else {

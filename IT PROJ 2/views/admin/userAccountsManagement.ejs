@@ -149,6 +149,44 @@
             </div>
           </div>
         </div>
+   <section class="content-header">
+      <h1>
+        User Activity
+        <small>List of Registered User Activities for the last 2 weeks</small>
+      </h1>
+    </section><br>
+        <div class="col-xs-12">
+
+          <div class="box" style="border-top-color: #3e0901 !important;">
+            <div class="box-header">
+            </div>
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Account Type</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <%
+                  for(var x=0; x < uLogs.length; x++){
+                  %>
+                  <tr>
+                    <td><%= moment(uLogs[x].time).format('MMMM DD YYYY hh:mm A')%></td>
+                    <td><%= uLogs[x].account_type %></td>
+                    <td><%= uLogs[x].name %></td>
+                    <td><%= uLogs[x].username %></td>
+                    <td><%= uLogs[x].remarks%></td>
+                  </tr>
+                  <%}%>
+              </table>
+            </div>
+          </div>
+        </div>           
       </div>
 
         <!---------------------------------------------------------------------------------------------- Modal of Adding new user ----------->
@@ -249,8 +287,8 @@
     $("#example1").DataTable();
     $('#example2').DataTable({
       "paging": true,
-      "lengthChange": false,
-      "searching": false,
+      "lengthChange": true,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": true
