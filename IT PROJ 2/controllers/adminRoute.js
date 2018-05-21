@@ -163,7 +163,7 @@ app.get('/admin/patientManagement', function(req, res){
       if(req.session.email && req.session.sino == 'admin'){
         if(req.session.sino == 'admin'){
             var sql  = "SELECT account_id, account_type, name, age, sex, max(time) as last_Login, address, phone, username, status FROM user_accounts left join activity_logs using(account_id) where account_id !="+Aid+" group by account_id;";
-            var userLogs = "SELECT a.time, a.remarks, u.name, u.username, u.account_type from activity_logs as a inner join user_accounts as u where u.account_id != "+Aid+" and (a.time BETWEEN DATE_SUB(NOW(), INTERVAL 14 DAY) AND NOW()) order by a.time desc";
+            var userLogs = "SELECT a.time, a.remarks, u.name, u.username, u.account_type, a.account_id from activity_logs as a join user_accounts as u on(a.account_id = u.account_id) where a.account_id != "+Aid+" and (a.time BETWEEN DATE_SUB(NOW(), INTERVAL 14 DAY) AND NOW()) ORDER BY a.time DESC;";
             var filterPharma = "select * from user_accounts where account_type = 'pharmacist';";
             var filterLab = "select * from user_accounts where account_type = 'laboratorist';";
             var filterAdmin = "select * from user_accounts where account_type = 'admin';";
@@ -171,9 +171,12 @@ app.get('/admin/patientManagement', function(req, res){
               res.render('admin/userAccountsManagement', {p:rows[0], pharma:rows[1], lab:rows[2], adm:rows[3], uLogs:rows[4], username:user});
             });
         } else {
+          console.log('shiiiiiiiiiit123123123');
           res.redirect(req.session.sino+'/dashboard');
+          
         }
       } else {
+      	  console.log('shiiiiiiiiiithahahahah');
           res.redirect('../login');
       }
     });
