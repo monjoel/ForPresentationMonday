@@ -120,7 +120,7 @@
                         <td><%= requestStatus[i].pharm_confirm%></td>
 
                         <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
-                          <td><button name="sub" value="confirm" <%if(requestStatus[i].lab_confirm == "pending" || requestStatus[i].pharm_confirm == "pending"){%>disabled<%}%>>Confirm</button></td>
+                          <td><button name="sub" value="confirm" class="btn btn-default btn-sm" <%if(requestStatus[i].lab_confirm == "pending" || requestStatus[i].pharm_confirm == "pending"){%>disabled<%}%>>Confirm</button></td>
 
 
                         </form>

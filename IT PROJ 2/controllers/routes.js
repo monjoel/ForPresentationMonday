@@ -62,7 +62,10 @@ module.exports = function(app, db, bcrypt, moment, CronJob, io){
                       var resultDB = JSON.parse(JSON.stringify(rows));
                       for (var i in resultDB) {
                         if (moment(new Date()).add(5, 'minute').format("MM-DD-YYYY HH:mm") == moment(resultDB[i].appointment_timestamp).format("MM-DD-YYYY HH:mm")) {
-                          io.emit('type', {what:'appointment', message:'Appointment for <strong>'+resultDB[i].name+'</strong> !!!<br>REMARKS: <strong>'+resultDB[i].remarks+'</strong><br><h3>In 5 Minutes !!</h3>'});
+                          io.emit('type', {what:'appointment5', message:'Appointment for <strong>'+resultDB[i].name+'</strong> !!!'});
+                        }
+                        if (moment(new Date()).add(1, 'hour').format("MM-DD-YYYY HH:mm") == moment(resultDB[i].appointment_timestamp).format("MM-DD-YYYY HH:mm")) {
+                          io.emit('type', {what:'appointment1', message:'Appointment for <strong>'+resultDB[i].name+'</strong> !!!'});
                         }
                       }
                     });
