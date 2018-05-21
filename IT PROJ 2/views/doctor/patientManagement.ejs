@@ -200,18 +200,6 @@
                            <div class="tab-pane" id="labImage">
                             <div class="row">
                             <div class="col-md-8 text-center">
-                            <div class="box box-solid box-widget box-widget-user">
-                                <div class = "wodget-user-header bg-aqua-active" style="border-style: groove;">
-                                  <img class="img-circle" alt="User Avatar" src="../img/fdpsh logo.png" style="width:20%;  height:20%;">
-                                  <h2 class="widget-user-desc"><%= p2[0].patient_type %></h2>
-                                </div>
-                                <div class="box-footer" style="border-style: groove;">
-                                    <%if(p2){%>
-                                      <img src="../uploads/<%=p2[0].lab_img%>" style="width:100%;  height:100%;">   
-                                    <%}%>                                       
-
-                                </div>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -226,6 +214,7 @@
                                     <th>Prescribed Medicine</th>
                                     <th>Laboratory Tests</th>
                                     <th>Allocated Bed No.</th>
+                                    <th>Lab Image</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -278,10 +267,16 @@
                                             Outpatient
                                           <%}%>
                                       </td>
+                                      <td>
+                                      <%if(med[i].lab_img){%>
+                                        <img src="../uploads/<%=med[i].lab_img%>" style="width:100px;  height:100px;">   
+                                      <%}%>
+                                      </td>
                                   </tr>
                              <%}%>
                                 </tbody>
                               </table>
+
 
                             </div>
                           </div>
@@ -473,29 +468,6 @@
       <%}%>
       </section>
       </div>
-
-      <div class="modal fade modal-info" id="showInputPassword" role="dialog" aria-labelledby="labRequestlabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="labRequestlabel"><%= username[0].name %>, please input your password.</h4>
-            </div>
-
-            <div id="PasswordInput" style="display:none;">
-              <form id="dynamicActionPassword" method="post">
-                <div class="modal-body">
-                      <input class="form-control" type="password" name="patientPassword" placeholder="Password">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" name="sub" class="btn btn-outline" value="pass"><i class="fa fa-sign-in"></i> Enter</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-      <div class="control-sidebar-bg"></div>
-    </div>
   </body>
       <% include ../partials/footer.ejs %>
 

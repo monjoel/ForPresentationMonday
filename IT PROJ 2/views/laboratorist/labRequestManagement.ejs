@@ -110,7 +110,7 @@
                           <td align="center">
                             <form action="/laboratorist/labRequestManagement?requestId=<%=pendingLabRequestSQL[i].request_id%>&labrequestPatientName=<%=pendingLabRequestSQL[i].name%>" method="post">
                               <button type="submit" name="sub" value="confirm" class="btn btn-primary btn-sm">Confirm</button>
-                              <button type="button" name="button" onClick="actionUpload(<%=pendingLabRequestSQL[i].patient_id%>,<%=JSON.stringify(pendingLabRequestSQL[i].name)%>)" class="btn btn-default btn-sm" data-toggle="modal" data-target="#import">Import image</button>
+                              <button type="button" name="button" onClick="actionUpload(<%=pendingLabRequestSQL[i].histo_id%>,<%=JSON.stringify(pendingLabRequestSQL[i].name)%>)" class="btn btn-default btn-sm" data-toggle="modal" data-target="#import">Import image</button>
                             </form>
                           </td>
                       </tr>

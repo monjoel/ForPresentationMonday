@@ -84,7 +84,7 @@ res.redirect('../login');
   app.get('/laboratorist/labRequestManagement', function(req, res){
     if(req.session.email && req.session.sino == 'laboratorist'){
       if(req.session.sino == 'laboratorist'){
-          var pendingLabRequestSQL = 'SELECT * from lab_request l inner join patient using(patient_id) where lab_status = "pending" ORDER BY timestamp desc;';
+          var pendingLabRequestSQL = 'SELECT * from lab_request l inner join patient using(patient_id) INNER join patient_history using(patient_id) where lab_status = "pending" and patient_history.status = "pending" ORDER BY timestamp desc;';
           var confirmedLabRequestSQL = 'SELECT * from lab_request l inner join patient using(patient_id) where lab_status = "confirmed" ORDER BY timestamp desc;';
 
           db.query(pendingLabRequestSQL + confirmedLabRequestSQL, function(err, rows){
@@ -116,11 +116,7 @@ res.redirect('../login');
             }
           });
         } else {
-          var img = data.labIMG;
-          console.log(req.files);
-          console.log(req.files[0].path);
-
-          var uploadIMGlab = 'UPDATE patient SET lab_img = "'+req.files[0].filename+'" where patient_id = '+req.query.pId+';';
+          var uploadIMGlab = 'UPDATE patient_history SET lab_img = "'+req.files[0].filename+'" where histo_id = '+req.query.pId+';';
           db.query(uploadIMGlab + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "imgUploadLab", "Image Upload for patient: '+req.query.pName+'");', function(err){
             if(err){
               console.log(err);

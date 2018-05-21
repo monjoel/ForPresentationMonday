@@ -421,7 +421,9 @@
                     <%= d1%> - <%= d2%>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" name="button" data-toggle="modal" data-target="#showInputPassword" onclick="PasswordInput(<%= p[i].patient_id %>)"><i class="fa fa-user"></i> Profile</button>
+                  <form action="/nurse/patientManagement?passPatient=<%= p[i].patient_id%>&OPD=Y" method="post">
+                    <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
+                  </form>
                 </td>
               </tr>
               <%}%>
@@ -433,28 +435,6 @@
       <%}%>
       </section>
       </div>
-
-      <div class="modal fade modal-info" id="showInputPassword" role="dialog" aria-labelledby="labRequestlabel">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="labRequestlabel"><%= username[0].name %>, please input your password.</h4>
-            </div>
-              <form id="dynamicActionPassword" method="post">
-            <div class="modal-body">
-              <div id="PasswordInput" style="display:none">
-                  <input class="form-control" type="password" name="patientPassword" placeholder="Password">
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" name="sub" class="btn btn-outline" value="pass"><i class="fa fa-sign-in"></i> Enter</button>
-              </div>
-                </form>
-            </div>
-          </div>
-      <div class="control-sidebar-bg"></div>
-    </div>
       <% include ../partials/footer.ejs %>
 
 <style>
@@ -517,11 +497,6 @@ idleTimer();
     $("#PasswordInput").show();
   });
 <%}%>
-
-  function PasswordInput(id){
-    document.getElementById('PasswordInput').style.display = 'block';
-    document.getElementById('dynamicActionPassword').action = '/nurse/patientManagement?passPatient='+id+'';
-  }
   function dynaPatientInfo(id){
   document.getElementById('dynamicEditProfPatientLink').action = '/nurse/patientManagement?patient_id='+id+'';
   }
