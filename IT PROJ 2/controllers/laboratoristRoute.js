@@ -5,7 +5,7 @@ var user, Aid;
     if(req.session.email && req.session.sino == 'laboratorist'){
       if(req.session.sino == 'laboratorist'){
         Aid = req.session.Aid;
-        var diagnosisSQL      = 'SELECT * from lab_request where lab_status="pending";';
+        var diagnosisSQL      = 'SELECT lab_counter_id from lab_counter;';
         var bloodChemistrySQL = 'SELECT * from lab_counter l inner join patient using(patient_id) where l.type = "Blood Chemistry";';
         var hermatology       = 'SELECT * from lab_counter l inner join patient using(patient_id) where l.type = "Hematology";';
         var microscopy        = 'SELECT * from lab_counter l inner join patient using(patient_id) where l.type = "Microscopy";';

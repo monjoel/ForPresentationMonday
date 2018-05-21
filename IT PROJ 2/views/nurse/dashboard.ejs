@@ -6,6 +6,22 @@
   <title>Dashboard</title>
   <% include ../partials/header.ejs %>
 </head>
+<!--quarter month-->
+<%  var date = new Date();     
+    var quarter =  parseInt(date.getMonth() / 3 ) + 1 ;
+
+    var quarterMonth;
+
+    if(quarter == 1){
+        quarterMonth = "January - March";
+    } else if(quarter == 2){
+        quarterMonth = "April - June";
+    } else if(quarter == 3){
+        quarterMonth = "July - September";
+    } else if(quarter == 4){
+        quarterMonth = "October - December";
+    }
+%>
   <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div class="wrapper">
@@ -102,7 +118,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><%= counts[0].OPD%></h3>
-              <p>OPD</p>
+              <p>OPD Visits (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -115,7 +131,7 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= counts[0].WARD%></h3>
-              <p>Ward</p>
+              <p>Ward Admissions (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -215,7 +231,7 @@
               <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header with-border">
               <i class="fa fa-bar-chart-o"></i>
-              <h3 class="box-title">Patient Chart</h3>
+              <h3 class="box-title">Patient Chart as of <%= quarterMonth%></h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -594,7 +610,7 @@
             <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">OPD Logs (Jan - Mar)</h4>
+                    <h4 class="modal-title" id="myModalLabel">OPD Visits as of <%= quarterMonth%></h4>
                   </div>
                   <div class="modal-body" id="ShowOpd" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
                 <section class="content">
@@ -627,7 +643,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ward Logs</h4>
+                <h4 class="modal-title" id="myModalLabel">Ward Admissions as of <%= quarterMonth%></h4>
               </div>
                 <div class="modal-body" id="ShowWard" style="display:none;max-height: calc(100vh - 200px);overflow-y: auto;">
                 <section class="content">
