@@ -108,9 +108,10 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
       if (req.session.sino == 'doctor') {
           if (data.sub == 'admit') {
             var bedSQL     = 'UPDATE bed set allotment_timestamp = "'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", patient_id = '+req.query.patient_id+',status = "occupied" where bed_id = '+data.bedNumber+';';
+            var bedCounter = 'INSERT INTO bed_counter(allotment_timestamp, patient_id, bed_num) VALUES("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", '+req.query.patient_id+', '+data.bedNumber+');';
             var historySQL = 'UPDATE patient_history set bed = CONCAT(IFNULL(bed, ""),"'+data.bedNumber+', ") where histo_id ='+req.query.histo_id+';';
             var wardCount  = 'INSERT into ward_count (date_stamp, patient_id) values("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'",'+req.query.patient_id+');';
-            db.query(bedSQL + historySQL + wardCount + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "bed", "Alloted bed number: '+data.bedNumber+' to patient:'+req.query.patient_name+'",'+req.query.patient_id+');', function(err){
+            db.query(bedSQL + bedCounter + historySQL + wardCount + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "bed", "Alloted bed number: '+data.bedNumber+' to patient:'+req.query.patient_name+'",'+req.query.patient_id+');', function(err){
               if (err) {
                 console.log(err);
               } else {
@@ -264,6 +265,15 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
           } else if (data.sub == 'setAvailable') {
               var setBedAvailable = 'UPDATE bed set status = "Unoccupied" where bed_id = '+req.query.bed+';';
               db.query(setBedAvailable + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedAvailable", "Set to available bed number: '+req.query.bed+'");', function(err, rows){
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.redirect(req.get('referer'));
+                }
+          });
+        } else if (data.sub == 'changeBed') {
+              var changeBed = 'UPDATE bed set status = "Unoccupied", patient_id = NULL, allotment_timestamp = NULL where bed_id = '+req.query.bed+';';
+              db.query(changeBed + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "setBedAvailable", "Set to available bed number: '+req.query.bed+'");', function(err, rows){
                 if (err) {
                   console.log(err);
                 } else {

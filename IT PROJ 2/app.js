@@ -61,7 +61,7 @@ new CronJob('00 00 * * 1-7', function() {
 
 //RESET COUNTER EVERY 3 MONTHS
   new CronJob('00 00 1 mar,jun,sep,dec *', function() {
-     db.query("DELETE from opd_count;" + "DELETE from ward_count;" + "DELETE from lab_counter;" + "DELETE from chart_count;",function(err){
+     db.query("DELETE from opd_count;" + "DELETE from ward_count;" + "DELETE from lab_counter;" + "DELETE from bed_counter" + "DELETE from chart_count;",function(err){
        if (err) {
          console.log(err);
        } else {

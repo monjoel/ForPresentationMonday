@@ -46,7 +46,8 @@ var rankSQL     = "SELECT rank_name FROM rank;";
            var historySQL        = 'INSERT into patient_history (date_stamp, patient_id, doctor_id, bed, status) VALUES("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", '+nameForBedEmit[0]+','+data.bedDoc+',"'+data.bed+', ","pending");';
            var wardCount         = 'INSERT into ward_count (date_stamp, patient_id) values("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'",'+nameForBedEmit[0]+');';
            var bedLogs           = 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "bed", "allotted bed number '+data.bed+' for ER patient '+nameForBedEmit[1]+'", '+nameForBedEmit[0]+');'
-           db.query(historySQL + bedSQL + wardCount + bedLogs + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "er", "Added ER patient '+nameForBedEmit[1]+'", '+nameForBedEmit[0]+');', function(err){
+           var bedCounter        = 'INSERT INTO bed_counter(allotment_timestamp, patient_id, bed_num) VALUES("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", '+nameForBedEmit[0]+', '+data.bed+');';
+           db.query(historySQL + bedSQL + wardCount + bedLogs + bedCounter + 'INSERT into activity_logs(account_id, time, type, remarks, patient_id) VALUES ('+req.session.Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "er", "Added ER patient '+nameForBedEmit[1]+'", '+nameForBedEmit[0]+');', function(err){
              if (err) {
                console.log(err);
              }
@@ -208,8 +209,9 @@ var rankSQL     = "SELECT rank_name FROM rank;";
     if (req.session.email && req.session.sino == 'nurse') {
       if (req.session.sino == 'nurse') {
         var bedSQL = "SELECT b.bed_id, p.patient_type, p.name, b.status, b.allotment_timestamp from bed b LEFT JOIN patient p USING(patient_id); ";
-        db.query(bedSQL + name, req.session.Aid, function(err, rows, fields){
-          res.render('nurse/bedManagement', {bedDetails:rows[0], username:rows[1]});
+        var bedLogs = "SELECT b.bed_num, p.name, b.allotment_timestamp FROM bed_counter as b join patient as p using(patient_id);";
+        db.query(bedSQL + name + bedLogs, req.session.Aid, function(err, rows, fields){
+          res.render('nurse/bedManagement', {bedDetails:rows[0], username:rows[1], patientLogs:rows[2]});
         });
       } else {
         res.redirect(req.session.sino+'/dashboard');
