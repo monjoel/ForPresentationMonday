@@ -159,13 +159,13 @@
                           for(var i=0; i <p.length; i++){
                           %>
                           <h5 class="text-muted">
-                                <%  var d1 = moment(new Date(p[i].allotment)).format('MMM-DD-YYYY HH:mm').toString();
-                                var d2 = moment(new Date(p[i].discharge)).format('MMM-DD-YYYY HH:mm').toString();
-                                if(d1 == "Jan-01-1970 08:00"){
+                                <%  var d1 = moment(new Date(p[i].allotment)).format('MMMM DD YYYY hh:mm A').toString();
+                                var d2 = moment(new Date(p[i].discharge)).format('MMMM DD YYYY hh:mm A').toString();
+                                if(d1 == "January 01 1970 08:00 AM"){
                                 d1 = " ";
                                 }
 
-                                if(d2 == "Jan-01-1970 08:00" || new Date(p[i].discharge) < new Date(p[i].allotment)){
+                                if(d2 == "January 01 1970 08:00 AM" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                                 d2 = " "
                                 }
                                 %>
@@ -447,12 +447,12 @@
                 <td><%= p[i].sex %></td>
                 <td><%= p[i].blood_type %></td>
                 <td>
-                    <%  var d1 = moment(new Date(p[i].allotment)).format('MMM-DD-YYYY HH:mm').toString();
-                        var d2 = moment(new Date(p[i].discharge)).format('MMM-DD-YYYY HH:mm').toString();
-                        if(d1 == "Jan-01-1970 08:00" || d1 == "Invalid date"){
+                    <%  var d1 = moment(new Date(p[i].allotment)).format('MMMM DD YYYY hh:mm A').toString();
+                        var d2 = moment(new Date(p[i].discharge)).format('MMMM DD YYYY hh:mm A').toString();
+                        if(d1 == "January 01 1970 08:00 AM" || d1 == "Invalid date"){
                             d1 = " ";
                         }
-                        if(d2 == "Jan-01-1970 08:00" || d2 == "Invalid date" || new Date(p[i].discharge) < new Date(p[i].allotment)){
+                        if(d2 == "January 01 1970 08:00 AM" || d2 == "Invalid date" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                             d2 = " ";
                         }
                     %>

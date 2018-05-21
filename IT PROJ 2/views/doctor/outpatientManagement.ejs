@@ -154,7 +154,11 @@
                 <%for (var i = 0; i < opdInfo.length; i++) {%>
                   <tr>
                       <td><%=opdInfo[i].patient_type%></td>
-                      <td><%=opdInfo[i].name%></td>
+                      <td>
+                        <form action="/doctor/patientManagement?passPatient=<%= opdInfo[i].patient_id%>" method="post">
+                          <a href="javascript:;" onclick="parentNode.submit();" name="button" ><%=opdInfo[i].name%></a>
+                        </form>   
+                      </td>
                       <td><%=opdInfo[i].age%></td>
                       <td><%=opdInfo[i].sex%></td>
                     <%if(opdInfo[i].vitals){%>
@@ -171,9 +175,7 @@
                       <td><%=opdInfo[i].initial_assessment%></td>
                       <td>
                         <!-- VIEW -->
-                        <form action="/doctor/patientManagement?passPatient=<%= opdInfo[i].patient_id%>" method="post">
-                          <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
-                        </form>                        <!-- LAB -->
+                     <!-- LAB -->
                         <%
                         var labArr= '';
                           for (var j = 0; j < labSQL.length; j++){
@@ -259,7 +261,11 @@
                 <%for (var i = 0; i < opdInfo2.length; i++) {%>
                   <tr>
                       <td><%=opdInfo2[i].patient_type%></td>
-                      <td><%=opdInfo2[i].name%></td>
+                      <td>
+                      <form action="/doctor/patientManagement?passPatient=<%= opdInfo2[i].patient_id%>&OPD=NULL" method="post">
+                          <a href="javascript:;" onclick="parentNode.submit();" name="button" ><%=opdInfo2[i].name%></a>
+                        </form>
+                      </td>
                       <td><%=opdInfo2[i].age%></td>
                       <td><%=opdInfo2[i].sex%></td>
                       <td style="font-size:10px;">
@@ -275,10 +281,7 @@
                       </td>
                       <td><%= opdInfo2[i].bed_id%><%if(opdInfo2[i].bed_id){%><a href="/doctor/bedManagement?bed_id=<%=opdInfo2[i].bed_id%>" style="font-size:10px;"></a><%}%></td>
                       <td>
-                        <!-- VIEW -->
-                        <form action="/doctor/patientManagement?passPatient=<%= opdInfo2[i].patient_id%>&OPD=NULL" method="post">
-                          <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
-                        </form>                               <!-- LAB -->
+                              <!-- LAB -->
                         <%
                         var labArr= [];
                           for (var j = 0; j < labSQL.length; j++){
