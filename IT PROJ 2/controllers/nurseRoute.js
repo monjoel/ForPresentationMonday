@@ -209,7 +209,7 @@ var rankSQL     = "SELECT rank_name FROM rank;";
     if (req.session.email && req.session.sino == 'nurse') {
       if (req.session.sino == 'nurse') {
         var bedSQL = "SELECT b.bed_id, p.patient_type, p.name, b.status, b.allotment_timestamp from bed b LEFT JOIN patient p USING(patient_id); ";
-        var bedLogs = "SELECT b.bed_num, p.name, b.allotment_timestamp FROM bed_counter as b join patient as p using(patient_id);";
+        var bedLogs = "SELECT b.bed_num, p.name, p.patient_type, b.allotment_timestamp FROM bed_counter as b join patient as p using(patient_id);";
         db.query(bedSQL + name + bedLogs, req.session.Aid, function(err, rows, fields){
           res.render('nurse/bedManagement', {bedDetails:rows[0], username:rows[1], patientLogs:rows[2]});
         });

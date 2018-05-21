@@ -110,7 +110,24 @@
         <div class="col-xs-12">
           <div class="box" style="border-top-color: #3e0901 !important;">
             <div class="box-header">
-              <h3 class="box-title">Quarterly Bed Report</h3><small>  List of Bed Allotment</small>
+              <h3 class="box-title">Quarterly Bed Report</h3><small> As of
+                <%  var date = new Date();     
+                    var quarter =  parseInt(date.getMonth() / 3 ) + 1 ;
+                
+                    var quarterMonth;
+                
+                    if(quarter == 1){
+                        quarterMonth = "January - March";
+                    } else if(quarter == 2){
+                        quarterMonth = "April - June";
+                    } else if(quarter == 3){
+                        quarterMonth = "July - September";
+                    } else if(quarter == 4){
+                        quarterMonth = "October - December";
+                    }
+                
+                %> <%= quarterMonth%>
+                </small>
             </div>
             <div class="box-body">
               <table id="example2" class="table table-bordered table-striped">
@@ -118,6 +135,7 @@
                   <tr>
                     <th>No.</th>
                     <th>Bed Number</th>
+                    <th>Patient Type</th>
                     <th>Patient Name</th>
                     <th>Confinement Date</th>
                   </tr>
@@ -126,6 +144,7 @@
                 <tr>
                   <td><%= i+1%></td>
                   <td><%= patientLogs[i].bed_num%></td>
+                  <td><%= patientLogs[i].patient_type%></td>
                   <td><%= patientLogs[i].name%></td>
                   <%
                   var DT = moment(patientLogs[i].allotment_timestamp).format('MMMM DD YYYY hh:mm A');
@@ -180,11 +199,11 @@
             'print',
             {
                 extend: 'excel',
-                title: 'Quarterly Bed Report'
+                title: 'Bed Report for <%=quarterMonth%>'
             },
             {
                 extend: 'pdf',
-                title: 'Quarterly Bed Report'
+                title: 'Bed Report for <%=quarterMonth%>'
             }
         ]
     });

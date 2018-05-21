@@ -11,7 +11,22 @@
       }
   </style>
 </head>
+<!--quarter month-->
+<%  var date = new Date();     
+    var quarter =  parseInt(date.getMonth() / 3 ) + 1 ;
 
+    var quarterMonth;
+
+    if(quarter == 1){
+        quarterMonth = "January - March";
+    } else if(quarter == 2){
+        quarterMonth = "April - June";
+    } else if(quarter == 3){
+        quarterMonth = "July - September";
+    } else if(quarter == 4){
+        quarterMonth = "October - December";
+    }
+%>
 <body class="hold-transition skin-fdpsh fixed sidebar-mini" onload="myFunction()"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div id="loader"></div> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
 <div class="wrapper">
@@ -81,7 +96,7 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3><%= diagnosisSQL.length%></h3>
-              <p>Total Diagnosis Tests</p>
+              <p>Total Diagnosis Tests (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -93,7 +108,7 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3><%= bloodChemistrySQL.length%></h3>
-              <p>Blood Chemistry</p>
+              <p>Blood Chemistry (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -105,7 +120,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><%= hermatology.length%></h3>
-              <p>Hematology</p>
+              <p>Hematology (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -117,7 +132,7 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= microscopy.length%></h3>
-              <p>Microscopy</p>
+              <p>Microscopy (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -129,7 +144,7 @@
           <div class="small-box bg-orange">
             <div class="inner">
               <h3><%= parasitology.length%></h3>
-              <p>Parasitology</p>
+              <p>Parasitology (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -141,7 +156,7 @@
           <div class="small-box bg-gray">
             <div class="inner">
               <h3><%= serology.length%></h3>
-              <p>Serology</p>
+              <p>Serology (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -153,7 +168,7 @@
           <div class="small-box bg-purple">
             <div class="inner">
               <h3><%= microbiology.length%></h3>
-              <p>Microbiology</p>
+              <p>Microbiology (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
@@ -165,7 +180,7 @@
           <div class="small-box bg-black">
             <div class="inner">
               <h3><%= xRay.length%></h3>
-              <p>X-Ray</p>
+              <p>X-Ray (<%= quarterMonth%>)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
