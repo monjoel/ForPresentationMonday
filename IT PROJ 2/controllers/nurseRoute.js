@@ -178,7 +178,7 @@ var rankSQL     = "SELECT rank_name FROM rank;";
                 var updatedSql2  = "SELECT * FROM patient where patient_id = "+req.query.patient_id+";";
 
                 db.query(patientManSQL + updatedSql2 + med + name,req.session.Aid, function(err, successRows2){
-                  res.render('doctor/patientManagement', {p:successRows2[0], p2:successRows2[1], med:successRows2[2], username:successRows2[3], invalid:null, opd:req.query.OPD});
+                  res.render('nurse/patientManagement', {p:successRows2[0], p2:successRows2[1], med:successRows2[2], username:successRows2[3], invalid:null, opd:req.query.OPD});
                 });
               }
             });
@@ -192,7 +192,7 @@ var rankSQL     = "SELECT rank_name FROM rank;";
             var sql2  = "SELECT * FROM patient where patient_id = "+req.query.passPatient+";";
             var med = "select lab_img, date_stamp, lab, medicine,diagnosis,bed, initial_assessment from patient_history where patient_id = "+req.query.passPatient+"  order by date_stamp desc;";
             db.query(patientManSQL + sql2 + med + name, req.session.Aid, function(err, successRows){
-              res.render('doctor/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null, opd:req.query.OPD});
+              res.render('nurse/patientManagement', {p:successRows[0], p2:successRows[1], med:successRows[2], username:successRows[3], invalid:null, opd:req.query.OPD});
             });
           }
         } else {

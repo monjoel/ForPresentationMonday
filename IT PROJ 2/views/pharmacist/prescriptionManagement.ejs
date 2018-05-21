@@ -123,7 +123,7 @@
                     </tr>
                   <% if(prescriptionDetails[i].medications != null){
                     var medicine = prescriptionDetails[i].medications.split('\n');
-                      for(var l=0; l < 4; l++){ %>
+                      for(var l=0; l < 5; l++){ %>
                         <tr>
                           <%var parseMed = medicine[l].split(':');%>
                             <td style="font-weight: bold;"><%= parseMed[0]%></td>
@@ -181,7 +181,7 @@
                     </tr>
                   <% if(confirmedprescriptionSQL[i].medications != null){
                     var medicine = confirmedprescriptionSQL[i].medications.split('\n');
-                      for(var l=0; l < 4; l++){ %>
+                      for(var l=0; l < 5; l++){ %>
                         <tr>
                           <%var parseMed = medicine[l].split(':');%>
                             <td style="font-weight: bold;"><%= parseMed[0]%></td>

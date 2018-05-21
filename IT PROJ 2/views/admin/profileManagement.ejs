@@ -142,7 +142,7 @@
                       <i class="fa fa-share bg-green"></i>
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'bed'){ %>
-                      <i class="fa fa-bed bg-primary"></i>
+                      <i class="fa fa-bed bg-navy"></i>
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'bedDischarge'){ %>
                       <i class="fa fa-sign-out bg-navy"></i>
@@ -257,6 +257,9 @@
                       <div class="timeline-item">
                     <%} else if (activityInfo[i].type == 'imgUploadLab'){ %>
                       <i class="fa fa-image bg-navy"></i>
+                      <div class="timeline-item">
+                    <%} else if (activityInfo[i].type == 'confirmedHisto'){ %>
+                      <i class="fa fa-check-circle bg-teal"></i>
                       <div class="timeline-item">
                     <%}%>
                       <h3 class="timeline-header"><%= activityInfo[i].remarks%></a></h3>

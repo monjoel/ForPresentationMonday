@@ -133,10 +133,12 @@
                         <td><%= requestStatus[i].name%></td>
                         <td><%= requestStatus[i].lab_confirm%></td>
                         <td><%= requestStatus[i].pharm_confirm%></td>
-                        <%if(!(requestStatus[i].pharm_confirm == "confirmed")){%>
-                        <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
-                          <td><button name="sub" value="confirm">confirm</button></td>
-                        </form>
+                        <td>
+                          <%if(!(requestStatus[i].pharm_confirm == "confirmed")){%>
+                          <form action="/pharmacist/dashboard?pName=<%=requestStatus[i].name%>&histoId=<%=requestStatus[i].histo_id%>" method="post">
+                            <button name="sub" value="confirm">confirm</button>
+                          </form>
+                        </td>
                       </tr>
                       <%}%>
                       <%}%>

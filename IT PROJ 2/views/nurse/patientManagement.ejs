@@ -67,9 +67,9 @@
 
        <ul class="sidebar-menu">
         <li ><a href="dashboard"><img src="../icons/medicine.png" alt="dboard" height="20px;" width="20px;"> <span>Dashboard</span></a></li>
-        <li class="active"><a href="patientManagement" target="_self"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span>Patient Registry</span></a></li>
+        <li class="active"><a href="patientManagement" target="_self"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span>Patient Management</span></a></li>
         <li><a href="bedManagement"><img src="../icons/hospital-bed.png" alt="bed" height="20px;" width="20px;"> <span>Bed Management</span></a></li>
-        <li><a href="profileManagement"><img src="../icons/doctor.png" alt="doctor" height="20px;" width="20px;"> <span>Profile Management</span></a></li>
+        <li><a href="profileManagement"><img src="../icons/nurse.png" alt="nurse" height="20px;" width="20px;"> <span>Profile Management</span></a></li>
     </ul>
     </section>
   </aside>
@@ -78,7 +78,7 @@
   <div class="content-wrapper"  id="myDiv1"> <!------------------------------------ EDIT FOR LOADER ---------------------------------->
     <section class="content-header">
       <h1>
-        Patient Registry
+        Patient Management
         <small>List of Registered Patients</small>
       </h1>
     </section>
@@ -152,12 +152,12 @@
                           for(var i=0; i <p.length; i++){
                           %>
                           <h5 class="text-muted">
-                                <%  var d1 = moment(new Date(p[i].allotment)).format('MMMM DD YYYY hh:mm A').toString();
-                                var d2 = moment(new Date(p[i].discharge)).format('MMMM DD YYYY hh:mm A').toString();
-                                if(d1 == "January 01 1970 08:00 AM"){
+                                <%  var d1 = moment(new Date(p[i].allotment)).format('MMM-DD-YYYY HH:mm').toString();
+                                var d2 = moment(new Date(p[i].discharge)).format('MMM-DD-YYYY HH:mm').toString();
+                                if(d1 == "Jan-01-1970 08:00"){
                                 d1 = " ";
                                 }
-                                if(d2 == "January 01 1970 08:00 AM" || new Date(p[i].discharge) < new Date(p[i].allotment)){
+                                if(d2 == "Jan-01-1970 08:00" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                                 d2 = " "
                                 }
                                 %>
@@ -311,6 +311,7 @@
                                     <th>Prescribed Medicine</th>
                                     <th>Laboratory Tests</th>
                                     <th>Allocated Bed No.</th>
+                                    <th>Lab Image</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -363,12 +364,31 @@
                                             Outpatient
                                           <%}%>
                                       </td>
+                                      <td>
+                                      <%if(med[i].lab_img){%>
+                                        <img id="myImg" src="../uploads/<%=med[i].lab_img%>" style="width:100px;  height:100px;">   
+                                      <%}%>
+                                      </td>
                                   </tr>
                              <%}%>
                                 </tbody>
                               </table>
 
                             </div>
+                                                        <!-- The Modal -->
+                            <div id="myModal" class="modal">
+
+                              <!-- The Close Button -->
+                              <span class="close">&times;</span>
+
+                              <!-- Modal Content (The Image) -->
+                              <img class="modal-content" id="img01">
+
+                              <!-- Modal Caption (Image Text) -->
+                              <div id="caption"></div>
+                            </div>
+                          </div>
+
                           </div>
                           <!-- /.tab-pane -->
                         </div>
@@ -409,22 +429,23 @@
                 <td><%= p[i].sex %></td>
                 <td><%= p[i].blood_type %></td>
                 <td>
-                    <%  var d1 = moment(new Date(p[i].allotment)).format('MMMM DD YYYY hh:mm A').toString();
-                        var d2 = moment(new Date(p[i].discharge)).format('MMMM DD YYYY hh:mm A').toString();
-                        if(d1 == "January 01 1970 08:00 AM" || d1 == "Invalid date"){
+                    <%  var d1 = moment(new Date(p[i].allotment)).format('MMM-DD-YYYY HH:mm').toString();
+                        var d2 = moment(new Date(p[i].discharge)).format('MMM-DD-YYYY HH:mm').toString();
+                        if(d1 == "Jan-01-1970 08:00" || d1 == "Invalid date"){
                             d1 = " ";
                         }
-                        if(d2 == "January 01 1970 08:00 AM" || d2 == "Invalid date" || new Date(p[i].discharge) < new Date(p[i].allotment)){
+                        if(d2 == "Jan-01-1970 08:00" || d2 == "Invalid date" || new Date(p[i].discharge) < new Date(p[i].allotment)){
                             d2 = " "
                         }
                     %>
                     <%= d1%> - <%= d2%>
                 </td>
-                <td>
+                                <td>
                   <form action="/nurse/patientManagement?passPatient=<%= p[i].patient_id%>&OPD=Y" method="post">
                     <button type="submit" class="btn btn-primary btn-sm" name="button" ><i class="fa fa-user"></i> Profile</button>
                   </form>
                 </td>
+
               </tr>
               <%}%>
             </table>
@@ -445,7 +466,85 @@
   label{
     font-size: 20px;
   }
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: relative;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
 </style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="/notif-nurse.js"></script>
@@ -500,4 +599,25 @@ idleTimer();
   function dynaPatientInfo(id){
   document.getElementById('dynamicEditProfPatientLink').action = '/nurse/patientManagement?patient_id='+id+'';
   }
+
+        // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('myImg');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+      modal.style.display = "none";
+    }
 </script>

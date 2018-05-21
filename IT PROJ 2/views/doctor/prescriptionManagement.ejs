@@ -120,7 +120,8 @@
                               <%
                           var vitals = prescriptionDetails[i].medications.split('\n');
                           for(var l=0; l < 5; l++){ %>
-                            <%=vitals[l]%><br>
+                                                        <%=vitals[l]%><br>                            
+
                         <%}%>
                             </td>
                           <td><%=prescriptionDetails[i].STATUS.charAt(0).toUpperCase() + prescriptionDetails[i].STATUS.slice(1);%></td>
@@ -164,12 +165,14 @@
       <td><%=confirmedprescriptionSQL[i].name%></td>
       <td><%=confirmedprescriptionSQL[i].age%></td>
       <td>
-          <%
-      var vitals = confirmedprescriptionSQL[i].medications.split('\n');
-      for(var l=0; l < 5; l++){ %>
-        <%=vitals[l]%><br>
-    <%}%>
-        </td>
+        <%
+        if(confirmedprescriptionSQL[i].medications){
+          var vitals = confirmedprescriptionSQL[i].medications.split('\n');
+            for(var l=0; l < 5; l++){ %>
+              <%=vitals[l]%><br>                            
+          <%}
+        }%>  
+      </td>
       <td style="color:green; font-weight: bold;">Confirmed</td>
     </tr>
     <%}%>
