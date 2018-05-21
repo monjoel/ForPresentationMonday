@@ -106,6 +106,41 @@
             </div>
           </div>
         </div>
+           
+        <div class="col-xs-12">
+          <div class="box" style="border-top-color: #3e0901 !important;">
+            <div class="box-header">
+              <h3 class="box-title">Quarterly Bed Report</h3><small>  List of Bed Allotment</small>
+            </div>
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Bed Number</th>
+                    <th>Patient Name</th>
+                    <th>Confinement Date</th>
+                  </tr>
+                </thead>
+                <%for(var i=0; i < patientLogs.length; i++){%>
+                <tr>
+                  <td><%= i+1%></td>
+                  <td><%= patientLogs[i].bed_num%></td>
+                  <td><%= patientLogs[i].name%></td>
+                  <%
+                  var DT = moment(patientLogs[i].allotment_timestamp).format('MMMM DD YYYY hh:mm A');
+                  if(DT == 'Invalid date'){%>
+                    <td></td>
+                  <%} else {%>
+                    <td><%= DT%></td>
+                  <%}%>
+                </tr>
+                <%}%>
+              </table>
+            </div>
+          </div>
+        </div>
+           
       </div>
     </section>
 
@@ -139,7 +174,20 @@
         $(function () {
         $("#example1").DataTable();
         $('#example2').DataTable({
-        });
+        "searching": false,
+        dom: 'Bfrtip',
+        buttons: [
+            'print',
+            {
+                extend: 'excel',
+                title: 'Quarterly Bed Report'
+            },
+            {
+                extend: 'pdf',
+                title: 'Quarterly Bed Report'
+            }
+        ]
+    });
         });
 
         function discharge(bedID){
