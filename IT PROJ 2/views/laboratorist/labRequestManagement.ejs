@@ -131,7 +131,7 @@
               <div class="modal-body">
                 <form id="dynaAction" method="post" enctype="multipart/form-data" onsubmit="successAlert()">
                   <div class="form-group">
-                    <input type="file" name="labIMG" accept="image/*" required>
+                    <input type="file" name="labIMG[]" accept="image/*" multiple required>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
                       <button type="submit" name="sub" value="saveIMG" class="btn btn-primary"><i class="fa fa-check"></i> Save </button>

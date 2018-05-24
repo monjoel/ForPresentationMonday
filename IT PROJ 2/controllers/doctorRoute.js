@@ -84,15 +84,20 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
           var outpatientDepartmentSQL3 = 'SELECT * from patient_history inner join patient using(patient_id) left join bed using(patient_id) where patient_history.status = "pending" and bed is not null group by patient_id;';
           var labSQL                  = 'SELECT * from lab_request left join patient_history using(patient_id)  where lab_status = "pending" group by patient_id;';
           var prescribeSQL            = 'SELECT * from prescription p inner join patient using(patient_id) where p.status = "pending" group by patient_id;';
-          var requestConfirmation = 'SELECT request, patient_id from patient_history where request = "pending";';
-          var bedDisabble = 'SELECT patient_id from bed;';
-          var requestStatusSQL = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
-          var pendingLabRequestSQL = 'select * from lab_request where lab_status = "pending";'
-          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation + bedDisabble + requestStatusSQL + pendingLabRequestSQL,req.session.Aid, function(err, rows){
+          var requestConfirmation     = 'SELECT request, patient_id from patient_history where request = "pending";';
+          var bedDisabble             = 'SELECT patient_id from bed;';
+          var requestStatusSQL        = 'select * from patient_history inner join patient using(patient_id) where request = "pending";';
+          var pendingLabRequestSQL    = 'select * from lab_request where lab_status = "pending";'
+          var listMed                 = 'select * from medicine;'
+          var latestPrescription      = 'SELECT * from prescription where status = "hold" order by prescription_id desc limit 1;';
+          db.query(outpatientDepartmentSQL + availableBeds + labSQL + prescribeSQL + outpatientDepartmentSQL2 + outpatientDepartmentSQL3 + name + requestConfirmation + bedDisabble + requestStatusSQL + pendingLabRequestSQL + listMed + latestPrescription,req.session.Aid, function(err, rows){
           if (err) {
             console.log(err);
           } else {
-              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], bedDisable:rows[8], requestStatus:rows[9],pendingLabRequestSQL:rows[10], invalid:null});
+            if (rows[12] == "") {
+              rows[12] = null;
+            }
+              res.render('doctor/outpatientManagement', {opdInfo:rows[0], admitAvailableBeds:rows[1], labSQL:rows[2], prescribeSQL:rows[3], opdInfo1:rows[4], opdInfo2:rows[5], username: rows[6], request:rows[7], bedDisable:rows[8], requestStatus:rows[9],pendingLabRequestSQL:rows[10], latestPrescription:rows[12], listMed:rows[11], invalid:null});
           }
         });
       } else {
@@ -117,6 +122,24 @@ module.exports = function(app,db,name,counts,chart,whoCurrentlyAdmitted,whoOPD,w
               } else {
                 res.redirect(req.get('referer'));
               }
+            });
+          } else if (data.sub == 'prescribeAdd') {
+            if (data.brand == "") {
+              data.brand = 'generic';
+            }
+            var prescribeAdd = 'INSERT into prescription (creation_stamp, medicine, quantity, dosage, timeframe, doctor_id, patient_id, status, brand) VALUES ("'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'","'+data.medicine+'","'+data.quantity+'","'+data.dosage+'","'+data.timeframe+'",'+req.session.Aid+','+req.query.patient_id+',"hold","'+data.brand+'");';
+            db.query(prescribeAdd, function(err, rows){
+              if (err) {
+                console.log(err);
+              }
+              res.redirect(req.get('referer'));
+            });
+          } else if (data.sub == 'prescribeClear') {
+            db.query('delete from prescription where status = "hold";', function(err, rows){
+              if (err) {
+                console.log(err);
+              }
+              res.redirect(req.get('referer'));
             });
           } else if(data.sub == 'prescribe') {
             if (data.brand == "") {

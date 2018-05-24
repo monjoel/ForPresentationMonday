@@ -116,7 +116,11 @@ res.redirect('../login');
             }
           });
         } else {
-          var uploadIMGlab = 'UPDATE patient_history SET lab_img = "'+req.files[0].filename+'" where histo_id = '+req.query.pId+';';
+          var blobs = '';
+          for (var i = 0; i < req.files.length; i++) {
+            blobs += req.files[i].filename + '\n';
+          }
+          var uploadIMGlab = 'UPDATE patient_history SET lab_img = "'+blobs+'" where histo_id = '+req.query.pId+';';
           db.query(uploadIMGlab + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "imgUploadLab", "Image Upload for patient: '+req.query.pName+'");', function(err){
             if(err){
               console.log(err);

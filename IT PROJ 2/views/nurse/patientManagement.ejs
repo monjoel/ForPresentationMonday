@@ -365,9 +365,12 @@
                                           <%}%>
                                       </td>
                                       <td>
-                                      <%if(med[i].lab_img){%>
-                                        <img id="myImg" src="../uploads/<%=med[i].lab_img%>" onClick="dynaIMG('../uploads/<%=med[i].lab_img%>')" style="width:100px;  height:100px;">
-                                      <%}%>
+                                        <%if(med[i].lab_img){
+                                          var blobs = med[i].lab_img.toString().split('\n');
+                                          for(var j = 0; j < blobs.length-1; j++){%>
+                                            <img id="myImg" alt="Lab Image" src="../uploads/<%=blobs[j]%>" onClick="dynaIMG('../uploads/<%=blobs[j]%>')" style="width:100px;  height:100px;" >
+                                          <%}
+                                        }%>
                                       </td>
                                   </tr>
                              <%}%>
