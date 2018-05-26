@@ -62,7 +62,7 @@
 
       <ul class="sidebar-menu">
         <li class="active"><a href="dashboard" target="_self"><img src="../icons/medicine.png" alt="dboard" height="20px;" width="20px;"> <span>Dashboard</span></a></li>
-        <li><a href="prescriptionManagement"><img src="../icons/prescription.png" alt="prescription" height="20px;" width="20px;"> <span> Prescriptions Management </span></a></li>
+        <li><a href="prescriptionManagement"><img src="../icons/pills.png" alt="prescription" height="20px;" width="20px;"> <span> Prescriptions Management </span></a></li>
         <li><a href="patientManagement"><img src="../icons/patient.png" alt="patient" height="20px;" width="20px;"> <span> Patient Registry </span></a></li>
         <li><a href="profileManagement"><img src="../icons/doctor.png" alt="doctor" height="20px;" width="20px;"> <span> Profile Management</span></a></li>
         <li><a href=../pharmacist/reports><img src="../icons/growth.png" alt="dboard" height="20px;" width="20px;"> <span> Reports</span></a></li>
@@ -113,7 +113,7 @@
           </div>
           <div class="box-body">
             <a class="btn btn-app" data-toggle="modal" data-target="#myModal2">
-            <img src="../icons/notebook.png" alt="notebook" height="30px;" width="30px;" data-target="myModal2">add medicine
+            <img src="../icons/pills.png" alt="notebook" height="30px;" width="30px;" data-target="myModal2">Add Medicine
             </a>
         </div>
         </center>
@@ -129,14 +129,14 @@
           <div class="modal-body">
             <form class="horizontal" method="post" onsubmit="successAlert()">
               <div class="form-group">
-                  <label for="assessment" class="col-sm-2 control-label">medicine name</label>
+                  <label for="assessment" class="col-sm-2 control-label">Medicine Name</label>
                   <div class="col-sm-10">
                     <input type="text" name="newMed">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                <button type="submit" name="sub" value="newMedicine" class="btn btn-primary"><i class="fa fa-check"></i> add</button>                    
                   </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                <button type="submit" name="sub" value="newMedicine" class="btn btn-primary"><i class="fa fa-check"></i> add</button>
               </div>
             </form>
           </div>
