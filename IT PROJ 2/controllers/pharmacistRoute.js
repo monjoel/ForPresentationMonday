@@ -58,13 +58,9 @@ var confirmedprescriptionSQL = 'SELECT CONCAT("medicine:",medicine,"\nBrand:",br
             });
             res.redirect(req.get('referer'));
 
-        } else if(data.sub == 'appointment') {
-              var splitDateNTime = data.dateNtime.split('T');
-              var parseDate      = splitDateNTime[0];
-              var parseTime      = splitDateNTime[1] + ':00';
-              var parseDateNTime = parseDate+' '+parseTime;
-              var addAppointment = 'INSERT into appointment (doctor_id, patient_id, appointment_timestamp, remarks) VALUES ('+Aid+', '+data.appointmentPatientID+', "'+parseDateNTime+'", "'+data.appointmentRemarks+'");';
-              db.query(addAppointment + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "appointment", "Set Appointment with '+req.query.appointmentPatientName+' on '+parseDateNTime+'");', function(err){
+        } else if(data.sub == 'newMedicine') {
+              var addAppointment = 'INSERT into medicine (med_name) VALUES ("'+data.newMed+'");';
+              db.query(addAppointment + 'INSERT into activity_logs(account_id, time, type, remarks) VALUES ('+Aid+',"'+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+'", "newMed", "New Medicine Added");', function(err){
                 if (err) {
                   console.log(err);
                 }
